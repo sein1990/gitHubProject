@@ -17,7 +17,6 @@ import SummaryReport.NativeShortageStaff_Report;
 import SummaryReport.SalaryStoppedDueToLossOrShortage_Report;
 import SummaryReport.TerminatedEmployeeDueToLossOrShortage_Report;
 import com.itextpdf.text.DocumentException;
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -124,7 +123,7 @@ public class A1Servlet extends HttpServlet {
                 String DEST = file.getDEST();
                 String pdfName = file.getPdfName();
                 file.pp(response);
-                
+               //kjkjhjghg
             }
         } catch (DocumentException ex) {
             Logger.getLogger(A1Servlet.class.getName()).log(Level.SEVERE, null, ex);
