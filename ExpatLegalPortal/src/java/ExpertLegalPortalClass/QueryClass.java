@@ -213,11 +213,50 @@ public class QueryClass {
      }
      
     public String a3(String caseid1){
-     return "SELECT * FROM `a2_with_company_property` WHERE `id`='"+caseid1+"'";
+     return "SELECT * FROM `a3_damage_or_loss` WHERE `id`='"+caseid1+"'";
      }
      public String a3Attachment(String caseid1){
      return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
      }
+     public String Dis(String caseid1){
+     return "SELECT * FROM `dis` WHERE `id`='"+caseid1+"'";
+     }
+     public String DisAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+     }
+      public String empPassedAway(String caseid1){
+     return "SELECT * FROM `emp_passed_away` WHERE `id`='"+caseid1+"'";
+     }
+     public String empPassedAwayAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+     }
+     public String leaveExtension(String caseid1){
+     return "SELECT * FROM `leave_extension` WHERE `id`='"+caseid1+"'";
+     }
+     public String leaveExtensionAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+     }
+     
+     public String nativeStaffShortage(String caseid1){
+     return "SELECT * FROM `native_staff_shortage` WHERE `id`='"+caseid1+"'";
+     }
+     public String nativeStaffShortageAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+     }
+     public String salaryStopped(String caseid1){
+     return "SELECT * FROM `salary_stopped_due_to_loss_or_performance` WHERE `id`='"+caseid1+"'";
+     }
+     public String salaryStoppedAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+     }
+      public String terminatedEmp(String caseid1){
+     return "SELECT * FROM `terminated_emp_due_loss_or_performance` WHERE `id`='"+caseid1+"'";
+     }
+     public String terminatedEmpAttachment(String caseid1){
+     return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"' and `flag`='1'";
+     }
+     
+     
      
      
 }

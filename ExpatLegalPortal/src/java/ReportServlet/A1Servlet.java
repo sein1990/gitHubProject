@@ -58,15 +58,12 @@ public class A1Servlet extends HttpServlet {
             String[] parts=caseidupdate.split("-");
             String part1=parts[0];
             String part2=parts[1];
-            if(part1.equals("A1")){
-             
+            if(part1.equals("A1")){          
                 A1_Report file = new A1_Report();
                 file.A1Report(caseidupdate);
                 String DEST = file.getDEST();
                 String pdfName = file.getPdfName();
                 file.pp(response);
-                
-             
             }
                 else if(part1.equals("A2")){
                 A2_Report file = new A2_Report();
@@ -118,7 +115,7 @@ public class A1Servlet extends HttpServlet {
                 file.pp(response);
             }
             else if(part1.equals("A9")){
-                    LeaveExtension_Report file = new  LeaveExtension_Report();
+                LeaveExtension_Report file = new  LeaveExtension_Report();
                 file. LeaveExtensionReport(caseidupdate);
                 String DEST = file.getDEST();
                 String pdfName = file.getPdfName();
@@ -133,44 +130,5 @@ public class A1Servlet extends HttpServlet {
         
         
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
+

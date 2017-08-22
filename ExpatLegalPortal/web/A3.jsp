@@ -1,4 +1,5 @@
 
+<%@page import="ExpertLegalPortalClass.QueryClass"%>
 <%@page import="java.io.File"%>
 <%@page import="ExpertLegalPortalClass.Attachment"%>
 <%@page import="java.util.Vector"%>
@@ -8,7 +9,7 @@
 <%@page import="java.sql.Connection"%>
 <% 
 //String UPLOAD_DIRECTORY ="C://Users//Sein 90//Desktop//up";
-   
+    QueryClass objQuery=new QueryClass();  
 String caseid1 = request.getParameter("caseid"); 
 String dateS="";
 String reasonS="";
@@ -24,7 +25,7 @@ String empIDS="";
  String dbID="";
     PreparedStatement ps=null;
     ResultSet rs=null;
-    String IDquery="SELECT * FROM `a3_damage_or_loss` WHERE `id`='"+caseid1+"'";
+    String IDquery=objQuery.a3(caseid1);
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery();
   
@@ -42,7 +43,7 @@ String empIDS="";
         fileClosedS=rs.getString(10);
         empIDS=rs.getString(11);      
     }
-    IDquery="SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+    IDquery=objQuery.a3Attachment(caseid1);
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery(); 
     Vector<Attachment> attachVector =new Vector();while(rs.next())

@@ -95,24 +95,25 @@ public class PieChartDemo {
           month = months[m];
           }
           System.out.print(month);*/
+                       System.out.println("v");
+
+          Connection OracleConnection=OracleDbConnection.OracleGetConnection();
+          String query="select * from EMP";
+          PreparedStatement ps=OracleConnection.prepareStatement(query);
           
-          Connection con=dbconnection.getConnection();
-          String query="select * from `user`";
-          PreparedStatement ps=con.prepareStatement(query);
-          
-          
+          String q="";
           ResultSet rs=ps.executeQuery();
-          if(rs.next())
+          while(rs.next())
           {
-             System.out.println("v");
+            q=rs.getString(1);
+            System.out.println(q);
           }
-          else
-          {
-             System.out.println("c");
-          }
-      } catch (SQLException ex) {
+         
+          } catch (SQLException ex) {
           Logger.getLogger(PieChartDemo.class.getName()).log(Level.SEVERE, null, ex);
-      }
+          }
+      
+  //
   }
       
       

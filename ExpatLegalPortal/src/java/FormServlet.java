@@ -31,7 +31,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(name="FormServlet", urlPatterns = {"/FormServlet"})
 @MultipartConfig
 public class FormServlet extends HttpServlet {
-    private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\ExpatLegalPortal\\up\\";
+    private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\gitHubProject\\ExpatLegalPortal\\up\\";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
