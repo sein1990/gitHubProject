@@ -1,4 +1,5 @@
 
+<%@page import="ExpertLegalPortalClass.QueryClass"%>
 <%@page import="java.io.File"%>
 <%@page import="ExpertLegalPortalClass.Attachment"%>
 <%@page import="java.util.Vector"%>
@@ -8,7 +9,7 @@
 <%@page import="java.sql.Connection"%>
 <% 
 //String UPLOAD_DIRECTORY ="C://Users//Sein 90//Desktop//up";
-   
+   QueryClass objQuery=new QueryClass();
 String caseid1 = request.getParameter("caseid"); 
 String dateS="";
 String unitS="";
@@ -21,7 +22,7 @@ String empIDS="";
  String dbID="";
     PreparedStatement ps=null;
     ResultSet rs=null;
-    String IDquery="SELECT * FROM `emp_passed_away` WHERE `id`='"+caseid1+"'";
+    String IDquery=objQuery.empPassedAway(caseid1);
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery();
   
@@ -38,7 +39,7 @@ String empIDS="";
         deathReasonS=rs.getString(7);
         empIDS=rs.getString(8);      
     }
-    IDquery="SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"'and `flag`='1'";
+    IDquery=objQuery.empPassedAwayAttachment(caseid1);
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery(); 
     Vector<Attachment> attachVector =new Vector();while(rs.next())
