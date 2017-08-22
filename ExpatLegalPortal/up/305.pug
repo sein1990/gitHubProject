@@ -1,0 +1,22 @@
+.setting
+.setting.image_picker
+  h2 Image
+  .settings_wrap
+    label.drop_target
+      .image_preview
+      input#inputFile(type='file')
+    .settings_actions.vertical
+      a(data-action='choose_from_uploaded')
+        i.fa.fa-picture-o
+        |  Choose from Uploads
+      a.disabled(data-action='remove_current_image')
+        i.fa.fa-ban
+        |  Remove Current Image
+    .image_details
+      label.input_line.image_title
+        input(type='text' placeholder='Title')
+      //label.input_line.image_alt
+        //input(type='text' placeholder='Alternative Text')
+      //a.confirm(data-action='confirm_image_details')
+        //i.fa.fa-check-circle
+.setting
