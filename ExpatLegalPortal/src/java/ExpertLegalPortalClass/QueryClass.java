@@ -24,9 +24,9 @@ public class QueryClass {
     }
     public String UpdateA1NotReturnedFromLeave(String newId)
     {
-    return "UPDATE `a1_not_returned_from_leave` SET `date`=?,`reason`=?,`name`=?,`unit`=?,`remarks`=?,"
-                         + "`amount_to_be_recovered_apart_from_salary_holdings`=?,`salary_deposit`=?,`total_amount`=?,`filed_and_closed`=?,"
-                         + "`emp_id`=? WHERE `id`='"+newId+"'";
+    return "UPDATE `a1_not_returned_from_leave` SET `date`=?,`reason`=?,`remarks`=?,"
+                         + "`amount_to_be_recovered_apart_from_salary_holdings`=?,`salary_deposit`=?,`total_amount`=?,`filed_and_closed`=?"
+                         + "WHERE `id`='"+newId+"'";
     }
     public String InsertA2WithCompanyProperty(){
     return " INSERT INTO `a2_with_company_property` (`id`, `date`, `reason`, `name`, `unit`, `remarks`, "
@@ -37,15 +37,14 @@ public class QueryClass {
     return "UPDATE `highestvalue` SET `a2`=?";
     }
     public String UpdateA2WithCompanyProperty(String newId){
-     return "UPDATE `a2_with_company_property` SET `date`=?,`reason`=?,`name`=?,`unit`=?,`remarks`=?,"
-                         + "`amount_to_be_recovered_apart_from_salary_holdings`=?,`salary_deposit`=?,`total_amount`=?,`filed_and_closed`=?,"
-                         + "`emp_id`=? WHERE `id`='"+newId+"'";   
+     return "UPDATE `a2_with_company_property` SET `date`=?,`reason`=?,`remarks`=?,"
+             + "`amount_to_be_recovered_apart_from_salary_holdings`=?,`salary_deposit`=?,`total_amount`=?,"
+             + "`filed_and_closed`=? WHERE `id`='"+newId+"'";   
     }    
     public String InsertA3DamageOrLoss(){
-    
-    return  " INSERT INTO `a3_damage_or_loss` (`id`, `date`, `reason`, `name`, `unit`, `remarks`,"
-            + " `amount_to_be_recovered_apart_from_salary_holdings`, `salary_deposit`, `total_amount`, "
-            + "`filed_and_closed`, `emp_id`)values(?,?,?,?,?,?,?,?,?,?,?)";                 
+    return  "INSERT INTO `a3_damage_or_loss` (`id`,`date`,`reason`, `name`, `unit`, `remarks`,"
+            + "`amount_to_be_recovered_apart_from_salary_holdings`, `salary_deposit`, `total_amount`,"
+            + "`filed_and_closed`,`emp_id`)values(?,?,?,?,?,?,?,?,?,?,?)";                 
     }
     public String UpdateA3HighestValue(){
     return "UPDATE `highestvalue` SET `a3`=?";
@@ -76,7 +75,7 @@ public class QueryClass {
     return "UPDATE `highestvalue` SET `emp_passed_away`=?";
     }
     public String UpdateEmpPassedAway(String newId){
-    return  "UPDATE `emp_passed_away` SET  `date`=?,`name`=?,`unit`=?,`remarks`=?,`action_taken`=?,"
+    return  "UPDATE `emp_passed_away` SET  `date`=?,`remarks`=?,`action_taken`=?,"
             + "`reason_for_death`=?,`emp_id`=? WHERE `id`='"+newId+"'";
     }
     public String InsertLeaveExtension(){
@@ -110,8 +109,7 @@ public class QueryClass {
     return "UPDATE `highestvalue` SET `terminated_emp_due_loss`=?";
     }
     public String UpdateTerminatedEmployee(String newId){
-    return "UPDATE `terminated_emp_due_loss_or_performance` SET `date`=?,`name`=?, `unit`=?,"
-            + "`remarks`=?, `action_taken`, `short_amount`=?,`details`=?,`emp_id`=? WHERE `id`='"+newId+"'";
+    return "UPDATE `terminated_emp_due_loss_or_performance` SET `date`=?, `remarks`=?, `action_taken`, `short_amount`=?,`details`=? WHERE `id`='"+newId+"'";
     }
     public String InsertSalaryStopped(){
     return " INSERT INTO `salary_stopped_due_to_loss_or_performance` (`id`, `date`,`name`, `unit`, `remarks`,"
@@ -121,8 +119,8 @@ public class QueryClass {
     return "UPDATE `highestvalue` SET `salary_stopped_due_to_loss`=?";
     }
     public String UpdateSalaryStopped(String newId){
-    return "UPDATE `salary_stopped_due_to_loss_or_performance` SET `date`=?,`name`=?,`unit`=?,"
-                         + "`remarks`=?,`action_taken`=?,`stopped_by`=?,`emp_id`=? WHERE `id`='"+newId+"'";
+    return "UPDATE `salary_stopped_due_to_loss_or_performance` SET `date`=?,`remarks`=?,`action_taken`=?,"
+            + "`stopped_by`=? WHERE `id`='"+newId+"'";
     }
     public String InsertAttachment(){
     return  " INSERT INTO `attachment` (`flag`, `path`, `caseID`)values(?,?,?)";
@@ -143,7 +141,7 @@ public class QueryClass {
                       +" UNION SELECT `id`,`date`,`name`,`unit` FROM `emp_passed_away`"
                       +" UNION SELECT  `id`,`date`,`name`,`unit` FROM `salary_stopped_due_to_loss_or_performance`"
                       +" UNION SELECT  `id`,`date`,`name`,`unit` FROM `terminated_emp_due_loss_or_performance`"
-                      +" UNION SELECT  `id`,`name`,`unit`,`remarks` FROM `native_staff_shortage`";
+                      +" UNION SELECT  `id`,`date`,`name`,`unit` FROM `native_staff_shortage`";
     }
     public String A1SummaryData(String caseidupdate){
     return "SELECT * FROM `a1_not_returned_from_leave` WHERE `id`='"+caseidupdate+"'";
@@ -256,7 +254,13 @@ public class QueryClass {
      return "SELECT `id`,`path` FROM `attachment` WHERE `caseID`='"+caseid1+"' and `flag`='1'";
      }
      
+     public String getUnits(){
+         return "SELECT DISTINCT A.EMP_DEPT FROM EXISTING_EMPLOYEES_DETAILS A";
+     }
      
+     public String getEmpData(){
+         return "SELECT * FROM EXISTING_EMPLOYEES_DETAILS A";
+     }
      
      
 }

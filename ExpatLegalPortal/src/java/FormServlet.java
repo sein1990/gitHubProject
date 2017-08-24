@@ -6,12 +6,9 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
-import ExpertLegalPortalClass.dbconnection;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -117,15 +114,16 @@ public class FormServlet extends HttpServlet {
                         item.write( new File(UPLOAD_DIRECTORY +lastID+exte));
                         fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);             
                     }
-                    else{        
+                    else{   
+                        
+                        
+                        
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();
                         if(fieldName.equals("date"))
                             date = item.getString();
-                        if(fieldName.equals("name"))
-                            name = item.getString();
-                        if(fieldName.equals("reason"))
+                         if(fieldName.equals("reason"))
                            reason = item.getString();
                         if(fieldName.equals("unity"))
                            unity = item.getString();
@@ -139,8 +137,11 @@ public class FormServlet extends HttpServlet {
                            totalAmount = item.getString();
                         if(fieldName.equals("fileClosed"))
                            fileClosed = item.getString();
-                        if(fieldName.equals("empID"))
-                           empID = item.getString();
+                        if(fieldName.equals("empID")){
+                            String[] array = item.getString().split("-");
+                            name = array[0];
+                            empID = array[1];
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                         if(fieldName.equals("sub"))

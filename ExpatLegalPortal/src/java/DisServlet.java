@@ -136,8 +136,11 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                            actionToBeTaken = item.getString();
                         if(fieldName.equals("peopleInvolved"))
                            peopleInvolved = item.getString();
-                        if(fieldName.equals("empID"))
-                           empID = item.getString();
+                          if(fieldName.equals("empID")){
+                            String[] array = item.getString().split("-");
+                            name = array[0];
+                            empID = array[1];
+                          }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

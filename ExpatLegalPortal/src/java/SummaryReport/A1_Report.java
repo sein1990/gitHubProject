@@ -162,7 +162,7 @@ public class A1_Report {
             p2.setSpacingBefore(1f);
             p2.setSpacingAfter(1f);
             document.add(p2);
-            Paragraph p3 = new Paragraph("REPORT ", blueFont);
+            Paragraph p3 = new Paragraph("SUMMARY REPORT ", blueFont);
             p3.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p3.setSpacingBefore(25f);

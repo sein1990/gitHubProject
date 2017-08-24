@@ -64,9 +64,7 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
         PrintWriter out = response.getWriter();
         try {
                   dbID = Obj.a3_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
-              if(lastID != 0){
-                    
-                }
+           
                response.sendRedirect("formpage.jsp?pageid=3&caseid="+caseidupdate+""); 
         } finally {
             out.close();
@@ -137,8 +135,11 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                            totalAmount = item.getString();
                         if(fieldName.equals("fileClosed"))
                            fileClosed = item.getString();
-                        if(fieldName.equals("empID"))
-                           empID = item.getString();
+                          if(fieldName.equals("empID")){
+                            String[] array = item.getString().split("-");
+                            name = array[0];
+                            empID = array[1];
+                          }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

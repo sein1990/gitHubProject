@@ -131,8 +131,11 @@ public class LeaveExtension extends HttpServlet {
                            actual = item.getString();
                         if(fieldName.equals("actionTaken"))
                            actionTaken = item.getString();
-                        if(fieldName.equals("empID"))
-                           empID = item.getString();
+                          if(fieldName.equals("empID")){
+                            String[] array = item.getString().split("-");
+                            name = array[0];
+                            empID = array[1];
+                          }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

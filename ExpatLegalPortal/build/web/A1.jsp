@@ -1,4 +1,5 @@
 
+<%@page import="ExpertLegalPortalClass.OracleDbConnection"%>
 <%@page import="ExpertLegalPortalClass.QueryClass"%>
 <%@page import="ExpertLegalPortalClass.PieChartDemo"%>
 <%@page import="java.io.File"%>
@@ -92,21 +93,76 @@
                                 <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
                         </div>
                 </div>
-                                                        <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Name </label>
+                <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
 
-                        <div class="col-sm-9">
-                                <input type="text"  value="<%=nameS%>" class="form-control" name="name" required/>
-                        </div>
-                </div>
-                                                                                                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Unit </label>
+                <div class="col-sm-9">
+                    <%
+                    if(caseid1==null){
+                    %>
+                        <input list="empid"  name="empID"  required="">
+                        <datalist id="empid">
+                            <%       
+                               Connection OracleConnection=OracleDbConnection.OracleGetConnection();
+                               String query=objQuery.getEmpData();
+                               PreparedStatement ps2=OracleConnection.prepareStatement(query);
+                               String ID="";
 
-                        <div class="col-sm-9">
-                                <input type="text" name="unity" value="<%=unityS%>" class="form-control"  required/>
-                        </div>
+                               ResultSet rs2=ps2.executeQuery();
+
+                               while(rs2.next())
+                                {		
+                                  ID=rs2.getString(3)+ "- "+rs2.getString(1);
+                                  out.println("<option>"+ID+"</option>");
+                              
+                                }
+                             %>
+                        </datalist>
+                        <%
+                        }else{
+                        %>
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="unity" readonly/> 
+                        <%
+                        }   
+                        %>	
+
+
                 </div>
-                                                                                                <div class="form-group">
+                </div>  
+                <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">Unit</label>
+                <div class="col-xs-12 col-sm-9">
+                <%
+                
+                if(caseid1==null){
+                    %>
+                    <input list="unit"  name="unity">
+                    <datalist id="unit">
+                    
+                    
+                    <%
+                    Connection OracleConnection=OracleDbConnection.OracleGetConnection();
+                    String query=objQuery.getUnits();
+                    PreparedStatement ps2=OracleConnection.prepareStatement(query);
+                    String unit="";
+
+                    ResultSet rs2=ps2.executeQuery();
+                    while(rs2.next()){		
+                        unit=rs2.getString(1);
+                        out.println("<option>"+unit+"</option>");
+                    }
+                    %>
+                    </datalist>
+                    <%
+                }else{
+                    %>
+                    <input type="text"  value="<%=unityS%>" class="form-control" name="unity" readonly/> 
+                   <%
+                }
+                %>        
+                    </div>
+                </div>
+                <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
                         <div class="col-sm-9">
@@ -146,20 +202,15 @@
 
                         </select>
                                 </div>
-                        </div>                                                               						<div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
-
-                        <div class="col-sm-9">
-                                <input type="text" name="empID" value="<%=empIDS%>" class="form-control"  required/>
-                        </div>
-                </div>
+                        </div>                                                 
+                        
                         <%                        
                             for(int i=0;i<attachVector.size();i++){
                                 %>
                                 <div class="alert alert-info">
                                     <i class="ace-icon fa fa-hand-o-right"></i>
                                     <a href="<%=attachVector.get(i).getPath()%>">
-                                    Please note that:</a>
+                                   Attachment:</a>
                                     <button class="close"  data-dismiss="alert">
                                     <i class="ace-icon fa fa-times"></i>
                                     </button>
@@ -233,7 +284,116 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			
-    
+                        
+                        jQuery(function($){
+			    var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({infoTextFiltered: '<span class="label label-purple label-lg">Filtered</span>'});
+				var container1 = demo1.bootstrapDualListbox('getContainer');
+				container1.find('.btn').addClass('btn-white btn-info btn-bold');
+			
+				/**var setRatingColors = function() {
+					$(this).find('.star-on-png,.star-half-png').addClass('orange2').removeClass('grey');
+					$(this).find('.star-off-png').removeClass('orange2').addClass('grey');
+				}*/
+				$('.rating').raty({
+					'cancel' : true,
+					'half': true,
+					'starType' : 'i'
+					/**,
+					
+					'click': function() {
+						setRatingColors.call(this);
+					},
+					'mouseover': function() {
+						setRatingColors.call(this);
+					},
+					'mouseout': function() {
+						setRatingColors.call(this);
+					}*/
+				})//.find('i:not(.star-raty)').addClass('grey');
+				
+				
+				
+				//////////////////
+				//select2
+				$('.select2').css('width','200px').select2({allowClear:true})
+				$('#select2-multiple-style .btn').on('click', function(e){
+					var target = $(this).find('input[type=radio]');
+					var which = parseInt(target.val());
+					if(which == 2) $('.select2').addClass('tag-input-style');
+					 else $('.select2').removeClass('tag-input-style');
+				});
+				
+				//////////////////
+				$('.multiselect').multiselect({
+				 enableFiltering: true,
+				 enableHTML: true,
+				 buttonClass: 'btn btn-white btn-primary',
+				 templates: {
+					button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> &nbsp;<b class="fa fa-caret-down"></b></button>',
+					ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+					filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+					filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default btn-white btn-grey multiselect-clear-filter" type="button"><i class="fa fa-times-circle red2"></i></button></span>',
+					li: '<li><a tabindex="0"><label></label></a></li>',
+			        divider: '<li class="multiselect-item divider"></li>',
+			        liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+				 }
+				});
+			
+				
+				///////////////////
+					
+				//typeahead.js
+				//example taken from plugin's page at: https://twitter.github.io/typeahead.js/examples/
+				var substringMatcher = function(strs) {
+					return function findMatches(q, cb) {
+						var matches, substringRegex;
+					 
+						// an array that will be populated with substring matches
+						matches = [];
+					 
+						// regex used to determine if a string contains the substring `q`
+						substrRegex = new RegExp(q, 'i');
+					 
+						// iterate through the pool of strings and for any string that
+						// contains the substring `q`, add it to the `matches` array
+						$.each(strs, function(i, str) {
+							if (substrRegex.test(str)) {
+								// the typeahead jQuery plugin expects suggestions to a
+								// JavaScript object, refer to typeahead docs for more info
+								matches.push({ value: str });
+							}
+						});
+			
+						cb(matches);
+					}
+				 }
+			
+				 $('input.typeahead').typeahead({
+					hint: true,
+					highlight: true,
+					minLength: 1
+				 }, {
+					name: 'states',
+					displayKey: 'value',
+					source: substringMatcher(ace.vars['US_STATES']),
+					limit: 10
+				 });
+					
+					
+				///////////////
+				
+				
+				//in ajax mode, remove remaining elements before leaving page
+				$(document).one('ajaxloadstart.page', function(e) {
+					$('[class*=select2]').remove();
+					$('select[name="duallistbox_demo1[]"]').bootstrapDualListbox('destroy');
+					$('.rating').raty('destroy');
+					$('.multiselect').multiselect('destroy');
+				});
+			
+			});
+                        
+                        
                             jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
@@ -667,6 +827,7 @@
 				});
 			
 			});
+                        
 		</script>
                 
                    <script type="text/javascript">
@@ -771,3 +932,4 @@
 			
 			});
 		</script>
+                

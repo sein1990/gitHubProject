@@ -1,4 +1,5 @@
 
+<%@page import="ExpertLegalPortalClass.OracleDbConnection"%>
 <%@page import="ExpertLegalPortalClass.QueryClass"%>
 <%@page import="java.io.File"%>
 <%@page import="ExpertLegalPortalClass.Attachment"%>
@@ -13,7 +14,7 @@
     String caseid1 = request.getParameter("caseid"); 
     String nameS="";
     String dateS="";
-    String unitS="";
+    String unityS="";
     String remarksS="";
     String actionTakenS="";
     String detailsS="";
@@ -31,7 +32,7 @@
         dbID=rs.getString(1);
         dateS=rs.getString(2);
         nameS=rs.getString(3);
-        unitS=rs.getString(4);
+        unityS=rs.getString(4);
         remarksS=rs.getString(5);
         actionTakenS=rs.getString(6);
         shortAmountS=rs.getString(7);
@@ -78,18 +79,73 @@
                         </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Name </label>
+                   <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID and Name </label>
 
-                    <div class="col-sm-9">
-                            <input type="text"  value="<%=nameS%>" class="form-control" name="name" required/>
-                    </div>
+                <div class="col-sm-9">
+                    <%
+                    if(caseid1==null){
+                    %>
+                        <input list="empid"  name="empID"  required="">
+                        <datalist id="empid">
+                            <%       
+                               Connection OracleConnection=OracleDbConnection.OracleGetConnection();
+                               String query=objQuery.getEmpData();
+                               PreparedStatement ps2=OracleConnection.prepareStatement(query);
+                               String ID="";
+
+                               ResultSet rs2=ps2.executeQuery();
+
+                               while(rs2.next())
+                                {		
+                                  ID=rs2.getString(3)+ "- "+rs2.getString(1);
+                                  out.println("<option>"+ID+"</option>");
+                              
+                                }
+                             %>
+                        </datalist>
+                        <%
+                        }else{
+                        %>
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="empID" readonly/> 
+                        <%
+                        }   
+                        %>	
+
+
                 </div>
-                      <div class="form-group">
-                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Unit </label>
+                </div>  
+                <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">Unit</label>
+                <div class="col-xs-12 col-sm-9">
+                <%
+                
+                if(caseid1==null){
+                    %>
+                    <input list="unit"  name="unity">
+                    <datalist id="unit">
+                    
+                    
+                    <%
+                    Connection OracleConnection=OracleDbConnection.OracleGetConnection();
+                    String query=objQuery.getUnits();
+                    PreparedStatement ps2=OracleConnection.prepareStatement(query);
+                    String unit="";
 
-                    <div class="col-sm-9">
-                            <input type="text"  value="<%=unitS%>" class="form-control" name="unity" required/>
+                    ResultSet rs2=ps2.executeQuery();
+                    while(rs2.next()){		
+                        unit=rs2.getString(1);
+                        out.println("<option>"+unit+"</option>");
+                    }
+                    %>
+                    </datalist>
+                    <%
+                }else{
+                    %>
+                    <input type="text"  value="<%=unityS%>" class="form-control" name="unity" readonly/> 
+                   <%
+                }
+                %>        
                     </div>
                 </div>
                     
@@ -126,20 +182,14 @@
                         </div>
                         </div>
                                   
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
-
-                        <div class="col-sm-9">
-                                <input type="text" name="empID" value="<%=empIDS%>" class="form-control"  required/>
-                        </div>
-                </div>
+              
                         <%                        
                             for(int i=0;i<attachVector.size();i++){
                                 %>
                                 <div class="alert alert-info">
                                     <i class="ace-icon fa fa-hand-o-right"></i>
                                     <a href="<%=attachVector.get(i).getPath()%>">
-                                    Please note that:</a>
+                                    Attachment:</a>
                                     <button class="close"  data-dismiss="alert">
                                     <i class="ace-icon fa fa-times"></i>
                                     </button>

@@ -98,14 +98,14 @@ public class PieChartDemo {
                        System.out.println("v");
 
           Connection OracleConnection=OracleDbConnection.OracleGetConnection();
-          String query="select * from EMP";
+          String query="SELECT * FROM EXISTING_EMPLOYEES_DETAILS A";
           PreparedStatement ps=OracleConnection.prepareStatement(query);
           
           String q="";
           ResultSet rs=ps.executeQuery();
           while(rs.next())
           {
-            q=rs.getString(1);
+            q=rs.getString(3);
             System.out.println(q);
           }
          

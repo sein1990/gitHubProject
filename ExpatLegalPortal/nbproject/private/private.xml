@@ -3,16 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/QueryClass.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ReportServlet/A1Servlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/A1.jsp</file>
             <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/OracleDbConnection.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/FormServlet.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/dbconnection.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/A2Servlet.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/Home.jsp</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ReportServlet/ReportServlet.java</file>
-            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/SummaryReport/A1_Report.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/ExpertLegalPortalOperation.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/A3Servlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/Dis.jsp</file>
             <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/PieChartDemo.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/SalaryStopped.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/QueryClass.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/A2.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/FormServlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/EmpPassedAway.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/LeaveExtension.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/DisServlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/dbconnection.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/A3.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ReportServlet/A1Servlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/EmpPassedAway.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/TerminatedEmp.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/Case.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/NativeStaffShortage.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/TerminatedEmp.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/FileInfoOperation.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/LeaveExtension.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/Home.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/A2Servlet.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/ExpertLegalPortalClass/CaseSelectors.java</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/web/NativeStaffShortage.jsp</file>
+            <file>file:/C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/src/java/SalaryStopped.java</file>
         </group>
     </open-files>
 </project-private>

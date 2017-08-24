@@ -94,14 +94,12 @@ public class ExpertLegalPortalOperation {
                         PreparedStatement preparedStmt = con.prepareStatement(query2);           
                         preparedStmt.setString(1, date);
                         preparedStmt.setString(2, reason);
-                        preparedStmt.setString(3, name);
-                        preparedStmt.setString(4, unity);
-                        preparedStmt.setString(5, remarks);
-                        preparedStmt.setString(6, recovered);
-                        preparedStmt.setString(7, salaryDeposit);
-                        preparedStmt.setString(8, totalAmount);
-                        preparedStmt.setString(9, fileClosed);
-                        preparedStmt.setString(10, empID);
+                        preparedStmt.setString(3, remarks);
+                        preparedStmt.setString(4, recovered);
+                        preparedStmt.setString(5, salaryDeposit);
+                        preparedStmt.setString(6, totalAmount);
+                        preparedStmt.setString(7, fileClosed);
+                       
                         preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,14 +141,13 @@ public class ExpertLegalPortalOperation {
                         PreparedStatement preparedStmt = con.prepareStatement(query2);           
                         preparedStmt.setString(1, date);
                         preparedStmt.setString(2, reason);
-                        preparedStmt.setString(3, name);
-                        preparedStmt.setString(4, unity);
-                        preparedStmt.setString(5, remarks);
-                        preparedStmt.setString(6, recovered);
-                        preparedStmt.setString(7, salaryDeposit);
-                        preparedStmt.setString(8, totalAmount);
-                        preparedStmt.setString(9, fileClosed);
-                        preparedStmt.setString(10, empID);
+                        
+                        preparedStmt.setString(3, remarks);
+                        preparedStmt.setString(4, recovered);
+                        preparedStmt.setString(5, salaryDeposit);
+                        preparedStmt.setString(6, totalAmount);
+                        preparedStmt.setString(7, fileClosed);
+                    
                         preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,21 +160,21 @@ public class ExpertLegalPortalOperation {
         String dbID= getNewId(objQuery.selectHighestValue("a3"),"A3-");   
         if(newId.equals("null")){
               try {
-                String sql =objQuery.InsertA3DamageOrLoss();
-                PreparedStatement ps2=null;
-                    ps2=con.prepareStatement(sql);
-                    ps2.setString(1, dbID);
-                    ps2.setString(2, date);
-                    ps2.setString(3, reason);
-                    ps2.setString(4, name);
-                    ps2.setString(5, unity);
-                    ps2.setString(6, remarks);
-                    ps2.setString(7, recovered); 
-                    ps2.setString(8, salaryDeposit);
-                    ps2.setString(9, totalAmount);
-                    ps2.setString(10, fileClosed);
-                    ps2.setString(11, empID);
-                    ps2.executeUpdate();
+                PreparedStatement ps2=null;  
+                String sql =objQuery.InsertA3DamageOrLoss();               
+                ps2=con.prepareStatement(sql);
+                ps2.setString(1, dbID);
+                ps2.setString(2, date);
+                ps2.setString(3, reason);
+                ps2.setString(4, name);
+                ps2.setString(5, unity);
+                ps2.setString(6, remarks);
+                ps2.setString(7, recovered); 
+                ps2.setString(8, salaryDeposit);
+                ps2.setString(9, totalAmount);
+                ps2.setString(10, fileClosed);
+                ps2.setString(11, empID);
+                ps2.executeUpdate();
                 String query2 = objQuery.UpdateA3HighestValue();
                 dbID = dbID.substring(dbID.indexOf("-")+1);
                 updateId(query2,Integer.parseInt(dbID));
@@ -281,12 +278,10 @@ public class ExpertLegalPortalOperation {
                  String query2 =objQuery.UpdateEmpPassedAway(newId);
                  PreparedStatement preparedStmt = con.prepareStatement(query2);
                  preparedStmt.setString(1, date);
-                 preparedStmt.setString(2, name);
-                 preparedStmt.setString(3, unity);
-                 preparedStmt.setString(4, remarks);
-                 preparedStmt.setString(5, actionTaken);
-                 preparedStmt.setString(6, deathReason);
-                 preparedStmt.setString(7, empID);
+                 preparedStmt.setString(2, remarks);
+                 preparedStmt.setString(3, actionTaken);
+                 preparedStmt.setString(4, deathReason);
+                 preparedStmt.setString(5, empID);
                  preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -416,13 +411,11 @@ public class ExpertLegalPortalOperation {
                  String query2 =objQuery.UpdateTerminatedEmployee(newId);
                  PreparedStatement preparedStmt = con.prepareStatement(query2);
                  preparedStmt.setString(1, date);
-                 preparedStmt.setString(2, name);
-                 preparedStmt.setString(3, unity);
-                 preparedStmt.setString(4, remarks);
-                 preparedStmt.setString(5, actionTaken);
-                 preparedStmt.setString(6, shortAmount);
-                 preparedStmt.setString(7, details);
-                 preparedStmt.setString(8, empID);
+                 preparedStmt.setString(2, remarks);
+                 preparedStmt.setString(3, actionTaken);
+                 preparedStmt.setString(4, shortAmount);
+                 preparedStmt.setString(5, details);
+                 
                  preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -459,13 +452,11 @@ public class ExpertLegalPortalOperation {
              try {
                  String query2 = objQuery.UpdateSalaryStopped(newId);
                  PreparedStatement preparedStmt = con.prepareStatement(query2);
-                 preparedStmt.setString(1, date);
-                 preparedStmt.setString(2, name);
-                 preparedStmt.setString(3, unity);
-                 preparedStmt.setString(4, remarks);
-                 preparedStmt.setString(5, actionTaken);
-                 preparedStmt.setString(6, stoppedBy);
-                 preparedStmt.setString(7, empID);
+                 preparedStmt.setString(1, date);                
+                 preparedStmt.setString(2, remarks);
+                 preparedStmt.setString(3, actionTaken);
+                 preparedStmt.setString(4, stoppedBy);
+               
                  preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);

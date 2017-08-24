@@ -361,7 +361,7 @@
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getEmpName()+"</td>";
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getEmpUnit()+"</td>";
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getCaseDate()+"</td>";
-                                                                                            HTMLCode = HTMLCode + "<td>"+"<form action='A1Servlet' method='post'>"
+                                                                                            HTMLCode = HTMLCode + "<td>"+"<form action='ReportSummaryServlet' method='post'>"
                                                                                                     + "<input type='hidden' name='IDcase' value='"+e.getCaseId()+"'>"+""
                                                                                                     + "<input type='image' src='pdfIcon.png' height='40' width='50'  name='sub' value='report' ></form>"+"</td></tr>";
                                                                                             out.print(HTMLCode);
