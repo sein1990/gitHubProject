@@ -78,14 +78,28 @@
                             <input type="text" name="caseidupdate"  class="form-control" required="required" value="<%=caseid1%>" readonly/>
                         </div>
                 </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                    <div class="form-group">
+                    
+                    
+                    <%
+                    if(caseid1.contains("null")){
+                    %>
+                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
 
                         <div class="col-sm-9">
                             <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
+                        <%
+                        }else{
+                        %>
+                          <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="date"  class="form-control" required="required" value="<%=dateS%>" readonly/>
+                        </div>
+                        <%
+                        }   
+                        %>
                 </div>
-
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
 
@@ -93,12 +107,12 @@
                                 <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
                         </div>
                 </div>
-                <div class="form-group">
+                                                        <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
 
                 <div class="col-sm-9">
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
                         <input list="empid"  name="empID"  required="">
                         <datalist id="empid">
@@ -121,7 +135,7 @@
                         <%
                         }else{
                         %>
-                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="unity" readonly/> 
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="empID" readonly/> 
                         <%
                         }   
                         %>	
@@ -134,7 +148,7 @@
                 <div class="col-xs-12 col-sm-9">
                 <%
                 
-                if(caseid1==null){
+                if(caseid1.contains("null")){
                     %>
                     <input list="unit"  name="unity">
                     <datalist id="unit">
@@ -162,6 +176,7 @@
                 %>        
                     </div>
                 </div>
+                         
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
@@ -206,16 +221,14 @@
                         
                         <%                        
                             for(int i=0;i<attachVector.size();i++){
-                                %>
-                                <div class="alert alert-info">
-                                    <i class="ace-icon fa fa-hand-o-right"></i>
-                                    <a href="<%=attachVector.get(i).getPath()%>">
-                                   Attachment:</a>
-                                    <button class="close"  data-dismiss="alert">
-                                    <i class="ace-icon fa fa-times"></i>
-                                    </button>
-                                </div>
-                               <% 
+                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href="+attachVector.get(i).getPath()+">");
+                                out.print(attachVector.get(i).getPath()+"</a></div>");
+                                
+                                   
+                               
                             }
                             %>  
                               <div class="form-group">

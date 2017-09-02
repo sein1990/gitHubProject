@@ -51,6 +51,7 @@ public class NativeStaffShortage extends HttpServlet {
     String empID=null;
     String fileOne=null;
     String fileName=null;
+    String attachmentID=null;
     String dbID=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
@@ -116,7 +117,6 @@ public class NativeStaffShortage extends HttpServlet {
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();
-                        
                         if(fieldName.equals("date"))
                             date = item.getString();
                         if(fieldName.equals("name"))

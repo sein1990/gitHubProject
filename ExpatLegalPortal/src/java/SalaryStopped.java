@@ -87,6 +87,7 @@ public class SalaryStopped extends HttpServlet {
     String empID;
     String fileOne;
     String fileName=null;
+    String attachmentID=null;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

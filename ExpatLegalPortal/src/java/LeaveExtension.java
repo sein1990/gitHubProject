@@ -45,7 +45,7 @@ public class LeaveExtension extends HttpServlet {
     String to=null;
     String extendedDay=null;
     String actual=null;
-   
+   String attachmentID=null;
     String actionTaken=null;
     String empID=null;
     String fileOne=null;

@@ -76,14 +76,28 @@ String empIDS="";
                             <input type="text" name="caseidupdate"  class="form-control" required="required" value="<%=caseid1%> " readonly/>
                         </div>
                 </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                 <div class="form-group">
+                    
+                    
+                    <%
+                    if(caseid1==null){
+                    %>
+                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
 
                         <div class="col-sm-9">
                             <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
+                        <%
+                        }else{
+                        %>
+                          <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="date"  class="form-control" required="required" value="<%=dateS%>" readonly/>
+                        </div>
+                        <%
+                        }   
+                        %>
                 </div>
-
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
 
@@ -119,7 +133,7 @@ String empIDS="";
                         <%
                         }else{
                         %>
-                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="unity" readonly/> 
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="empID" readonly/> 
                         <%
                         }   
                         %>	
@@ -132,7 +146,7 @@ String empIDS="";
                 <div class="col-xs-12 col-sm-9">
                 <%
                 
-                if(caseid1==null){
+                if(caseid1.contains("null")){
                     %>
                     <input list="unit"  name="unity">
                     <datalist id="unit">
@@ -202,7 +216,7 @@ String empIDS="";
                                 </div>
                         </div>   
                         <%                        
-                            for(int i=0;i<attachVector.size();i++){
+                            for(int i=0;i<1;i++){
                                 %>
                                 <div class="alert alert-info">
                                     <i class="ace-icon fa fa-hand-o-right"></i>

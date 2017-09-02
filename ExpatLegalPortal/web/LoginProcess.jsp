@@ -24,7 +24,7 @@ String result=login.loginCheck(UserItems);
         {
              response.sendRedirect("Home.jsp");
        
-         }
+        }
  
         //if use is not exist
         if(result.equals("false"))

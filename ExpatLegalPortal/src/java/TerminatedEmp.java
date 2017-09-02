@@ -42,6 +42,7 @@ public class TerminatedEmp extends HttpServlet {
     String fileClosed=null;
     String empID=null;
     String fileOne=null;
+    String attachmentID=null;
     String fileName=null;
       String dbID=null;
     boolean submit=false;

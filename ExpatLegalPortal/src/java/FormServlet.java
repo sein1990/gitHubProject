@@ -28,7 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(name="FormServlet", urlPatterns = {"/FormServlet"})
 @MultipartConfig
 public class FormServlet extends HttpServlet {
-    private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\gitHubProject\\ExpatLegalPortal\\up\\";
+    private final String UPLOAD_DIRECTORY ="C://Users//USER//Documents//NetBeansProjects//gitHubProject//ExpatLegalPortal//up//";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,6 +53,7 @@ public class FormServlet extends HttpServlet {
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String attachmentID="";
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -63,11 +64,8 @@ public class FormServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-           dbID = Obj.a1_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
-              if(lastID != 0){
-                    
-                }
-               response.sendRedirect("formpage.jsp?pageid=1&caseid="+caseidupdate+""); 
+            dbID = Obj.a1_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
+            response.sendRedirect("formpage.jsp?pageid=1&caseid="+caseidupdate+""); 
         } finally {
             out.close();
         }
@@ -115,9 +113,6 @@ public class FormServlet extends HttpServlet {
                         fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);             
                     }
                     else{   
-                        
-                        
-                        
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();

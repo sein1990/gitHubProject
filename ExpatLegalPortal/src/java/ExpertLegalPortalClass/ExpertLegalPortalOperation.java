@@ -8,6 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -24,7 +28,6 @@ public class ExpertLegalPortalOperation {
              int counter = 0;
              PreparedStatement ps=null;
              ResultSet rs=null;
-             //   String IDquery="SELECT `a1` FROM `highestvalue`";
              ps=con.prepareStatement(Query);
              rs=ps.executeQuery();
              if(rs.next())
@@ -65,13 +68,20 @@ public class ExpertLegalPortalOperation {
      {
          
         String dbID= getNewId(objQuery.selectHighestValue("a1"),"A1-");   
-        if(newId.equals("null")){
+      if(newId.contains("null"))
+          
+            {
+                 String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
               try {
+                  
+               
                   PreparedStatement ps2=null;
                 String sql = objQuery.InsertA1NonReturnedFromLeave();
                 ps2=con.prepareStatement(sql);
                 ps2.setString(1, dbID);
-                ps2.setString(2, date);
+                ps2.setString(2, newDateString);
                 ps2.setString(3, reason);
                 ps2.setString(4, name);
                 ps2.setString(5, unity);
@@ -92,13 +102,13 @@ public class ExpertLegalPortalOperation {
              try {
                  String query2 = objQuery.UpdateA1NotReturnedFromLeave(newId);
                         PreparedStatement preparedStmt = con.prepareStatement(query2);           
-                        preparedStmt.setString(1, date);
-                        preparedStmt.setString(2, reason);
-                        preparedStmt.setString(3, remarks);
-                        preparedStmt.setString(4, recovered);
-                        preparedStmt.setString(5, salaryDeposit);
-                        preparedStmt.setString(6, totalAmount);
-                        preparedStmt.setString(7, fileClosed);
+                       
+                        preparedStmt.setString(1, reason);
+                        preparedStmt.setString(2, remarks);
+                        preparedStmt.setString(3, recovered);
+                        preparedStmt.setString(4, salaryDeposit);
+                        preparedStmt.setString(5, totalAmount);
+                        preparedStmt.setString(6, fileClosed);
                        
                         preparedStmt.executeUpdate();
              } catch (SQLException ex) {
@@ -111,13 +121,19 @@ public class ExpertLegalPortalOperation {
       public String a2_notReturnFromLeave(String date, String reason, String name,String unity, String remarks, String recovered, String salaryDeposit, String totalAmount, String fileClosed, String empID,String newId)
      {
             String dbID= getNewId(objQuery.selectHighestValue("a2"),"A2-");   
-        if(newId.equals("null")){
+     if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
+                
                     String sql = objQuery.InsertA2WithCompanyProperty();
                     PreparedStatement ps2=null;
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, reason);
                     ps2.setString(4, name);
                     ps2.setString(5, unity);
@@ -155,16 +171,24 @@ public class ExpertLegalPortalOperation {
          }
          return dbID;
          } 
+      String[] monthArray={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG", "SEP", "OCT", "NOV","DEC"};
        public String a3_notReturnFromLeave(String date, String reason, String name,String unity, String remarks, String recovered, String salaryDeposit, String totalAmount, String fileClosed, String empID,String newId)
      {
         String dbID= getNewId(objQuery.selectHighestValue("a3"),"A3-");   
-        if(newId.equals("null")){
+            if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
+                
+                  
                 PreparedStatement ps2=null;  
                 String sql =objQuery.InsertA3DamageOrLoss();               
                 ps2=con.prepareStatement(sql);
                 ps2.setString(1, dbID);
-                ps2.setString(2, date);
+                ps2.setString(2, newDateString);//"to_char(to_date('"+newDateString+"','DD-MM-RRRR'),'DD-MON-RR')");
                 ps2.setString(3, reason);
                 ps2.setString(4, name);
                 ps2.setString(5, unity);
@@ -179,6 +203,7 @@ public class ExpertLegalPortalOperation {
                 dbID = dbID.substring(dbID.indexOf("-")+1);
                 updateId(query2,Integer.parseInt(dbID));
                  } catch (SQLException ex) {
+                     String s=ex.getMessage();
                      Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
                  }
          }else{
@@ -206,13 +231,18 @@ public class ExpertLegalPortalOperation {
          public String Dis_notReturnFromLeave(String date,String reason,String name,String unity,String remarks,String investigation,String actionTaken,String actionToBeTaken,String peopleInvolved,String empID,String newId)
      {
            String dbID= getNewId(objQuery.selectHighestValue("dis"),"A4-");   
-        if(newId.equals("null")){
+         if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null;                
                     String sql = objQuery.InsertDisNotReturnFromLeave();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, reason);
                     ps2.setString(4, name);
                     ps2.setString(5, unity);
@@ -253,13 +283,18 @@ public class ExpertLegalPortalOperation {
            public String empPassedAway(String date, String name, String unity,String remarks, String actionTaken, String deathReason, String empID, String newId)
      {
          String dbID= getNewId(objQuery.selectHighestValue("emp_passed_away"),"A6-");   
-        if(newId.equals("null")){
+        if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null;
                     String sql = objQuery.InsertEmpPassedAway();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
                     ps2.setString(5, remarks);
@@ -293,13 +328,18 @@ public class ExpertLegalPortalOperation {
            public String LeaveExtension(String date, String name,String unity,String from,String to,String extendedDay,String actual,String actionTaken,String empID, String newId)
      {
            String dbID= getNewId(objQuery.selectHighestValue("leave_extension"),"A9-");   
-        if(newId.equals("null")){
+         if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null;    
                     String sql = objQuery.InsertLeaveExtension();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
                     ps2.setString(5, from);
@@ -339,13 +379,18 @@ public class ExpertLegalPortalOperation {
            public String NativeStaffShortage(String date, String name,String unity,String remarks,String recovered, String action, String shortAmount,String currentStatus,String empID, String newId)
      {
          String dbID= getNewId(objQuery.selectHighestValue("native_staff_shortage"),"A7-");   
-        if(newId.equals("null")){
+        if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null; 
                     String sql = objQuery.InsertNativeStaffShortage();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
                     ps2.setString(5, remarks);
@@ -384,13 +429,18 @@ public class ExpertLegalPortalOperation {
            public String terminatedEmployee(String date, String name,String unity, String remarks,String  actionTaken,String  shortAmount,String details,String empID, String newId)
      {
          String dbID= getNewId(objQuery.selectHighestValue("terminated_emp_due_loss"),"A8-");   
-        if(newId.equals("null")){
-              try { 
+         if(newId.contains("null"))
+            {
+              try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null;
                     String sql = objQuery.InsertTerminatedEmployee();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
                     ps2.setString(5, remarks);
@@ -427,13 +477,18 @@ public class ExpertLegalPortalOperation {
             public String salaryStopped(String name, String date, String unity,String remarks, String actionTaken, String stoppedBy,String empID, String newId)
      {
                      String dbID= getNewId(objQuery.selectHighestValue("salary_stopped_due_to_loss"),"A5-");   
-        if(newId.equals("null")){
+        if(newId.contains("null"))
+            {
               try {
+                  
+                String arrayDate[]= date.split("-");
+                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                
                     PreparedStatement ps2=null;               
                     String sql = objQuery.InsertSalaryStopped();
                     ps2=con.prepareStatement(sql);
                     ps2.setString(1, dbID);
-                    ps2.setString(2, date);
+                    ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
                     ps2.setString(5, remarks);
@@ -464,5 +519,11 @@ public class ExpertLegalPortalOperation {
          }
          return dbID;  
          } 
+            
+    
+            
+            
+            
+            
     }
     

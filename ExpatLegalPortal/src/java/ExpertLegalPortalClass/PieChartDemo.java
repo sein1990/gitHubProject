@@ -86,6 +86,8 @@ public class PieChartDemo {
   
   public static void main(String[] args){
       try {
+          //  try {
+          ///  try {
           /*    go();
           int m=1;
           String month = "invalid";
@@ -95,27 +97,74 @@ public class PieChartDemo {
           month = months[m];
           }
           System.out.print(month);*/
-                       System.out.println("v");
-
-          Connection OracleConnection=OracleDbConnection.OracleGetConnection();
-          String query="SELECT * FROM EXISTING_EMPLOYEES_DETAILS A";
-          PreparedStatement ps=OracleConnection.prepareStatement(query);
+//          Connection con=dbconnection.getConnection();
+//          System.out.println("v");
+//          String sql = "INSERT INTO highestvalue (id, a1, a2, a3, dis, emp_passed_away, leave_extension, native_staff_shortage, salary_stopped_due_to_loss, terminated_emp_due_loss) VALUES(?,?,?,?,?,?,?,?,?,?)";
+//          PreparedStatement ps2=null;
+//          ps2=con.prepareStatement(sql);
+//            ps2.setInt(1, 0);;
+//          ps2.setInt(2, 0);
+//          ps2.setInt(3, 0);
+//          ps2.setInt(4, 0);
+//          ps2.setInt(5, 0);
+//          ps2.setInt(6, 0);
+//          ps2.setInt(7, 0);
+//          ps2.setInt(8, 0);
+//          ps2.setInt(9, 0);
+//          ps2.setInt(10, 0);
+//         
+//          ps2.executeUpdate();
+//      } catch (SQLException ex) {
+//          Logger.getLogger(PieChartDemo.class.getName()).log(Level.SEVERE, null, ex);
+//      }
+//      }
+//}
           
-          String q="";
-          ResultSet rs=ps.executeQuery();
+          
+          
+//String UPLOAD_DIRECTORY ="C://Users//Sein 90//Desktop//up";
+          
+//String caseid1 = request.getParameter("caseid");
+//          String dateS="";
+//          String reasonS="";
+//          String nameS="";
+//          String unityS="";
+//          String remarksS="";
+//          String investigationS="";
+//          String actionTakenS="";
+//          String actionToBeTakenS="";
+//          String peopleInvolvedS="";
+//          String empIDS="";
+          Connection con1=dbconnection.getConnection();
+      //    String dbID="CCCCCC";
+          PreparedStatement ps=null;
+          ResultSet rs=null;
+          String IDquery="SELECT * FROM attachment";
+          ps=con1.prepareStatement(IDquery);
+          rs=ps.executeQuery();
+          
+          
           while(rs.next())
           {
-            q=rs.getString(3);
-            System.out.println(q);
-          }
-         
-          } catch (SQLException ex) {
+              int dbID=rs.getInt(1);
+             String dateS=rs.getString(3);
+//              reasonS=rs.getString(3);
+//              nameS=rs.getString(4);
+//              unityS=rs.getString(5);
+//              remarksS=rs.getString(6);
+//              investigationS=rs.getString(7);
+//              actionTakenS=rs.getString(8);
+//              actionToBeTakenS=rs.getString(9);
+//              peopleInvolvedS=rs.getString(10);
+             // empIDS=rs.getString(11);
+                   
+      System.out.println(dbID+dateS);
+          } 
+
+      } catch (SQLException ex) {
           Logger.getLogger(PieChartDemo.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      
-  //
+      }
+
   }
-      
-      
-           
+          
 }

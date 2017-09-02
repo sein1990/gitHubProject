@@ -67,11 +67,26 @@ String empIDS="";
                         </div>
                 </div>
                 <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                    
+                    
+                    <%
+                    if(caseid1==null){
+                    %>
+                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
 
                         <div class="col-sm-9">
-                            <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>" />
+                            <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
+                        <%
+                        }else{
+                        %>
+                          <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="date"  class="form-control" required="required" value="<%=dateS%>" readonly/>
+                        </div>
+                        <%
+                        }   
+                        %>
                 </div>
                                      <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
