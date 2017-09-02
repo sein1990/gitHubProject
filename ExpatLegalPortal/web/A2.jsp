@@ -8,8 +8,9 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="ExpertLegalPortalClass.dbconnection"%>
 <%@page import="java.sql.Connection"%>
+
+
 <% 
-//String UPLOAD_DIRECTORY ="C://Users//Sein 90//Desktop//up";
  QueryClass objQuery=new QueryClass();  
 String caseid1 = request.getParameter("caseid"); 
 String dateS="";
@@ -66,9 +67,7 @@ String empIDS="";
 
 <div class="row">
 <div class="col-xs-12">
-        <!-- PAGE CONTENT BEGINS -->
-        <% //formpage.jsp?pageid=1&caseid="<%=caseid1 %>
-        <form class="form-horizontal"  action="A2Servlet" method="post" enctype="multipart/form-data" >
+         <form class="form-horizontal"  action="A2Servlet" method="post" enctype="multipart/form-data" >
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Case ID</label>
 
@@ -76,16 +75,16 @@ String empIDS="";
                             <input type="text" name="caseidupdate"  class="form-control" required="required" value="<%=caseid1%>" readonly/>
                         </div>
                 </div>
-                  <div class="form-group">
+                    <div class="form-group">
                     
                     
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
                                  <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
 
                         <div class="col-sm-9">
-                            <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
+                            <input type="date" name="date" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
                         <%
                         }else{
@@ -98,7 +97,6 @@ String empIDS="";
                         }   
                         %>
                 </div>
-
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
 
@@ -106,12 +104,12 @@ String empIDS="";
                                 <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
                         </div>
                 </div>
-                            <div class="form-group">
+                                                        <div class="form-group">
                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
 
                 <div class="col-sm-9">
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
                         <input list="empid"  name="empID"  required="">
                         <datalist id="empid">
@@ -147,7 +145,7 @@ String empIDS="";
                 <div class="col-xs-12 col-sm-9">
                 <%
                 
-                if(caseid1==null){
+                if(caseid1.contains("null")){
                     %>
                     <input list="unit"  name="unity">
                     <datalist id="unit">
@@ -175,7 +173,8 @@ String empIDS="";
                 %>        
                     </div>
                 </div>
-                                                                                                <div class="form-group">
+                         
+                <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
                         <div class="col-sm-9">
@@ -215,19 +214,18 @@ String empIDS="";
 
                         </select>
                                 </div>
-                        </div>                                                               		
+                        </div>                                                 
+                        
                         <%                        
                             for(int i=0;i<attachVector.size();i++){
-                                %>
-                                <div class="alert alert-info">
-                                    <i class="ace-icon fa fa-hand-o-right"></i>
-                                    <a href="<%=attachVector.get(i).getPath()%>">
-                                    Please note that:</a>
-                                    <button class="close"  data-dismiss="alert">
-                                    <i class="ace-icon fa fa-times"></i>
-                                    </button>
-                                </div>
-                               <% 
+                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href="+attachVector.get(i).getPath()+">");
+                                out.print(attachVector.get(i).getPath()+"</a></div>");
+                                
+                                   
+                               
                             }
                             %>  
                               <div class="form-group">

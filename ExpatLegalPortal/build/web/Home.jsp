@@ -144,7 +144,7 @@
 							</li>
 
 							<li class="">
-								<a href="formpage.jsp?pageid=2">
+								<a href="formpage.jsp?pageid=2&caseid=null">
 									<i class="menu-icon fa fa-caret-right"></i>
 									2--A2(With Company Property)
 								</a>
@@ -154,7 +154,7 @@
                                                      
 
 					<li class="">
-						<a href="formpage.jsp?pageid=3">
+						<a href="formpage.jsp?pageid=3&caseid=null">
                                                     <i class="menu-icon fa fa-caret-right"></i>
 							3--A3(Damage or Loose)
 						</a>

@@ -148,6 +148,7 @@ public class PieChartDemo {
           {
               int dbID=rs.getInt(1);
              String dateS=rs.getString(3);
+             String date=rs.getString(4);
 //              reasonS=rs.getString(3);
 //              nameS=rs.getString(4);
 //              unityS=rs.getString(5);
@@ -156,9 +157,9 @@ public class PieChartDemo {
 //              actionTakenS=rs.getString(8);
 //              actionToBeTakenS=rs.getString(9);
 //              peopleInvolvedS=rs.getString(10);
-             // empIDS=rs.getString(11);
+//              empIDS=rs.getString(11);
                    
-      System.out.println(dbID+dateS);
+      System.out.println(dbID+dateS+date);
           } 
 
       } catch (SQLException ex) {

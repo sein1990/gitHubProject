@@ -203,13 +203,13 @@ public class QueryClass {
      return "SELECT * FROM a1_not_returned_from_leave WHERE id='"+caseid1+"'";
      }
      public String a1Attachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
       public String a2(String caseid1){
-     return "SELECT * FROM a2_with_company_property WHERE `id`='"+caseid1+"'";
+     return "SELECT * FROM a2_with_company_property WHERE id='"+caseid1+"'";
      }
      public String a2Attachment(String caseid1){
-     return "SELECT id, path` FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
      
     public String a3(String caseid1){

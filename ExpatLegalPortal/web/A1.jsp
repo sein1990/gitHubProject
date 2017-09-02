@@ -84,8 +84,7 @@
                     <%
                     if(caseid1.contains("null")){
                     %>
-                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
-
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                         <div class="col-sm-9">
                             <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
@@ -220,17 +219,18 @@
                         </div>                                                 
                         
                         <%                        
-                            for(int i=0;i<attachVector.size();i++){
-                               
+                            for(int i=0;i<attachVector.size();i++){                               
                                 out.print("<div class='alert alert-info'>");
                                 out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
-                                out.print("<a href="+attachVector.get(i).getPath()+">");
-                                out.print(attachVector.get(i).getPath()+"</a></div>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+")'>"); 
+                               
+                                out.print("Attachment"+"</a></div>");
                                 
-                                   
                                
                             }
-                            %>  
+                          
+                        %>  
+                        
                               <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
