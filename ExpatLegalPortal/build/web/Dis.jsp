@@ -49,7 +49,7 @@ String empIDS="";
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery(); 
     Vector<Attachment> attachVector =new Vector();while(rs.next())
-        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1)));
+        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1),rs.getString(3)));
 
 %>	
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -76,16 +76,15 @@ String empIDS="";
                             <input type="text" name="caseidupdate"  class="form-control" required="required" value="<%=caseid1%>" readonly/>
                         </div>
                 </div>
-                <div class="form-group">
+              <div class="form-group">
                     
                     
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
-                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
-
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                         <div class="col-sm-9">
-                            <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
+                            <input type="date" name="date" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
                         <%
                         }else{
@@ -97,8 +96,6 @@ String empIDS="";
                         <%
                         }   
                         %>
-                    
-        
                 </div>
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Reason </label>
@@ -109,14 +106,15 @@ String empIDS="";
                         </div>
                 </div>
 
-          <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
+         
+                                                        <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID and Name</label>
 
                 <div class="col-sm-9">
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
-                        <input list="empid"  name="empID"  required="">
+                        <input list="empid" class="form-control" name="empID"  required="">
                         <datalist id="empid">
                             <%       
                                Connection OracleConnection=OracleDbConnection.OracleGetConnection();
@@ -137,7 +135,7 @@ String empIDS="";
                         <%
                         }else{
                         %>
-                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="unity" readonly/> 
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="empID" readonly/> 
                         <%
                         }   
                         %>	
@@ -150,9 +148,9 @@ String empIDS="";
                 <div class="col-xs-12 col-sm-9">
                 <%
                 
-                if(caseid1==null){
+                if(caseid1.contains("null")){
                     %>
-                    <input list="unit"  name="unity">
+                    <input list="unit"  name="unity" class="form-control">
                     <datalist id="unit">
                     
                     
@@ -177,7 +175,7 @@ String empIDS="";
                 }
                 %>        
                     </div>
-                </div>            
+                </div>
                                                                                                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
@@ -219,20 +217,18 @@ String empIDS="";
                         </div>
                         </div>
                
-                        <%                        
-                            for(int i=0;i<attachVector.size();i++){
-                                %>
-                                <div class="alert alert-info">
-                                    <i class="ace-icon fa fa-hand-o-right"></i>
-                                    <a href="<%=attachVector.get(i).getPath()%>">
-                                    Please note that:</a>
-                                    <button class="close"  data-dismiss="alert">
-                                    <i class="ace-icon fa fa-times"></i>
-                                    </button>
-                                </div>
-                               <% 
+                     <%                        
+                            for(int i=0;i<attachVector.size();i++){                               
+                               out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
+                                out.print("<button class='close'  data-dismiss='alert'><i class='ace-icon fa fa-times'></i></button></div>");
+                                
+                               
                             }
-                            %>  
+                          
+                        %>  
                                <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
@@ -243,7 +239,45 @@ String empIDS="";
 
                             <div class="form-group">
                                     <div class="col-xs-12">
-                                            <input  name="fileOne" type="file" id="fileOne" multiple/>
+                                           
+                                                                <p>
+        <input type="file" name="fileOne"  id="fileOne" onchange="FileDetails()"/>
+    </p>
+    
+    <!--SHOW RESULT HERE-->
+    <p id="fp"></p>
+
+ 
+    <script>
+    function FileDetails()
+    {
+        // GET THE FILE INPUT.
+        var fi = document.getElementById('fileOne');
+        // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        if (fi.files.length > 0) {
+            // THE TOTAL FILE COUNT.
+//            document.getElementById('fp').innerHTML =
+//                'Total Files: <b>' + fi.files.length + '</b></br >';
+            // RUN A LOOP TO CHECK EACH SELECTED FILE.
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+         //       var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                // SHOW THE EXTRACTED DETAILS OF THE FILE.
+                document.getElementById('fp').innerHTML =
+                document.getElementById('fp').innerHTML + '<br/>' +
+                '<input type="text" name="fileRemarks" class="form-control" required/>'+ '<b>'+fname+'</b></br>';
+            }
+//            var fileSize = parseInt(fi.files.length);
+//            var arrySize=0;
+//            arrySize=parseInt("<%=attachVector.size()%>");
+//            var totalSize=fileSize+arrySize;
+//        document.getElementById('fp').innerHTML = document.getElementById('fp').innerHTML + '<input type="text" name="numberOfFiles" value="'+fileSize+'">';
+        }
+        else { 
+            alert('Please select a file.');
+        }
+    }
+</script>
                                     </div>
                             </div>
 

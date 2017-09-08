@@ -229,7 +229,7 @@ public class A1_Report {
             p12.setSpacingAfter(10f);
             document.add(p12);
             
-            Paragraph p13 = new Paragraph(" F & F FIXED & CLOSED/REMARKS:    "+attachItems.getFileClosed(), blueFont);
+            Paragraph p13 = new Paragraph("FILED & CLOSED:    "+attachItems.getFileClosed(), blueFont);
             p13.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
             p13.setSpacingBefore(1f);

@@ -4,61 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class FileInfoOperation {
-     Connection con=dbconnection.getConnection();
-       QueryClass objQuery=new QueryClass();
-//                 
-//        public String getAttachment( ){
-//         String HighestValueQuery=objQuery.selectHighestAttachmentValue();
-//        String attachmentID=null;
-//                  try {
-//             int counter = 0; 
-//             PreparedStatement ps=null;
-//             ResultSet rs=null;
-//             ps=con.prepareStatement(HighestValueQuery);
-//             rs=ps.executeQuery();
-//             if(rs.next())
-//             { 
-//                 attachmentID=rs.getString(1);
-//             }
-//             if(attachmentID==null){
-//                 //  dbID="A1-1";
-//                 attachmentID="attachment-"+"1";
-//             }
-//             else{
-//                 
-//            String[] parts = attachmentID.split("-");
-//            String part1attachment = parts[0]; // 004
-//            String part2attachment = parts[1]; 
-//                
-//                 attachmentID=part1attachment;
-//             }       
-//             
-//               String query2 =objQuery.UpdateAttachment();
-//                    PreparedStatement preparedStmt = con.prepareStatement(query2);
-//                    preparedStmt.setString(1, attachmentID);                     
-//                    preparedStmt.executeUpdate();
-//             
-//         } catch (SQLException ex) {
-//             Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//         return attachmentID;
-//     }
-//     
-//     private void updateattachmentID(String Query,int counter){
-//         try {
-//             PreparedStatement preparedStmt = con.prepareStatement(Query);
-//             preparedStmt.setInt(1, counter);
-//             preparedStmt.executeUpdate();
-//         } catch (SQLException ex) {
-//             Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//     }
-//            
-//            
-//           
+    Connection con=dbconnection.getConnection();
+    QueryClass objQuery=new QueryClass();        
      public void addToAttachment(String UPLOAD_DIRECTORY,  String caseidupdate, String fileName,  int lastID, String exte)
      {
          try {
@@ -103,5 +54,34 @@ public class FileInfoOperation {
              Logger.getLogger(FileInfoOperation.class.getName()).log(Level.SEVERE, null, ex);
          }
           return x;
+    }
+ public String selectAttachmentLastRecord(String caseidupdate){
+            String attachmentID=null;
+             try{
+             PreparedStatement ps=null;
+             ResultSet rs=null;
+             String IDquery=objQuery.SelectAttachment(caseidupdate);
+             ps=con.prepareStatement(IDquery);
+             rs=ps.executeQuery();
+             while(rs.next())
+             {    
+                 attachmentID=rs.getString(1);         
+             }
+         } catch (SQLException ex) {
+             Logger.getLogger(FileInfoOperation.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         return attachmentID;
+    }
+    public void updateLastAttachmentRemarks(String fileRemarks, String attachmentID){  
+        try {
+            String query2 =objQuery.updateRemarks();
+            PreparedStatement preparedStmt = con.prepareStatement(query2);
+            preparedStmt.setString(1, fileRemarks);
+            preparedStmt.setString(2, attachmentID);
+
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FileInfoOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -28,7 +28,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(name="FormServlet", urlPatterns = {"/FormServlet"})
 @MultipartConfig
 public class FormServlet extends HttpServlet {
-    private final String UPLOAD_DIRECTORY ="C://Users//USER//Documents//NetBeansProjects//gitHubProject//ExpatLegalPortal//up//";
+    private final String UPLOAD_DIRECTORY ="C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/up/";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,6 +41,7 @@ public class FormServlet extends HttpServlet {
      */
     String date=null;
     String name=null;
+    int numberOfFiles=0;
     String caseidupdate=null;
     String reason=null;
     String unity=null;
@@ -48,6 +49,7 @@ public class FormServlet extends HttpServlet {
     String recovered=null;
     String salaryDeposit=null;
     String totalAmount=null;
+    String fileRemarks[]=new String[numberOfFiles];
     String fileClosed=null;
     String empID=null;
     String fileOne=null;
@@ -59,12 +61,20 @@ public class FormServlet extends HttpServlet {
     FileInfoOperation fileObj;
     int lastID=0;
     String exte;   
+    int i=0;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+            int salaryDepositAmount = Integer.parseInt(salaryDeposit);
+            int recoveredAmount=Integer.parseInt(recovered);
+            int total=recoveredAmount+salaryDepositAmount;
+            totalAmount=Integer.toString(total);
             dbID = Obj.a1_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
+            fileObj =new FileInfoOperation();
+           // fileObj.selectAttachmentLastRecord(dbID);
+           // fileObj.updateLastAttachmentRemarks(fileRemarks);
             response.sendRedirect("formpage.jsp?pageid=1&caseid="+caseidupdate+""); 
         } finally {
             out.close();
@@ -110,7 +120,7 @@ public class FormServlet extends HttpServlet {
                         fileName = new File(item.getName()).getName();
                         exte=fileName.substring(fileName.indexOf("."));
                         item.write( new File(UPLOAD_DIRECTORY +lastID+exte));
-                        fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);             
+                        fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);                 
                     }
                     else{   
                         String fieldName = item.getFieldName();
@@ -136,6 +146,13 @@ public class FormServlet extends HttpServlet {
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
+                        }
+                        if(fieldName.equals("fileRemarks")){
+                            fileRemarks[i]=item.getString();
+                            i++;
+                        }
+                        if(fieldName.equals("numberOfFiles")){
+                        numberOfFiles=Integer.parseInt(item.getString());
                         }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();

@@ -5,6 +5,8 @@
  */
 package ExpertLegalPortalClass;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author USER
@@ -37,7 +39,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET a2=?";
     }
     public String UpdateA2WithCompanyProperty(String newId){
-     return "UPDATE a2_with_company_property SET case_date=?,reason=?,remarks=?,"
+     return "UPDATE a2_with_company_property SET reason=?,remarks=?,"
              + "a_t_b_r_a_f_s_h=?,salary_deposit=?,total_amount=?,"
              + "filed_and_closed=? WHERE id='"+newId+"'";   
     }    
@@ -51,7 +53,7 @@ public class QueryClass {
     }
     public String UpdateA3DamageOrLoss(String newId){
     
-    return "UPDATE a3_damage_or_loss SET case_date=?, reason=?, name=?, unit=?, remarks=?,"
+    return "UPDATE a3_damage_or_loss SET reason=?, name=?, unit=?, remarks=?,"
                          + "a_t_b_r_a_f_s_h=?, salary_deposit=?, total_amount=?, filed_and_closed=?,"
                          + " emp_id=? WHERE id='"+newId+"'";
     }
@@ -64,7 +66,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET dis=?";
     }
     public String UpdateDisNotReturnFromLeave(String newId){
-    return "UPDATE dis SET case_date=?, reason=?, name=?, unit=?, remarks=?, investigation=?, action_taken=?,"
+    return "UPDATE dis SET reason=?, name=?, unit=?, remarks=?, investigation=?, action_taken=?,"
             + "action_to_be_taken=?, people_involved=?, emp_id=? WHERE id='"+newId+"'";                
     }   
     public String InsertEmpPassedAway(){
@@ -75,7 +77,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET emp_passed_away=?";
     }
     public String UpdateEmpPassedAway(String newId){
-    return  "UPDATE emp_passed_away SET  case_date=?, remarks=?, action_taken=?,"
+    return  "UPDATE emp_passed_away SET remarks=?, action_taken=?,"
             + "reason_for_death=?, emp_id=? WHERE id='"+newId+"'";
     }
     public String InsertLeaveExtension(){
@@ -97,7 +99,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET native_staff_shortage=?";
     }
     public String UpdateNativeStaffShortage(String newId){
-    return "UPDATE native_staff_shortage SET case_date=?, name=?, unit=?, remarks=?,"
+    return "UPDATE native_staff_shortage SET  name=?, unit=?, remarks=?,"
                          + "to_be_recovered=?,action=?, short_amount=?,"
                          + "current_status=?, emp_id=?  WHERE id='"+newId+"'";
     }
@@ -109,7 +111,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET terminated_emp_due_loss=?";
     }
     public String UpdateTerminatedEmployee(String newId){
-    return "UPDATE t_e_d_l_o_p SET case_date=?, remarks=?, action_taken, short_amount=?, details=? WHERE id='"+newId+"'";
+    return "UPDATE t_e_d_l_o_p SET remarks=?, action_taken=?, short_amount=?, details=? WHERE id='"+newId+"'";
     }
     public String InsertSalaryStopped(){
     return " INSERT INTO s_s_d_t_l_o_p (id, case_date, name, unit, remarks,"
@@ -119,7 +121,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET salary_stopped_due_to_loss=?";
     }
     public String UpdateSalaryStopped(String newId){
-    return "UPDATE s_s_d_t_l_o_p SET case_date=?, remarks=?, action_taken=?,"
+    return "UPDATE s_s_d_t_l_o_p SET remarks=?, action_taken=?,"
             + "stopped_by=? WHERE id='"+newId+"'";
     }
     public String InsertAttachment(){
@@ -140,7 +142,7 @@ public class QueryClass {
                       +" UNION SELECT id,case_date, name,unit FROM emp_passed_away"
                       +" UNION SELECT  id, case_date, name, unit FROM s_s_d_t_l_o_p"
                       +" UNION SELECT  id, case_date, name, unit FROM t_e_d_l_o_p"
-                      +" UNION SELECT  id, case_date, name, unit FROM native_staff_shortage";
+                      +" UNION SELECT  id, case_date, name, unit FROM native_staff_shortage ORDER BY case_date DESC";
     }
     public String A1SummaryData(String caseidupdate){
     return "SELECT * FROM a1_not_returned_from_leave WHERE id='"+caseidupdate+"'";
@@ -203,32 +205,32 @@ public class QueryClass {
      return "SELECT * FROM a1_not_returned_from_leave WHERE id='"+caseid1+"'";
      }
      public String a1Attachment(String caseid1){
-     return "SELECT id, path, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
       public String a2(String caseid1){
      return "SELECT * FROM a2_with_company_property WHERE id='"+caseid1+"'";
      }
      public String a2Attachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path,Remarks,caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
      
     public String a3(String caseid1){
      return "SELECT * FROM a3_damage_or_loss WHERE id='"+caseid1+"'";
      }
      public String a3Attachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE  caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE  caseID='"+caseid1+"'and flag='1'";
      }
      public String Dis(String caseid1){
      return "SELECT * FROM dis WHERE id='"+caseid1+"'";
      }
      public String DisAttachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
       public String empPassedAway(String caseid1){
      return "SELECT * FROM emp_passed_away WHERE id='"+caseid1+"'";
      }
      public String empPassedAwayAttachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
      public String leaveExtension(String caseid1){
      return "SELECT * FROM leave_extension WHERE id='"+caseid1+"'";
@@ -241,19 +243,19 @@ public class QueryClass {
      return "SELECT * FROM native_staff_shortage WHERE id='"+caseid1+"'";
      }
      public String nativeStaffShortageAttachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
      public String salaryStopped(String caseid1){
      return "SELECT * FROM s_s_d_t_l_o_p WHERE id='"+caseid1+"'";
      }
      public String salaryStoppedAttachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"'and flag='1'";
      }
       public String terminatedEmp(String caseid1){
      return "SELECT * FROM t_e_d_l_o_p WHERE id='"+caseid1+"'";
      }
      public String terminatedEmpAttachment(String caseid1){
-     return "SELECT id, path FROM attachment WHERE caseID='"+caseid1+"' and flag='1'";
+     return "SELECT id, path, Remarks, caseID FROM attachment WHERE caseID='"+caseid1+"' and flag='1'";
      }
      
      public String getUnits(){
@@ -263,6 +265,10 @@ public class QueryClass {
      public String getEmpData(){
          return "SELECT * FROM EXISTING_EMPLOYEES_DETAILS A";
      }
-     
-     
+     public String SelectAttachment(String caseid1){
+      return "SELECT id FROM attachment WHERE id = (SELECT max(id) FROM attachment WHERE caseID='"+caseid1+"')";
+     }
+     public String updateRemarks(){
+            return "UPDATE attachment SET Remarks=? WHERE id=?";
+     }
 }

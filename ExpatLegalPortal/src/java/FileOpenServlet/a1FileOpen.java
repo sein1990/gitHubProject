@@ -35,28 +35,19 @@ public class a1FileOpen extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      
         try {
-            Vector<Attachment> attachVector = null;
-            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet a1FileOpen</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet a1FileOpen at " + request.getParameter("param") + "</h1>");
-//            out.println("</body>");
-//           out.println("</html>");
- // String           
-//            String path = request.getParameter("param");
-//            String[] parts = path.split("//");
-//            String part1 = parts[0]; // 004
-//            String part2 = parts[1]; // 034556
+            String path = request.getParameter("param");
+            String[] output = path.split("/");
+            String fileName=output[output.length-1];        
+            System.out.println(output[0]);
+            System.out.println(fileName);
+            String[] extension = fileName.split("\\.");
+            String fileExtension=extension[1];
             NewClass obj=new NewClass();
-                obj.pp(response);
+            obj.setPdfName(fileName);
+            obj.setFileExtension(fileExtension);
+            obj.pp(response);
         } finally {
-    //        out.close();
         }
     }
 

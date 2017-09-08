@@ -14,12 +14,14 @@ public class Attachment {
     String flag;
     String caseId;
     String Id;
+    String Remarks;
 
-    public Attachment(String path, String flag, String caseId, String Id) {
+    public Attachment(String path, String flag, String caseId, String Id, String Remarks) {
         this.path = path;
         this.flag = flag;
         this.caseId = caseId;
         this.Id = Id;
+        this.Remarks = Remarks;
     }
 
     public String getPath() {
@@ -36,6 +38,10 @@ public class Attachment {
 
     public String getId() {
         return Id;
+    }
+
+    public String getRemarks() {
+        return Remarks;
     }
   
 }

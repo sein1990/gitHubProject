@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/EmpPassedAway"})
 @MultipartConfig
 public class EmpPassedAway extends HttpServlet {
-    private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\ExpatLegalPortal\\up\\";
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +41,7 @@ public class EmpPassedAway extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-      String date=null;
+    String date=null;
     String name=null;
     String caseidupdate=null;
     String reason=null;
@@ -55,6 +58,7 @@ public class EmpPassedAway extends HttpServlet {
     FileInfoOperation fileObj;
     int lastID=0;
     String exte; 
+    String fileRemarks=null;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -62,7 +66,11 @@ public class EmpPassedAway extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
                 dbID=Obj.empPassedAway(date, name, unity, remarks, actionTaken, deathReason, empID, caseidupdate);
-                response.sendRedirect("formpage.jsp?pageid=6&caseid="+caseidupdate+""); 
+                if(fileRemarks!=null){
+                  String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                  fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                  }
+                response.sendRedirect("formpage.jsp?pageid=6&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -113,12 +121,10 @@ public class EmpPassedAway extends HttpServlet {
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();
-                        
                         if(fieldName.equals("date"))
                             date = item.getString();
                         if(fieldName.equals("name"))
                             name = item.getString();
-                        
                         if(fieldName.equals("unity"))
                             unity = item.getString();
                         if(fieldName.equals("remarks"))
@@ -131,6 +137,9 @@ public class EmpPassedAway extends HttpServlet {
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
+                          }
+                           if(fieldName.equals("fileRemarks")){
+                             fileRemarks=item.getString();
                           }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();

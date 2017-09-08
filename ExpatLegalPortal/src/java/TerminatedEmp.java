@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,10 +28,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/TerminatedEmp"})
 @MultipartConfig
 public class TerminatedEmp extends HttpServlet {
-    
-   private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\ExpatLegalPortal\\up\\";
-    
-       String date=null;
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
+    String date=null;
     String name=null;
     String caseidupdate=null;
     String reason=null;
@@ -41,10 +41,10 @@ public class TerminatedEmp extends HttpServlet {
     String details=null;
     String fileClosed=null;
     String empID=null;
+    String fileRemarks;
     String fileOne=null;
-    String attachmentID=null;
     String fileName=null;
-      String dbID=null;
+    String dbID=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -67,8 +67,12 @@ public class TerminatedEmp extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
 
-              dbID = Obj.terminatedEmployee(date, name,unity, remarks, actionTaken, shortAmount, details,  empID, caseidupdate);
-             response.sendRedirect("formpage.jsp?pageid=8&caseid="+caseidupdate+""); 
+                dbID = Obj.terminatedEmployee(date, name,unity, remarks, actionTaken, shortAmount, details,  empID, caseidupdate);
+                if(fileRemarks!=null){
+                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                 }
+              response.sendRedirect("formpage.jsp?pageid=8&caseid="+dbID+""); 
           
         } finally {
             out.close();
@@ -135,11 +139,16 @@ public class TerminatedEmp extends HttpServlet {
                            shortAmount = item.getString();
                         if(fieldName.equals("details"))
                            details = item.getString();
-                        if(fieldName.equals("empID")){
+                         if(fieldName.equals("empID")){
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
-                          }
+                        }
+                        if(fieldName.equals("fileRemarks")){
+//                            fileRemarks[i]=item.getString();
+//                            i++;
+                            fileRemarks=item.getString();
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

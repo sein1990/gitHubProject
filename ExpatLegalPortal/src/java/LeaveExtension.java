@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -26,7 +27,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/LeaveExtension"})
 @MultipartConfig
 public class LeaveExtension extends HttpServlet {
-   private final String UPLOAD_DIRECTORY ="C://Users//Sein 90//Documents//NetBeansProjects//ExpatLegalPortal//up//";
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,11 +47,11 @@ public class LeaveExtension extends HttpServlet {
     String to=null;
     String extendedDay=null;
     String actual=null;
-   String attachmentID=null;
     String actionTaken=null;
     String empID=null;
     String fileOne=null;
     String fileName=null;
+    String fileRemarks=null;
     String dbID=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
@@ -62,8 +64,12 @@ public class LeaveExtension extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {            
-           dbID=Obj.LeaveExtension(date, name, unity, from, to,extendedDay, actual, actionTaken, empID, caseidupdate);
+                dbID=Obj.LeaveExtension(date, name, unity, from, to,extendedDay, actual, actionTaken, empID, caseidupdate);
                  response.sendRedirect("formpage.jsp?pageid=9&caseid="+caseidupdate+""); 
+                 if(fileRemarks!=null){
+                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                 }
         } finally {
             out.close();
         }
@@ -131,11 +137,13 @@ public class LeaveExtension extends HttpServlet {
                            actual = item.getString();
                         if(fieldName.equals("actionTaken"))
                            actionTaken = item.getString();
-                          if(fieldName.equals("empID")){
-                            String[] array = item.getString().split("-");
-                            name = array[0];
-                            empID = array[1];
-                          }
+                        if(fieldName.equals("empID")){
+                          String[] array = item.getString().split("-");
+                          name = array[0];
+                          empID = array[1];
+                        }
+                        if(fieldName.equals("fileRemarks"))
+                            fileRemarks=item.getString(); 
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

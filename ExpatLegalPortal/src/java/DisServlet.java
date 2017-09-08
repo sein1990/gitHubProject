@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/DisServlet"})
 @MultipartConfig
 public class DisServlet extends HttpServlet {
-private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\gitHubProject\\ExpatLegalPortal\\up\\";
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -51,6 +53,7 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String fileRemarks=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -62,13 +65,13 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            dbID =Obj.Dis_notReturnFromLeave(date, reason, name,unity,remarks, investigation,actionTaken, actionToBeTaken, peopleInvolved, empID,caseidupdate);
-
-                if(lastID != 0){
-                    
-                }
             
-                 response.sendRedirect("formpage.jsp?pageid=4&caseid="+caseidupdate+""); 
+                dbID =Obj.Dis_notReturnFromLeave(date, reason, name,unity,remarks, investigation,actionTaken, actionToBeTaken, peopleInvolved, empID,caseidupdate);
+                if(fileRemarks!=null){
+                String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                 }
+            response.sendRedirect("formpage.jsp?pageid=4&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -140,6 +143,9 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
+                          }
+                          if(fieldName.equals("fileRemarks")){
+                             fileRemarks=item.getString();
                           }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();

@@ -32,23 +32,23 @@ String empIDS="";
   
     if(rs.next())
     {	
-   dbID=rs.getString(1);
-                    dateS=rs.getString(2);
-                    reasonS=rs.getString(3);
-                    nameS=rs.getString(4);
-                    unityS=rs.getString(5);
-                    remarksS=rs.getString(6);
-                    recoveredS=rs.getString(7);
-                    salaryDepositS=rs.getString(8);
-                    totalAmountS=rs.getString(9);
-                    fileClosedS=rs.getString(10);
-                    empIDS=rs.getString(11);   
+        dbID=rs.getString(1);
+        dateS=rs.getString(2);
+        reasonS=rs.getString(3);
+        nameS=rs.getString(4);
+        unityS=rs.getString(5);
+        remarksS=rs.getString(6);
+        recoveredS=rs.getString(7);
+        salaryDepositS=rs.getString(8);
+        totalAmountS=rs.getString(9);
+        fileClosedS=rs.getString(10);
+        empIDS=rs.getString(11);   
     }
     IDquery=objQuery.a3Attachment(caseid1);
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery(); 
     Vector<Attachment> attachVector =new Vector();while(rs.next())
-        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1)));
+        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1),rs.getString(3)));
 
 %>	
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -69,7 +69,7 @@ String empIDS="";
         <!-- PAGE CONTENT BEGINS -->
         <% //formpage.jsp?pageid=1&caseid="<%=caseid1 %>
         <form class="form-horizontal"  action="A3Servlet" method="post" enctype="multipart/form-data" >
-               <div class="form-group">
+             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Case ID</label>
 
                         <div class="col-sm-9">
@@ -82,8 +82,7 @@ String empIDS="";
                     <%
                     if(caseid1.contains("null")){
                     %>
-                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
-
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                         <div class="col-sm-9">
                             <input type="date" name="date" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
@@ -92,27 +91,21 @@ String empIDS="";
                         %>
                           <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                             <div class="col-sm-9">
-                            <input type="text" name="date"  class="form-control" required="required" value="<%=dateS%>" readonly/>
+                            <input type="date" name="date"  class="form-control" required="required" value="<%=dateS%>" readonly/>
                         </div>
                         <%
                         }   
                         %>
                 </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
-
-                        <div class="col-sm-9">
-                                <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
-                        </div>
-                </div>
+              
                                                         <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID and Name </label>
 
                 <div class="col-sm-9">
                     <%
                     if(caseid1.contains("null")){
                     %>
-                        <input list="empid"  name="empID"  required="">
+                        <input list="empid" class="form-control" name="empID"  required="">
                         <datalist id="empid">
                             <%       
                                Connection OracleConnection=OracleDbConnection.OracleGetConnection();
@@ -141,6 +134,7 @@ String empIDS="";
 
                 </div>
                 </div>  
+                   
                 <div class="form-group">
                 <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="food">Unit</label>
                 <div class="col-xs-12 col-sm-9">
@@ -148,7 +142,7 @@ String empIDS="";
                 
                 if(caseid1.contains("null")){
                     %>
-                    <input list="unit"  name="unity">
+                    <input list="unit"  name="unity" class="form-control">
                     <datalist id="unit">
                     
                     
@@ -174,7 +168,13 @@ String empIDS="";
                 %>        
                     </div>
                 </div>
-                         
+                                <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
+
+                        <div class="col-sm-9">
+                                <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
+                        </div>
+                </div>
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
@@ -186,25 +186,36 @@ String empIDS="";
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="recovered" value="<%=recoveredS%>"class="form-control" required/>
+                                <input type="text" name="recovered" value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)" required/>
                         </div>
                 </div>
             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary deposit </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control"  required/>
+                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control" onkeypress="return isNumberKey(event)" required/>
                         </div>
-                        </div>
+                        <script type="text/javascript">
+                            function isNumberKey(evt)
+                            {
+                                      var charCode = (evt.which) ? evt.which : event.keyCode;
+                                      if (charCode != 46 && charCode > 31 
+                                        && (charCode < 48 || charCode > 57))
+                                         return false;
+
+                                      return true;
+                            }
+                            </script>
+                    </div>
                         <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Total Amount </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="totalAmount" value="<%=totalAmountS%>" class="form-control"  required/>
+                                <input type="text" name="totalAmount" value="<%=totalAmountS%>" class="form-control"  readonly/>
                         </div>
                         </div>
                                 <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> F & F Fixed & Closed/Remarks </label>
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Filed & Closed </label>
 
                         <div class="col-sm-9">
 
@@ -218,17 +229,17 @@ String empIDS="";
                         </div>                                                 
                         
                         <%                        
-                            for(int i=0;i<attachVector.size();i++){
-                               
+                            for(int i=0;i<attachVector.size();i++)
+                            {                               
                                 out.print("<div class='alert alert-info'>");
                                 out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
-                                out.print("<a href="+attachVector.get(i).getPath()+">");
-                                out.print(attachVector.get(i).getPath()+"</a></div>");
-                                
-                                   
-                               
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
+                                out.print("<button class='close'  data-dismiss='alert'><i class='ace-icon fa fa-times'></i></button></div>");
+                             
                             }
-                            %>  
+                        %>  
+                        
                               <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
@@ -239,7 +250,45 @@ String empIDS="";
 
                             <div class="form-group">
                                     <div class="col-xs-12">
-                                            <input  name="fileOne" type="file" id="fileOne" multiple/>
+                                           
+                                                                <p>
+        <input type="file" name="fileOne"  id="fileOne" onchange="FileDetails()"/>
+    </p>
+    
+    <!--SHOW RESULT HERE-->
+    <p id="fp"></p>
+
+ 
+    <script>
+    function FileDetails()
+    {
+        // GET THE FILE INPUT.
+        var fi = document.getElementById('fileOne');
+        // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        if (fi.files.length > 0) {
+            // THE TOTAL FILE COUNT.
+//            document.getElementById('fp').innerHTML =
+//                'Total Files: <b>' + fi.files.length + '</b></br >';
+            // RUN A LOOP TO CHECK EACH SELECTED FILE.
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                var fname = fi.files.item(i).name;      // THE NAME OF THE FILE.
+         //       var fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                // SHOW THE EXTRACTED DETAILS OF THE FILE.
+                document.getElementById('fp').innerHTML =
+                document.getElementById('fp').innerHTML + '<br/>' +
+                '<input type="text" name="fileRemarks" class="form-control"/>'+ '<b>'+fname+'</b></br>';
+            }
+//            var fileSize = parseInt(fi.files.length);
+//            var arrySize=0;
+//            arrySize=parseInt("<%=attachVector.size()%>");
+//            var totalSize=fileSize+arrySize;
+//        document.getElementById('fp').innerHTML = document.getElementById('fp').innerHTML + '<input type="text" name="numberOfFiles" value="'+fileSize+'">';
+        }
+        else { 
+            alert('Please select a file.');
+        }
+    }
+</script>
                                     </div>
                             </div>
 
@@ -247,7 +296,14 @@ String empIDS="";
             </div>
                         </div>
                         </div>
-            
+                       
+                        
+                        
+                        
+     
+                        
+                        
+                        
                         <div class="col-md-offset-3 col-md-9">
                                 <button class="btn btn-info" type="submit" name="sub">
                                         <i class="ace-icon fa fa-check bigger-110"></i>

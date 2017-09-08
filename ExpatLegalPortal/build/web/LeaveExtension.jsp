@@ -45,7 +45,7 @@ String empIDS="";
     ps=con1.prepareStatement(IDquery);
     rs=ps.executeQuery(); 
     Vector<Attachment> attachVector =new Vector();while(rs.next())
-        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1)));
+        attachVector.add(new Attachment(rs.getString(2), "1", caseid1, rs.getString(1),rs.getString(3)));
 
 %>	
  
@@ -76,12 +76,11 @@ String empIDS="";
                     
                     
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
-                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
-
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                         <div class="col-sm-9">
-                            <input type="date" name="date" placeholder="yyyy/mm/dd" class="form-control" required="required" value="<%=dateS%>"/>
+                            <input type="date" name="date" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
                         <%
                         }else{
@@ -94,14 +93,15 @@ String empIDS="";
                         }   
                         %>
                 </div>
-                         <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID </label>
+                        
+                   <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID and Name</label>
 
                 <div class="col-sm-9">
                     <%
-                    if(caseid1==null){
+                    if(caseid1.contains("null")){
                     %>
-                        <input list="empid"  name="empID"  required="">
+                        <input list="empid" class="form-control" name="empID"  required="">
                         <datalist id="empid">
                             <%       
                                Connection OracleConnection=OracleDbConnection.OracleGetConnection();
@@ -122,7 +122,7 @@ String empIDS="";
                         <%
                         }else{
                         %>
-                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="unity" readonly/> 
+                            <input  value="<%=nameS+"-"+empIDS%>" class="form-control" name="empID" readonly/> 
                         <%
                         }   
                         %>	
@@ -135,12 +135,10 @@ String empIDS="";
                 <div class="col-xs-12 col-sm-9">
                 <%
                 
-                if(caseid1==null){
+                if(caseid1.contains("null")){
                     %>
-                    <input list="unit"  name="unity">
+                    <input list="unit"  name="unity" class="form-control">
                     <datalist id="unit">
-                    
-                    
                     <%
                     Connection OracleConnection=OracleDbConnection.OracleGetConnection();
                     String query=objQuery.getUnits();
@@ -161,8 +159,9 @@ String empIDS="";
                    <%
                 }
                 %>        
-                    </div>
-                </div>                                                                       <div class="form-group">
+                </div>
+                </div>   
+                                                                                                    <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> From </label>
 
                         <div class="col-sm-9">
@@ -197,20 +196,19 @@ String empIDS="";
                                 <input type="text" name="actionTaken" value="<%=actionTakenS%>" class="form-control"  required/>
                         </div>
                         </div>      
-                        <%                        
-                            for(int i=0;i<attachVector.size();i++){
-                                %>
-                                <div class="alert alert-info">
-                                    <i class="ace-icon fa fa-hand-o-right"></i>
-                                    <a href="<%=attachVector.get(i).getPath()%>">
-                                    Please note that:</a>
-                                    <button class="close"  data-dismiss="alert">
-                                    <i class="ace-icon fa fa-times"></i>
-                                    </button>
-                                </div>
-                               <% 
+                      <%                        
+                            for(int i=0;i<attachVector.size();i++){                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("<div class='alert alert-info'>");
+                                out.print("Attachment"+"</a></div>");
+                                  
+                               
                             }
-                            %>  
+                          
+                        %>  
+                        
                               <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 

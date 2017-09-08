@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,8 +28,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/A2Servlet"})
 @MultipartConfig
 public class A2Servlet extends HttpServlet {
-private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\ExpatLegalPortal\\up\\";
-
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,8 +39,9 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-       String date=null;
+    String date=null;
     String name=null;
+    String numberOfFiles=null;
     String caseidupdate=null;
     String reason=null;
     String unity=null;
@@ -47,6 +49,8 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
     String recovered=null;
     String salaryDeposit=null;
     String totalAmount=null;
+    int x=1;
+    String fileRemarks;
     String fileClosed=null;
     String empID=null;
     String fileOne=null;
@@ -56,7 +60,8 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
     int lastID=0;
-    String exte;
+    String exte;   
+    int i=0;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,8 +69,16 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-               dbID = Obj.a2_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
-              response.sendRedirect("formpage.jsp?pageid=2&caseid="+caseidupdate+""); 
+                int salaryDepositAmount = Integer.parseInt(salaryDeposit);
+                int recoveredAmount=Integer.parseInt(recovered);           
+                int total=recoveredAmount+salaryDepositAmount;
+                totalAmount=Integer.toString(total);
+                dbID = Obj.a2_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
+                if(fileRemarks!=null){
+                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                 }
+              response.sendRedirect("formpage.jsp?pageid=2&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -104,24 +117,22 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                 new DiskFileItemFactory()).parseRequest(request);
               
                 for(FileItem item : multiparts){
-                    if(!item.isFormField())
+                      if(!item.isFormField())
                     {   
-                         fileObj=new FileInfoOperation();
+                        fileObj=new FileInfoOperation();
                         lastID=fileObj.highestID();      
                         fileName = new File(item.getName()).getName();
                         exte=fileName.substring(fileName.indexOf("."));
                         item.write( new File(UPLOAD_DIRECTORY +lastID+exte));
-                        fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);   
+                        fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);                 
                     }
-                    else{        
+                    else{   
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();
                         if(fieldName.equals("date"))
                             date = item.getString();
-                        if(fieldName.equals("name"))
-                            name = item.getString();
-                        if(fieldName.equals("reason"))
+                         if(fieldName.equals("reason"))
                            reason = item.getString();
                         if(fieldName.equals("unity"))
                            unity = item.getString();
@@ -135,13 +146,25 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                            totalAmount = item.getString();
                         if(fieldName.equals("fileClosed"))
                            fileClosed = item.getString();
-                          if(fieldName.equals("empID")){
+                        if(fieldName.equals("empID")){
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
-                          }
+                        }
+                        if(fieldName.equals("fileRemarks")){
+//                            fileRemarks[i]=item.getString();
+//                            i++;
+                            fileRemarks=item.getString();
+                        }
+//                        if(fieldName.equals("numberOfFiles")){
+//                        numberOfFiles=(item.getString());
+//                          x=Integer.parseInt(numberOfFiles);
+//                        }
+                       
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
+                        if(fieldName.equals("sub"))
+                           submit = true;
                     }
                 }
                //File uploaded successfully

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package SummaryReport;
+import ExpertLegalPortalClass.PathClass;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,10 +38,9 @@ public class NewClass {
                         File myfile = new File(DEST + pdfName);
 
                         //set response headers
-                        response.setContentType("application/docx");         //I want to download a PDF file
+                        response.setContentType("application/'"+fileExtension+"'");         //I want to download a PDF file
 
-                        response.addHeader(
-                                "Content-Disposition", "inline; filename=" + pdfName);
+                        response.addHeader("Content-Disposition", "inline; filename=" + pdfName);
 
                         response.setContentLength((int) myfile.length());
 
@@ -90,8 +90,25 @@ public class NewClass {
             }
        return myDocuments;      
    }
- 
-    private String DEST="//up//";
-            String pdfName="3.docx";
+    PathClass pathObj=new PathClass();
+    private String DEST=pathObj.path();
+    private String pdfName;
 
+       public String getPdfName() {
+        return pdfName;
+    }
+
+    public void setPdfName(String pdfName) {
+        this.pdfName = pdfName;
+    }
+private String fileExtension;
+
+
+//String path = request.getParameter("param");
+
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
+            
+ 
 }

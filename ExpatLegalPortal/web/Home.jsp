@@ -163,7 +163,7 @@
 					</li>
                                     
 					 <li class="">
-						<a href="formpage.jsp?pageid=4">
+						<a href="formpage.jsp?pageid=4&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							 4--Disciplinary
 						</a>
@@ -172,7 +172,7 @@
 					</li>
 					
 					 <li class="">
-						<a href="formpage.jsp?pageid=5">
+						<a href="formpage.jsp?pageid=5&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 				5--Salary stopped due to loss/performance
 						</a>
@@ -180,7 +180,7 @@
 						<b class="arrow"></b>
 					</li>
                                              <li class="">
-						<a href="formpage.jsp?pageid=6">
+						<a href="formpage.jsp?pageid=6&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							6--Emp who passed away
 						</a>
@@ -188,7 +188,7 @@
 						<b class="arrow"></b>
 					</li>
                                            <li class="">
-						<a href="formpage.jsp?pageid=7">
+						<a href="formpage.jsp?pageid=7&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							7--Native Staff Shortage
 						</a>
@@ -197,7 +197,7 @@
 					</li>
                                    
                                         <li class="">
-						<a href="formpage.jsp?pageid=8">
+						<a href="formpage.jsp?pageid=8&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
                                             8--Terminated Emp due to loss/shortage
 						</a>
@@ -206,7 +206,7 @@
 					</li>
                                  
                                         <li class="">
-						<a href="formpage.jsp?pageid=9">
+						<a href="formpage.jsp?pageid=9&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 						9--Leave Extension
 						</a>
@@ -338,9 +338,9 @@
                                                       <tr class="header">
                                                             <th style="width:15%;">Case ID</th>
                                                             <th style="width:40%;">Employee Name</th>
-                                                            <th style="width:25%;">Unit</th>
+                                                            <th style="width:20%;">Unit</th>
                                                             <th style="width:10%;">Date</th>
-                                                            <th style="width:20;">Case Summary</th>
+                                                            <th style="width:25;">Case Summary</th>
                                                       </tr>
                                                       <%
 
@@ -361,7 +361,7 @@
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getEmpName()+"</td>";
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getEmpUnit()+"</td>";
                                                                                             HTMLCode = HTMLCode + "<td>"+e.getCaseDate()+"</td>";
-                                                                                            HTMLCode = HTMLCode + "<td>"+"<form action='ReportSummaryServlet' method='post'>"
+                                                                                            HTMLCode = HTMLCode + "<td>"+"<form action='ServletSummary' method='post'>"
                                                                                                     + "<input type='hidden' name='IDcase' value='"+e.getCaseId()+"'>"+""
                                                                                                     + "<input type='image' src='pdfIcon.png' height='40' width='50'  name='sub' value='report' ></form>"+"</td></tr>";
                                                                                             out.print(HTMLCode);

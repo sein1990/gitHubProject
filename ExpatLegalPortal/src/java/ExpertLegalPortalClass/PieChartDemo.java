@@ -85,7 +85,21 @@ public class PieChartDemo {
   
   
   public static void main(String[] args){
+      
       try {
+          //      String phone = "C://Users//USER//Documents//NetBeansProjects//gitHubProject//ExpatLegalPortal//up//6.pdf";
+//        String[] output = phone.split("//");
+//        
+//        String fileName=output[output.length-1];
+//        String pathName=output[output.length-2];
+//        System.out.println(output[0]);
+//        System.out.println(fileName);
+//        System.out.println(pathName);
+//        String [] extension=fileName.split("\\.");
+//        System.out.println(extension[0]);
+//        System.out.println(extension[1]);
+//  }
+          //  try {
           //  try {
           ///  try {
           /*    go();
@@ -122,6 +136,7 @@ public class PieChartDemo {
           
           
           
+          
 //String UPLOAD_DIRECTORY ="C://Users//Sein 90//Desktop//up";
           
 //String caseid1 = request.getParameter("caseid");
@@ -136,32 +151,60 @@ public class PieChartDemo {
 //          String peopleInvolvedS="";
 //          String empIDS="";
           Connection con1=dbconnection.getConnection();
-      //    String dbID="CCCCCC";
+          //String dbID="CCCCCC";
           PreparedStatement ps=null;
           ResultSet rs=null;
-          String IDquery="SELECT * FROM attachment";
-          ps=con1.prepareStatement(IDquery);
-          rs=ps.executeQuery();
+          //Update
+//          String query2 = "UPDATE highestvalue SET id=0, a1=0, a2=0, a3=0, dis=0, emp_passed_away=0, leave_extension=0, native_staff_shortage=0, salary_stopped_due_to_loss=0, terminated_emp_due_loss=0";
+//          PreparedStatement preparedStmt = con1.prepareStatement(query2);
+//          
+//          preparedStmt.executeUpdate();
+          //delete
+          
+          String sql = "DELETE FROM attachment";
+        ps = con1.prepareStatement(sql);
+        int i = ps.executeUpdate();
+        if(i > 0){
+    
+        System.out.print("Record Deleted Successfully");
+        }
+        else
+        {
+        
+        System.out.println("There is a problem in Deleting Record."); 
+        System.out.print("Check Manually in your Database");
+        } 
           
           
-          while(rs.next())
-          {
-              int dbID=rs.getInt(1);
-             String dateS=rs.getString(3);
-             String date=rs.getString(4);
-//              reasonS=rs.getString(3);
-//              nameS=rs.getString(4);
-//              unityS=rs.getString(5);
-//              remarksS=rs.getString(6);
-//              investigationS=rs.getString(7);
-//              actionTakenS=rs.getString(8);
-//              actionToBeTakenS=rs.getString(9);
-//              peopleInvolvedS=rs.getString(10);
-//              empIDS=rs.getString(11);
-                   
-      System.out.println(dbID+dateS+date);
-          } 
-
+          
+//          int x=1;
+//          String caseID="A1-1";
+//          String IDquery="SELECT * FROM attachment WHERE id = (SELECT max(id) FROM attachment WHERE caseID='"+caseID+"')";
+//          ps=con1.prepareStatement(IDquery);
+//          rs=ps.executeQuery();
+//
+//          
+//          while(rs.next())
+//          {
+//              String dbID=rs.getString(1);
+//            // String dateS=rs.getString(3);
+//            // String date=rs.getString(5);
+////              reasonS=rs.getString(3);
+////              nameS=rs.getString(4);
+////              unityS=rs.getString(5);
+////              remarksS=rs.getString(6);
+////              investigationS=rs.getString(7);
+////              actionTakenS=rs.getString(8);
+////              actionToBeTakenS=rs.getString(9);
+////              peopleInvolvedS=rs.getString(10);
+////              empIDS=rs.getString(11);
+//                   
+//      System.out.println(dbID);
+//          } 
+//
+//      } catch (SQLException ex) {
+//          Logger.getLogger(PieChartDemo.class.getName()).log(Level.SEVERE, null, ex);
+//      }
       } catch (SQLException ex) {
           Logger.getLogger(PieChartDemo.class.getName()).log(Level.SEVERE, null, ex);
       }

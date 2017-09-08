@@ -40,8 +40,7 @@ public class CaseSelectors {
             rs=ps.executeQuery();
             while(rs.next())
             {
-                
-               Case e = new Case(rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(2)); 
+            Case e = new Case(rs.getString(1),rs.getString(3),rs.getString(4),rs.getString(2));  
                EmpData.add(e);               
                 
             }

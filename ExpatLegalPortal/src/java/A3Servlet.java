@@ -5,6 +5,7 @@
  */
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,8 +26,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/A3Servlet"})
 @MultipartConfig
 public class A3Servlet extends HttpServlet {
-private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProjects\\gitHubProject\\ExpatLegalPortal\\up\\";
-
+ PathClass pathObj=new PathClass();
+ private final String UPLOAD_DIRECTORY =pathObj.path();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,6 +42,7 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
     String caseidupdate=null;
     String reason=null;
     String unity=null;
+    String fileRemarks=null;
     String remarks=null;
     String recovered=null;
     String salaryDeposit=null;
@@ -61,8 +63,16 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-                dbID = Obj.a3_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);         
-                response.sendRedirect("formpage.jsp?pageid=3&caseid="+caseidupdate+""); 
+                    int salaryDepositAmount = Integer.parseInt(salaryDeposit);
+                    int recoveredAmount=Integer.parseInt(recovered);
+                    int total=recoveredAmount+salaryDepositAmount;
+                    totalAmount=Integer.toString(total);
+                    dbID = Obj.a3_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);         
+                    if(fileRemarks!=null){
+                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                    }
+                    response.sendRedirect("formpage.jsp?pageid=3&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -131,13 +141,17 @@ private final String UPLOAD_DIRECTORY ="C:\\Users\\USER\\Documents\\NetBeansProj
                            totalAmount = item.getString();
                         if(fieldName.equals("fileClosed"))
                            fileClosed = item.getString();
-                          if(fieldName.equals("empID")){
-                            String[] array = item.getString().split("-");
-                            name = array[0];
-                            empID = array[1];
-                          }
+                        if(fieldName.equals("empID")){
+                        String[] array = item.getString().split("-");
+                        name = array[0];
+                        empID = array[1];
+                        }
+                        if(fieldName.equals("fileRemarks"))
+                        {
+                        fileRemarks=item.getString();
+                        }
                         if(fieldName.equals("fileOne"))
-                           fileOne = item.getString();
+                        fileOne = item.getString();
                     }
                 }
                //File uploaded successfully

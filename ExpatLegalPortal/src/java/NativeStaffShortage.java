@@ -6,6 +6,7 @@
 
 import ExpertLegalPortalClass.ExpertLegalPortalOperation;
 import ExpertLegalPortalClass.FileInfoOperation;
+import ExpertLegalPortalClass.PathClass;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +28,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 @WebServlet(urlPatterns = {"/NativeStaffShortage"})
 @MultipartConfig
 public class NativeStaffShortage extends HttpServlet {
-    private final String UPLOAD_DIRECTORY ="C://Users//Sein 90//Documents//NetBeansProjects//ExpatLegalPortal//up//";
+    PathClass pathObj=new PathClass();
+    private final String UPLOAD_DIRECTORY =pathObj.path();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,7 +53,7 @@ public class NativeStaffShortage extends HttpServlet {
     String empID=null;
     String fileOne=null;
     String fileName=null;
-    String attachmentID=null;
+    String fileRemarks=null;
     String dbID=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
@@ -65,7 +67,11 @@ public class NativeStaffShortage extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
                 dbID=Obj.NativeStaffShortage(date, name, unity,remarks,recovered, action, shortAmount,currentStatus, empID, caseidupdate);
-                  response.sendRedirect("formpage.jsp?pageid=7&caseid="+caseidupdate+""); 
+                 if(fileRemarks!=null){
+                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                 } 
+                response.sendRedirect("formpage.jsp?pageid=7&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -133,11 +139,16 @@ public class NativeStaffShortage extends HttpServlet {
                            shortAmount = item.getString();
                         if(fieldName.equals("currentStatus"))
                            currentStatus = item.getString();
-                           if(fieldName.equals("empID")){
+                          if(fieldName.equals("empID")){
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
-                          }
+                        }
+                        if(fieldName.equals("fileRemarks")){
+//                            fileRemarks[i]=item.getString();
+//                            i++;
+                            fileRemarks=item.getString();
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }
