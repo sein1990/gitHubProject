@@ -41,6 +41,8 @@ public class ReportServlet extends HttpServlet {
         String from=request.getParameter("from");
         String to=request.getParameter("to");
         String caseName=request.getParameter("caseName");
+       
+                 
         GraphReport fi = new GraphReport();
         fi.caseReport(from, to, caseName);
         String DEST = fi.getDEST();

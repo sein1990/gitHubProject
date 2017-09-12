@@ -56,6 +56,7 @@ public class A2Servlet extends HttpServlet {
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String currencyType=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -69,11 +70,13 @@ public class A2Servlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-                int salaryDepositAmount = Integer.parseInt(salaryDeposit);
-                int recoveredAmount=Integer.parseInt(recovered);           
+               int salaryDepositAmount = Integer.parseInt(salaryDeposit);
+                int recoveredAmount=Integer.parseInt(recovered);
                 int total=recoveredAmount+salaryDepositAmount;
                 totalAmount=Integer.toString(total);
-                dbID = Obj.a2_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
+                 String totalAmount1=Integer.toString(total);
+                totalAmount=totalAmount1+currencyType;
+                    dbID = Obj.a2_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
                 if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                     fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
@@ -150,6 +153,9 @@ public class A2Servlet extends HttpServlet {
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
+                        }
+                         if(fieldName.equals("currencyType")){
+                           currencyType=item.getString();
                         }
                         if(fieldName.equals("fileRemarks")){
 //                            fileRemarks[i]=item.getString();

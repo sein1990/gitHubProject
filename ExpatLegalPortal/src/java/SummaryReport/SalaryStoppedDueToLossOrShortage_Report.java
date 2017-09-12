@@ -24,6 +24,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
@@ -38,7 +39,8 @@ public class SalaryStoppedDueToLossOrShortage_Report {
     public void SalaryStoppedDueToLossOrShortageReport(String caseidupdate) throws IOException, DocumentException, SQLException
     {
         SalaryStoppedDueToLossOrShortage_ReportItems attachItems = getSalaryStoppedDueToLossOrShortage_Data(caseidupdate);
-        writeToPDF(attachItems);
+        Vector<AttachmentRemarks> a1remarksArray=a1Remarks(caseidupdate);
+        writeToPDF(attachItems,a1remarksArray);
     }
      public void pp(HttpServletResponse response){
           BufferedInputStream buf = null;
@@ -131,7 +133,27 @@ public class SalaryStoppedDueToLossOrShortage_Report {
          }
          return attachItems;
     }
-   public void writeToPDF(SalaryStoppedDueToLossOrShortage_ReportItems attachItems){
+      public Vector<AttachmentRemarks>  a1Remarks(String caseidupdate){
+         Vector<AttachmentRemarks> a1remarksArray = new Vector();
+       
+        try {   
+            PreparedStatement ps=null;
+            ResultSet rs=null;
+            String IDquery=objQuery.Remarks(caseidupdate);
+            ps=con1.prepareStatement(IDquery);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                 a1remarksArray.add(new AttachmentRemarks(rs.getString(1)));
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return a1remarksArray;
+    }
+    
+   public void writeToPDF(SalaryStoppedDueToLossOrShortage_ReportItems attachItems, Vector<AttachmentRemarks> a1remarksArray){
     
          Font blueFont = FontFactory.getFont(FontFactory.HELVETICA,10, Font.BOLD);
         try {
@@ -240,6 +262,21 @@ public class SalaryStoppedDueToLossOrShortage_Report {
             p14.setSpacingBefore(1f);
             p14.setSpacingAfter(10f);
             document.add(p14);  
+            
+            Paragraph p15 = new Paragraph(" ATTACHMENT REMARKS:    ",blueFont);
+            p15.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p15.setSpacingBefore(20f);
+            p15.setSpacingAfter(10f);
+            document.add(p15);
+             for (AttachmentRemarks a1remarksArray1 : a1remarksArray) {
+                 Paragraph p16 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
+                 p16.setAlignment(Element.ALIGN_LEFT);
+                 document.setMargins(1, 1, 1, 1);
+                 p16.setSpacingBefore(1f);
+                 p16.setSpacingAfter(10f);
+                 document.add(p16);
+             }
             document.close();
         }
        catch (IOException ex) {

@@ -207,22 +207,7 @@
      
                         </div>
                         </div>
-                                  
-              
-                           <%                        
-                            for(int i=0;i<attachVector.size();i++){                               
-                                                            
-                                out.print("<div class='alert alert-info'>");
-                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
-                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
-                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
-                                out.print("<button class='close'  data-dismiss='alert'><i class='ace-icon fa fa-times'></i></button></div>");
-                             
-                               
-                            }
-                          
-                        %>   
-                              <div class="form-group">
+                             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
                         <div class="col-sm-9">
@@ -277,8 +262,7 @@
             </div>
                         </div>
                         </div>
-            
-                        <div class="col-md-offset-3 col-md-9">
+             <div class="col-md-offset-3 col-md-9">
                                 <button class="btn btn-info" type="submit" name="sub">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         Submit
@@ -290,8 +274,30 @@
                                         Reset
                                 </button>
                                 </form>
+</div>
+
+
+
                         </div>
-              
+   </div>
+<p><p>
+                     
+                                 <%                        
+                            for(int i=0;i<attachVector.size();i++){                               
+                                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
+                                out.print("<form action='deleteattachmentservlet' method=post><input type='hidden' name='deleteattachmentid' id='deleteattachmentid' value='"+attachVector.get(i).getId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentdbid' id='deleteattachmentdbid' value='"+attachVector.get(i).getCaseId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentpageid' id='deleteattachmentpageid' value='4'>");   
+                                out.print("<button type='submit' name='deleteatta'  class='close'> <i class='ace-icon fa fa-times'></i></button></form></div>");
+                                   // onclick='onCloseFunction("+attachVector.get(i).getId()+")'
+                            }
+                           
+                          
+                        %>   
                         <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>

@@ -5,9 +5,7 @@
  */
 package ReportServlet;
 
-import ExpertLegalPortalClass.PieChartDemo;
 import SummaryReport.A1_Report;
-import SummaryReport.A1_ReportItems;
 import SummaryReport.A2_Report;
 import SummaryReport.A3_Report;
 import SummaryReport.Dis_Report;
@@ -18,14 +16,7 @@ import SummaryReport.SalaryStoppedDueToLossOrShortage_Report;
 import SummaryReport.TerminatedEmployeeDueToLossOrShortage_Report;
 import com.itextpdf.text.DocumentException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;

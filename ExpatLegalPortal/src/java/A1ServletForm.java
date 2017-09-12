@@ -59,6 +59,7 @@ public class A1ServletForm extends HttpServlet {
     String dbID=null;   boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
+    String currencyType=null;
     int lastID=0;
     String exte;   
     int i=0;
@@ -68,10 +69,12 @@ public class A1ServletForm extends HttpServlet {
        // PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-          int salaryDepositAmount = Integer.parseInt(salaryDeposit);
+            int salaryDepositAmount = Integer.parseInt(salaryDeposit);
             int recoveredAmount=Integer.parseInt(recovered);
             int total=recoveredAmount+salaryDepositAmount;
             totalAmount=Integer.toString(total);
+             String totalAmount1=Integer.toString(total);
+            totalAmount=totalAmount1+currencyType;
             dbID = Obj.a1_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);
             if(fileRemarks!=null){
                 String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
@@ -151,7 +154,10 @@ public class A1ServletForm extends HttpServlet {
                         }
                         if(fieldName.equals("fileRemarks")){
                             fileRemarks=item.getString();
-                        }                       
+                        }   
+                        if(fieldName.equals("currencyType")){
+                           currencyType=item.getString();
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                         if(fieldName.equals("sub"))

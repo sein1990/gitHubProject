@@ -22,6 +22,8 @@ String actionTakenS="";
 String actionToBeTakenS="";
 String peopleInvolvedS="";
 String empIDS="";
+String disTypeS="";
+String dateReleasedS="";
  Connection con1=dbconnection.getConnection();
  String dbID="";
     PreparedStatement ps=null;
@@ -43,7 +45,9 @@ String empIDS="";
         actionTakenS=rs.getString(8);
         actionToBeTakenS=rs.getString(9);
         peopleInvolvedS=rs.getString(10);
-        empIDS=rs.getString(11);      
+        empIDS=rs.getString(11); 
+        disTypeS=rs.getString(12);
+        dateReleasedS=rs.getString(13);
     }
     IDquery=objQuery.DisAttachment(caseid1);
     ps=con1.prepareStatement(IDquery);
@@ -97,14 +101,7 @@ String empIDS="";
                         }   
                         %>
                 </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Reason </label>
-
-                        <div class="col-sm-9">
-                                <input type="text" name="reason" value="<%=reasonS%>" class="form-control"  required/>
-                        
-                        </div>
-                </div>
+           
 
          
                                                         <div class="form-group">
@@ -176,7 +173,95 @@ String empIDS="";
                 %>        
                     </div>
                 </div>
-                                                                                                <div class="form-group">
+                    
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Dis Type </label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="disType" value="<%=disTypeS%>" class="form-control"  required/>
+                        
+                        </div>
+                </div> 
+                                
+                                
+                                <script type="text/javascript">
+                                    function doDisplay(radio)
+                                    {
+                                        switch (radio.value)
+                                        {
+                                            case "Yes":
+                                                document.getElementById("Yes").style.display = "inline";
+                                                document.getElementById("No").style.display = "none";
+
+                                                break;
+                                            case "No":
+                                                document.getElementById("Yes").style.display = "none";
+                                                document.getElementById("No").style.display = "inline";
+
+                                                break;
+                                        }
+                                    }
+                                    </script>
+                                    <%
+                                       if(caseid1.contains("null"))
+                                       {                                   
+                                    %>
+                                 
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Salary Released </label>
+
+                        <div class="col-sm-9">
+                                <select name="tt" onchange="doDisplay(this);" required/>
+                            <option></option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+
+                          </select>
+                                    </div>
+                            </div> 
+                                
+                          <span id="Yes" style="display:none">
+                                <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1" >Date Released</label>
+
+                            <div class="col-sm-9">
+                            <input type="date" name="dateReleased"  class="form-control" required="required" value="<%=dateReleasedS%>" required/>
+                            </div>
+                          </div>
+
+                          </span>
+                          
+                          <span id="No" style="display:none">
+                              
+                          </span>
+                                
+                                <%}
+                                    else{
+                                           
+                                    
+                                %>   
+                                        
+                                        <div class="form-group">
+                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" >Date Released</label>
+
+                                 <div class="col-sm-9">
+                                 <input type="text" name="dateReleased"  class="form-control" required="required" value="<%=dateReleasedS%>" readonly/>
+                                 </div>
+                               </div>
+
+                                <%
+                                       
+                                       }
+                                %>
+                         <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Reason </label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="reason" value="<%=reasonS%>" class="form-control"  required/>
+                        
+                        </div>
+                </div>                                                                      
+                    <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
 
                         <div class="col-sm-9">
@@ -192,6 +277,15 @@ String empIDS="";
         
                         </div>
                 </div>
+                                     <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Action To Be Taken </label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="actionToBeTaken" value="<%=actionToBeTakenS%>" class="form-control"  required/>
+     
+                        </div>
+                        </div>
+                                        
             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Action Taken </label>
 
@@ -200,15 +294,7 @@ String empIDS="";
      
                         </div>
                         </div>
-                                 <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Action To Be Taken </label>
-
-                        <div class="col-sm-9">
-                                <input type="text" name="actionToBeTaken" value="<%=actionToBeTakenS%>" class="form-control"  required/>
-     
-                        </div>
-                        </div>
-                                                      <div class="form-group">
+                                          <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> People Involved </label>
 
                         <div class="col-sm-9">
@@ -216,19 +302,7 @@ String empIDS="";
                        
                         </div>
                         </div>
-               
-                     <%                        
-                            for(int i=0;i<attachVector.size();i++){                               
-                               out.print("<div class='alert alert-info'>");
-                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
-                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
-                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
-                                out.print("<button class='close'  data-dismiss='alert'><i class='ace-icon fa fa-times'></i></button></div>");
-                                
-                               
-                            }
-                          
-                        %>  
+             
                                <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
@@ -286,7 +360,8 @@ String empIDS="";
                         </div>
                         </div>
             
-                        <div class="col-md-offset-3 col-md-9">
+                   
+                                  <div class="col-md-offset-3 col-md-9">
                                 <button class="btn btn-info" type="submit" name="sub">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         Submit
@@ -298,9 +373,30 @@ String empIDS="";
                                         Reset
                                 </button>
                                 </form>
+</div>
+
+
+
                         </div>
-                </div>
-            
+   </div>
+<p><p>
+                     
+                                 <%                        
+                            for(int i=0;i<attachVector.size();i++){                               
+                                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
+                                out.print("<form action='deleteattachmentservlet' method=post><input type='hidden' name='deleteattachmentid' id='deleteattachmentid' value='"+attachVector.get(i).getId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentdbid' id='deleteattachmentdbid' value='"+attachVector.get(i).getCaseId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentpageid' id='deleteattachmentpageid' value='4'>");   
+                                out.print("<button type='submit' name='deleteatta'  class='close'> <i class='ace-icon fa fa-times'></i></button></form></div>");
+                                   // onclick='onCloseFunction("+attachVector.get(i).getId()+")'
+                            }
+                           
+                          
+                        %>   
                         <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>

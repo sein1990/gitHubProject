@@ -54,6 +54,8 @@ public class DisServlet extends HttpServlet {
     String fileName=null;
     String dbID=null;
     String fileRemarks=null;
+    String disType=null;
+    String dateReleased=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -66,7 +68,7 @@ public class DisServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             
-                dbID =Obj.Dis_notReturnFromLeave(date, reason, name,unity,remarks, investigation,actionTaken, actionToBeTaken, peopleInvolved, empID,caseidupdate);
+                dbID =Obj.Dis_notReturnFromLeave(date, reason, name,unity,remarks, investigation,actionTaken, actionToBeTaken, peopleInvolved, empID,caseidupdate, disType, dateReleased);
                 if(fileRemarks!=null){
                 String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                 fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
@@ -146,6 +148,12 @@ public class DisServlet extends HttpServlet {
                           }
                           if(fieldName.equals("fileRemarks")){
                              fileRemarks=item.getString();
+                          }
+                          if(fieldName.equals("disType")){
+                              disType=item.getString();
+                          }
+                          if(fieldName.equals("dateReleased")){
+                          dateReleased=item.getString();
                           }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();

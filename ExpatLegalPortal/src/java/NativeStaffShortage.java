@@ -60,18 +60,18 @@ public class NativeStaffShortage extends HttpServlet {
     FileInfoOperation fileObj;
     int lastID=0;
     String exte; 
-    
+    String currencyType=null;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
-                dbID=Obj.NativeStaffShortage(date, name, unity,remarks,recovered, action, shortAmount,currentStatus, empID, caseidupdate);
+        try {   
+                dbID=Obj.NativeStaffShortage(date, name, unity,remarks,recovered, action, shortAmount,currentStatus, empID, currencyType, caseidupdate);   
                  if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                     fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
                  } 
-                response.sendRedirect("formpage.jsp?pageid=7&caseid="+dbID+""); 
+                 response.sendRedirect("formpage.jsp?pageid=7&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -144,13 +144,16 @@ public class NativeStaffShortage extends HttpServlet {
                             name = array[0];
                             empID = array[1];
                         }
-                        if(fieldName.equals("fileRemarks")){
-//                            fileRemarks[i]=item.getString();
-//                            i++;
-                            fileRemarks=item.getString();
+                          if(fieldName.equals("currencyType")){
+                           currencyType=item.getString();
                         }
-                        if(fieldName.equals("fileOne"))
-                           fileOne = item.getString();
+                       if(fieldName.equals("fileRemarks"))
+                        {
+                        fileRemarks=item.getString();
+                        }
+                        if(fieldName.equals("fileOne")){
+                        fileOne = item.getString();
+                    }
                     }
                 }
                //File uploaded successfully

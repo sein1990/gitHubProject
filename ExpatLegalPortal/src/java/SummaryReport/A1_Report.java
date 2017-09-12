@@ -7,6 +7,7 @@ package SummaryReport;
 
 import ExpertLegalPortalClass.QueryClass;
 import ExpertLegalPortalClass.dbconnection;
+import GraphAndPDFReport.DateReportItems;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
@@ -28,6 +29,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +44,8 @@ public class A1_Report {
     public void A1Report(String caseidupdate) throws IOException, DocumentException, SQLException
     {
         A1_ReportItems attachItems = getA1_Data(caseidupdate);
-        writeToPDF(attachItems);
+        Vector<AttachmentRemarks> a1remarksArray=a1Remarks(caseidupdate);
+        writeToPDF(attachItems,a1remarksArray);
     }
      public void pp(HttpServletResponse response){
           BufferedInputStream buf = null;
@@ -134,7 +137,29 @@ public class A1_Report {
          }
          return attachItems;
     }
-   public void writeToPDF(A1_ReportItems attachItems){
+
+    public Vector<AttachmentRemarks>  a1Remarks(String caseidupdate){
+         Vector<AttachmentRemarks> a1remarksArray = new Vector();
+       
+        try {   
+            PreparedStatement ps=null;
+            ResultSet rs=null;
+            String IDquery=objQuery.Remarks(caseidupdate);
+            ps=con1.prepareStatement(IDquery);
+            rs=ps.executeQuery();
+            while(rs.next())
+            {
+                 a1remarksArray.add(new AttachmentRemarks(rs.getString(1)));
+            }
+          
+        } catch (SQLException ex) {
+            Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return a1remarksArray;
+    }
+    
+     
+   public void writeToPDF(A1_ReportItems attachItems,  Vector<AttachmentRemarks> a1remarksArray){
          Font blueFont = FontFactory.getFont(FontFactory.HELVETICA,10, Font.BOLD);
         try {
             DEST =getMyDocPath()+"\\Canteen\\";
@@ -148,7 +173,7 @@ public class A1_Report {
             p.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p.setSpacingBefore(1f);
-                p.setSpacingAfter(1f);
+            p.setSpacingAfter(1f);
             document.add(p);
             Paragraph p1 = new Paragraph("EXPAT DISCIPLINARY PORTAL", blueFont);
             p1.setAlignment(Element.ALIGN_CENTER);         
@@ -162,7 +187,7 @@ public class A1_Report {
             p2.setSpacingBefore(1f);
             p2.setSpacingAfter(1f);
             document.add(p2);
-            Paragraph p3 = new Paragraph("SUMMARY REPORT ", blueFont);
+            Paragraph p3 = new Paragraph("REPORT SUMMARY", blueFont);
             p3.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p3.setSpacingBefore(25f);
@@ -182,12 +207,7 @@ public class A1_Report {
             p5.setSpacingBefore(1f);
             p5.setSpacingAfter(10f);
             document.add(p5);
-            Paragraph p6 = new Paragraph("REASON:       "+attachItems.getReason(), blueFont);
-            p6.setAlignment(Element.ALIGN_LEFT);         
-            document.setMargins(1, 1, 1, 1);
-            p6.setSpacingBefore(1f);
-            p6.setSpacingAfter(10f);
-            document.add(p6);
+           
             Paragraph p7 = new Paragraph("NAME:            "+attachItems.getName(), blueFont);
             p7.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -201,6 +221,12 @@ public class A1_Report {
             p8.setSpacingBefore(1f);
             p8.setSpacingAfter(10f);
             document.add(p8);
+            Paragraph p6 = new Paragraph("REASON:       "+attachItems.getReason(), blueFont);
+            p6.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p6.setSpacingBefore(1f);
+            p6.setSpacingAfter(10f);
+            document.add(p6);
             Paragraph p9 = new Paragraph("REMARKS:    "+attachItems.getRemarks(), blueFont);
             p9.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -208,14 +234,18 @@ public class A1_Report {
             p9.setSpacingAfter(10f);
             document.add(p9);
             
-            Paragraph p10 = new Paragraph("AMOUNT TO BE RECOVERED(A PART FROM SALARY HOLDINGS):    "+attachItems.getRecovered(), blueFont);
+            String string = attachItems.getTotalAmount();
+            String[] parts = string.split("-");
+            String part2CurrencyType  = parts[1]; 
+
+            Paragraph p10 = new Paragraph("AMOUNT TO BE RECOVERED(A PART FROM SALARY HOLDINGS):    "+attachItems.getRecovered()+"-"+part2CurrencyType, blueFont);
             p10.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
             p10.setSpacingBefore(1f);
             p10.setSpacingAfter(10f);
             document.add(p10);
             
-            Paragraph p11 = new Paragraph("SALARY DEPOSIT:      "+attachItems.getSalaryDeposit(), blueFont);
+            Paragraph p11 = new Paragraph("SALARY DEPOSIT:      "+attachItems.getSalaryDeposit()+"-"+part2CurrencyType, blueFont);
             p11.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
             p11.setSpacingBefore(1f);
@@ -242,13 +272,22 @@ public class A1_Report {
             p14.setSpacingBefore(1f);
             p14.setSpacingAfter(10f);
             document.add(p14);
-            
-            
+            Paragraph p15 = new Paragraph(" ATTACHMENT REMARKS:    ",blueFont);
+            p15.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p15.setSpacingBefore(20f);
+            p15.setSpacingAfter(10f);
+            document.add(p15);
+             for (AttachmentRemarks a1remarksArray1 : a1remarksArray) {
+                 Paragraph p16 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
+                 p16.setAlignment(Element.ALIGN_LEFT);
+                 document.setMargins(1, 1, 1, 1);
+                 p16.setSpacingBefore(1f);
+                 p16.setSpacingAfter(10f);
+                 document.add(p16);
+             }
             document.close();
           
-            
-            
- 
         }
        catch (IOException ex) {
             Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);

@@ -55,18 +55,22 @@ public class SalaryStopped extends HttpServlet {
     FileInfoOperation fileObj;
     int lastID=0;
     String exte; 
+    String deleteattachmentid;
+    String deleteattachmentdbid;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         //PrintWriter out = response.getWriter();
         try {
             /* TODO output your page here. You may use following sample code. */
-                dbID=Obj.salaryStopped(name, date, unity,remarks, actionTaken, stoppedBy,empID, caseidupdate);
-                if(fileRemarks!=null){
-                    String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
-                    fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
-                 }
-                    response.sendRedirect("formpage.jsp?pageid=5&caseid="+dbID+""); 
+              
+                    dbID=Obj.salaryStopped(name, date, unity,remarks, actionTaken, stoppedBy,empID, caseidupdate);
+                    if(fileRemarks!=null){
+                        String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
+                        fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
+                     }
+                        response.sendRedirect("formpage.jsp?pageid=5&caseid="+dbID+""); 
+                    
         } finally {
            // out.close();
         }
@@ -130,18 +134,23 @@ public class SalaryStopped extends HttpServlet {
                            actionTaken = item.getString();
                         if(fieldName.equals("stoppedBy"))
                            stoppedBy = item.getString();
-                          if(fieldName.equals("empID")){
+                        if(fieldName.equals("empID")){
                             String[] array = item.getString().split("-");
                             name = array[0];
                             empID = array[1];
-                          }
-                          if(fieldName.equals("fileRemarks")){
+                        }
+                        if(fieldName.equals("fileRemarks")){
                           fileRemarks=item.getString();
-                          }
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                         if(fieldName.equals(""))
                             fileRemarks=item.getString();
+                        if(fieldName.equals("deleteattachmentid"))
+                            fileRemarks=item.getString();
+                        if(fieldName.equals("deleteattachmentdbid"))
+                            fileRemarks=item.getString();
+                         
                     }
                 }
                request.setAttribute("message", "File Uploaded Successfully");

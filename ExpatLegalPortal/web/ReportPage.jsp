@@ -164,7 +164,7 @@
 							</li>
 
 							<li class="">
-								<a href="formpage.jsp?pageid=2">
+								<a href="formpage.jsp?pageid=2&caseid=null">
 									<i class="menu-icon fa fa-caret-right"></i>
 									A2(Not returned from leave)
 								</a>
@@ -174,7 +174,7 @@
                                                      
 
 					<li class="">
-						<a href="formpage.jsp?pageid=3">
+						<a href="formpage.jsp?pageid=3&caseid=null">
                                                     <i class="menu-icon fa fa-caret-right"></i>
 							A3(Not returned from leave)
 						</a>
@@ -183,7 +183,7 @@
 					</li>
                                     
 					 <li class="">
-						<a href="formpage.jsp?pageid=4">
+						<a href="formpage.jsp?pageid=4&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							 Dis
 						</a>
@@ -192,7 +192,7 @@
 					</li>
 					
 					 <li class="">
-						<a href="formpage.jsp?pageid=5">
+						<a href="formpage.jsp?pageid=5&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 				Salary stopped due to loss/performance
 						</a>
@@ -201,7 +201,7 @@
 					</li>
                                         
                                         <li class="">
-						<a href="formpage.jsp?pageid=8">
+						<a href="formpage.jsp?pageid=8&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
                                             Terminated Emp due to loss/shortage
 						</a>
@@ -209,7 +209,7 @@
 						<b class="arrow"></b>
 					</li>
                                     <li class="">
-						<a href="formpage.jsp?pageid=7">
+						<a href="formpage.jsp?pageid=7&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Native Staff Shortage
 						</a>
@@ -217,7 +217,7 @@
 						<b class="arrow"></b>
 					</li>
                                         <li class="">
-						<a href="formpage.jsp?pageid=6">
+						<a href="formpage.jsp?pageid=6&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 							Emp who passed away
 						</a>
@@ -225,7 +225,7 @@
 						<b class="arrow"></b>
 					</li>
                                         <li class="">
-						<a href="formpage.jsp?pageid=9">
+						<a href="formpage.jsp?pageid=9&caseid=null">
 							<i class="menu-icon fa fa-caret-right"></i>
 						Leave Extension
 						</a>

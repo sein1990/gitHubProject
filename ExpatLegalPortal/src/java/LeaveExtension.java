@@ -65,11 +65,13 @@ public class LeaveExtension extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {            
                 dbID=Obj.LeaveExtension(date, name, unity, from, to,extendedDay, actual, actionTaken, empID, caseidupdate);
-                 response.sendRedirect("formpage.jsp?pageid=9&caseid="+caseidupdate+""); 
+              
                  if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                     fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
                  }
+                 
+                    response.sendRedirect("formpage.jsp?pageid=9&caseid="+dbID+""); 
         } finally {
             out.close();
         }
@@ -104,7 +106,7 @@ public class LeaveExtension extends HttpServlet {
             throws ServletException, IOException {
           if(ServletFileUpload.isMultipartContent(request)){
             try {
-                List<FileItem> multiparts = new ServletFileUpload(
+               List<FileItem> multiparts = new ServletFileUpload(
                                          new DiskFileItemFactory()).parseRequest(request);
               
                 for(FileItem item : multiparts){
@@ -114,10 +116,10 @@ public class LeaveExtension extends HttpServlet {
                         lastID=fileObj.highestID();      
                         fileName = new File(item.getName()).getName();
                         exte=fileName.substring(fileName.indexOf("."));
-                        item.write( new File(UPLOAD_DIRECTORY + lastID+exte));
+                        item.write( new File(UPLOAD_DIRECTORY +lastID+exte));
                         fileObj.addToAttachment(UPLOAD_DIRECTORY, caseidupdate, fileName, lastID, exte);   
                     }
-                    else{        
+                    else{       
                         String fieldName = item.getFieldName();
                         if(fieldName.equals("caseidupdate"))
                             caseidupdate = item.getString();

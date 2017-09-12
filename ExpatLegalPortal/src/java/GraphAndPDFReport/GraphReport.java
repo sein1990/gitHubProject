@@ -5,12 +5,9 @@
  */
 package GraphAndPDFReport;
 
-import ExpertLegalPortalClass.PieChartDemo;
 import ExpertLegalPortalClass.QueryClass;
 import ExpertLegalPortalClass.dbconnection;
 import SummaryReport.A1_Report;
-import SummaryReport.A1_ReportItems;
-import com.itextpdf.awt.DefaultFontMapper;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -19,14 +16,8 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,17 +34,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -225,6 +210,15 @@ public class GraphReport {
                         String currentFromDate =year+"-"+getFormatedMonth(month)+"-01";
                         String currentToDate = year+"-"+getFormatedMonth(month)+"-"+numberOfMonth;
                        
+                        String[] monthArray={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG", "SEP", "OCT", "NOV","DEC"};
+                        String fromAarrayDate[]= currentFromDate.split("-");
+                        currentFromDate = fromAarrayDate[2]+"-"+monthArray[Integer.parseInt(fromAarrayDate[1])]+"-"+fromAarrayDate[0];   
+
+                        String toArrayDate[]= currentToDate.split("-");
+                        currentToDate = toArrayDate[2]+"-"+monthArray[Integer.parseInt(toArrayDate[1])]+"-"+toArrayDate[0];   
+                        
+                        
+                        
                         if(caseName.equals("A1::Not returned from leave")){
                         totalNumberPerMonth = getNumberFromDB(objQuery.A1ReportQuery(currentFromDate, currentToDate));
                         }

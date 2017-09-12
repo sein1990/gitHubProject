@@ -11,6 +11,6 @@ package ExpertLegalPortalClass;
  */
 public class PathClass {
     public String path(){
-    return "C:/Users/USER/Documents/NetBeansProjects/gitHubProject/ExpatLegalPortal/up/";
+    return "D:/expatlegalswfiles/";
     }
 }

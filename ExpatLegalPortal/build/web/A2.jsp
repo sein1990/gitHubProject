@@ -85,7 +85,7 @@
                     %>
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Date</label>
                         <div class="col-sm-9">
-                            <input type="date" name="date"  class="form-control" required="required" value="<%=dateS%>"/>
+                            <input type="date" name="date" class="form-control" required="required" value="<%=dateS%>"/>
                         </div>
                         <%
                         }else{
@@ -98,9 +98,8 @@
                         }   
                         %>
                 </div>
-            
-                                                        <div class="form-group">
-                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Employee ID and Name</label>
+                                          <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Employee ID and Name</label>
 
                 <div class="col-sm-9">
                     <%
@@ -168,13 +167,15 @@
                 %>        
                     </div>
                 </div>
-                        <div class="form-group">
+                    
+                         <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1" > Reason </label>
 
                         <div class="col-sm-9">
                                 <input type="text"  value="<%=reasonS%>" class="form-control" name="reason" required/>
                         </div>
                 </div>
+                         
                          
                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Remarks </label>
@@ -183,31 +184,82 @@
                                 <input type="text" name="remarks" value="<%=remarksS%>" class="form-control"  required/>
                         </div>
                 </div>
-                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
+                        
+                        
+                          <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Currency Type</label>
 
-                        <div class="col-sm-9">
-                                <input type="text" name="recovered" value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)" required/>
-                        </div>
-                </div>
-            <div class="form-group">
+                      
+
+                     <div class="form-group">
+                 
+                    <%
+                
+                          if(caseid1.contains("null")){
+                    %>
+                      <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
+                          <input type="radio" name="currencyType" value="-USD"/> USD    
+                        <input type="radio" name="currencyType" value="-Tshs" />Tshs 
+                        
+                    </label>
+                           
+                    </div>
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
+
+                            <div class="col-sm-9">
+                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            </div>
+                            <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary deposit </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control" onkeypress="return isNumberKey(event)" required/>
+                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control" onkeypress="return isNumberKey(event)" />
                         </div>
-                        <script type="text/javascript">
-                            function isNumberKey(evt)
-                            {
-                                      var charCode = (evt.which) ? evt.which : event.keyCode;
-                                      if (charCode != 46 && charCode > 31 
-                                        && (charCode < 48 || charCode > 57))
-                                         return false;
-
-                                      return true;
-                            }
-                            </script>
+                      
                     </div>
+                    
+                             <%
+                } else{
+                    %> 
+                      <div class="form-group">
+                               <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
+                               <%
+                                    String string = totalAmountS;
+                                    String[] parts = string.split("-");
+                                    String part2CurrencyType  = parts[1]; 
+                               %>
+                               <input type="radio" name="currencyType" value="<%=part2CurrencyType%>">
+                                    <%=part2CurrencyType%></label>
+                          </div>
+                
+                       
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
+
+                            <div class="col-sm-9">
+                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            </div>
+                            <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary deposit </label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="salaryDeposit"  value="<%=salaryDepositS%>" class="form-control" onkeypress="return isNumberKey(event)" />
+                        </div>
+                      
+                    </div>
+                    <%
+                }
+                    %>
+                  
+                        
+                        <%
+                         if(!caseid1.contains("null")){
+                        %>
+                       
+         
                         <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Total Amount </label>
 
@@ -215,6 +267,7 @@
                                 <input type="text" name="totalAmount" value="<%=totalAmountS%>" class="form-control"  readonly/>
                         </div>
                         </div>
+                        <%}%>
                                 <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Filed & Closed </label>
 
@@ -228,19 +281,18 @@
                         </select>
                                 </div>
                         </div>                                                 
-                        
-                        <%                        
-                            for(int i=0;i<attachVector.size();i++)
-                            {                               
-                                out.print("<div class='alert alert-info'>");
-                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
-                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
-                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
-                                out.print("<button class='close'  data-dismiss='alert'><i class='ace-icon fa fa-times'></i></button></div>");
-                             
+                          <script type="text/javascript">
+                            function isNumberKey(evt)
+                            {
+                                      var charCode = (evt.which) ? evt.which : event.keyCode;
+                                      if (charCode != 46 && charCode > 31 
+                                        && (charCode < 48 || charCode > 57))
+                                         return false;
+
+                                      return true;
                             }
-                        %>  
-                        
+                            </script>
+                 
                               <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> </label>
 
@@ -277,7 +329,7 @@
                 // SHOW THE EXTRACTED DETAILS OF THE FILE.
                 document.getElementById('fp').innerHTML =
                 document.getElementById('fp').innerHTML + '<br/>' +
-                '<input type="text" name="fileRemarks" class="form-control"/>'+ '<b>'+fname+'</b></br>';
+                '<input type="text" name="fileRemarks" class="form-control" required/><p>'+ '<b>'+fname+'</p></b></br>';
             }
 //            var fileSize = parseInt(fi.files.length);
 //            var arrySize=0;
@@ -298,14 +350,7 @@
                         </div>
                         </div>
                        
-                        
-                        
-                        
-     
-                        
-                        
-                        
-                        <div class="col-md-offset-3 col-md-9">
+                                  <div class="col-md-offset-3 col-md-9">
                                 <button class="btn btn-info" type="submit" name="sub">
                                         <i class="ace-icon fa fa-check bigger-110"></i>
                                         Submit
@@ -317,8 +362,30 @@
                                         Reset
                                 </button>
                                 </form>
+</div>
+
+
+
                         </div>
+   </div>
+<p><p>
+                     
+                                 <%                        
+                            for(int i=0;i<attachVector.size();i++){                               
+                                               
+                                out.print("<div class='alert alert-info'>");
+                                out.print("<i class='ace-icon fa fa-hand-o-right'></i>");
+                                out.print("<a href='a1FileOpen?param="+attachVector.get(i).getPath()+"'>"); 
+                                out.print("'"+attachVector.get(i).getRemarks()+"'</a>");
+                                out.print("<form action='deleteattachmentservlet' method=post><input type='hidden' name='deleteattachmentid' id='deleteattachmentid' value='"+attachVector.get(i).getId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentdbid' id='deleteattachmentdbid' value='"+attachVector.get(i).getCaseId()+"'>");
+                                out.print("<input type='hidden' name='deleteattachmentpageid' id='deleteattachmentpageid' value='2'>");   
+                                out.print("<button type='submit' name='deleteatta'  class='close'> <i class='ace-icon fa fa-times'></i></button></form></div>");
+                                   // onclick='onCloseFunction("+attachVector.get(i).getId()+")'
+                            }
+                           
                           
+                        %>   
               <script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
@@ -349,4 +416,6 @@
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
 
+		<!-- inline scripts related to this page -->
 		
+                

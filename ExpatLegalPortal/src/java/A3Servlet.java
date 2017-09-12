@@ -52,6 +52,7 @@ public class A3Servlet extends HttpServlet {
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String currencyType=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -67,6 +68,8 @@ public class A3Servlet extends HttpServlet {
                     int recoveredAmount=Integer.parseInt(recovered);
                     int total=recoveredAmount+salaryDepositAmount;
                     totalAmount=Integer.toString(total);
+                     String totalAmount1=Integer.toString(total);
+                    totalAmount=totalAmount1+currencyType;
                     dbID = Obj.a3_notReturnFromLeave(date, reason, name,unity,remarks, recovered,salaryDeposit, totalAmount, fileClosed, empID,caseidupdate);         
                     if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
@@ -145,6 +148,9 @@ public class A3Servlet extends HttpServlet {
                         String[] array = item.getString().split("-");
                         name = array[0];
                         empID = array[1];
+                        }
+                           if(fieldName.equals("currencyType")){
+                           currencyType=item.getString();
                         }
                         if(fieldName.equals("fileRemarks"))
                         {

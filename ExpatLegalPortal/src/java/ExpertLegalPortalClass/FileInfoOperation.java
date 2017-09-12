@@ -84,4 +84,21 @@ public class FileInfoOperation {
             Logger.getLogger(FileInfoOperation.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+     public void updateAttachementFlag(String attachmentID){  
+        try {
+            String query2 =objQuery.updateFlagAttachment();
+            PreparedStatement preparedStmt = con.prepareStatement(query2);
+            preparedStmt.setString(1, attachmentID);
+
+            preparedStmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(FileInfoOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    
+    
 }

@@ -214,14 +214,18 @@ public class ExpertLegalPortalOperation {
          }
          return dbID;
          } 
-         public String Dis_notReturnFromLeave(String date,String reason,String name,String unity,String remarks,String investigation,String actionTaken,String actionToBeTaken,String peopleInvolved,String empID,String dbID)
+         public String Dis_notReturnFromLeave(String date,String reason,String name,String unity,String remarks,String investigation,String actionTaken,String actionToBeTaken,String peopleInvolved,String empID,String dbID, String disType, String dateReleased)
      {  
          if(dbID.contains("null"))
             {
               try {
                     dbID= getNewId(objQuery.selectHighestValue("dis"),"A4-"); 
                     String arrayDate[]= date.split("-");
-                    String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];    
+                    String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];   
+                    
+                    String arrayDateReleased[]= dateReleased.split("-");
+                    String newDatReleasedeString = arrayDateReleased[2]+"-"+monthArray[Integer.parseInt(arrayDateReleased[1])]+"-"+arrayDateReleased[0];  
+                    
                     PreparedStatement ps2=null;                
                     String sql = objQuery.InsertDisNotReturnFromLeave();
                     ps2=con.prepareStatement(sql);
@@ -236,6 +240,8 @@ public class ExpertLegalPortalOperation {
                     ps2.setString(9, actionToBeTaken);
                     ps2.setString(10, peopleInvolved);
                     ps2.setString(11, empID);
+                    ps2.setString(12, disType);
+                    ps2.setString(13, newDatReleasedeString);
                     ps2.executeUpdate();
                     String query2 = objQuery.UpdateDisNotReturnFromLeaveHighestValue();
                     String dbIDM = dbID.substring(dbID.indexOf("-")+1);
@@ -256,6 +262,7 @@ public class ExpertLegalPortalOperation {
                  preparedStmt.setString(7, actionToBeTaken);
                  preparedStmt.setString(8, peopleInvolved);
                  preparedStmt.setString(9, empID);
+                 preparedStmt.setString(10, disType);
                  preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -313,8 +320,15 @@ public class ExpertLegalPortalOperation {
             {
               try {
                   
-                String arrayDate[]= date.split("-");
-                String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
+                    String arrayDate[]= date.split("-");
+                    String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];
+                    
+                    String arrayDateFrom[]= from.split("-");
+                    String fromNewDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDateFrom[1])]+"-"+arrayDateFrom[0];
+                    
+                    String arrayDateTo[]= to.split("-");
+                    String toNewDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDateTo[1])]+"-"+arrayDateTo[0];
+                    
                     dbID= getNewId(objQuery.selectHighestValue("leave_extension"),"A9-");   
                     PreparedStatement ps2=null;    
                     String sql = objQuery.InsertLeaveExtension();
@@ -323,8 +337,8 @@ public class ExpertLegalPortalOperation {
                     ps2.setString(2, newDateString);
                     ps2.setString(3, name);
                     ps2.setString(4, unity);
-                    ps2.setString(5, from);
-                    ps2.setString(6, to);
+                    ps2.setString(5, fromNewDateString);
+                    ps2.setString(6, toNewDateString);
                     ps2.setString(7, extendedDay);
                     ps2.setString(8, actual);
                     ps2.setString(9, actionTaken);
@@ -340,15 +354,10 @@ public class ExpertLegalPortalOperation {
              try {
                  String query2 =objQuery.UpdateLeaveExtension(dbID);
                  PreparedStatement preparedStmt = con.prepareStatement(query2);
-                 preparedStmt.setString(1, date);
-                 preparedStmt.setString(2, name);
-                 preparedStmt.setString(3, unity);
-                 preparedStmt.setString(4, from);
-                 preparedStmt.setString(5, to);
-                 preparedStmt.setString(6, extendedDay);
-                 preparedStmt.setString(7, actual);
-                 preparedStmt.setString(8, actionTaken);
-                 preparedStmt.setString(9, empID);
+               
+                 preparedStmt.setString(1, extendedDay);
+                 preparedStmt.setString(2, actionTaken);
+               
                  preparedStmt.executeUpdate();
              } catch (SQLException ex) {
                  Logger.getLogger(ExpertLegalPortalOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -357,16 +366,15 @@ public class ExpertLegalPortalOperation {
          return dbID; 
          } 
              
-           public String NativeStaffShortage(String date, String name,String unity,String remarks,String recovered, String action, String shortAmount,String currentStatus,String empID, String dbID)
+           public String NativeStaffShortage(String date, String name,String unity,String remarks,String recovered, String action, String shortAmount,String currentStatus,String empID, String currencyType, String dbID)
      {
-          
         if(dbID.contains("null"))
             {
               try {
                   dbID= getNewId(objQuery.selectHighestValue("native_staff_shortage"),"A7-");  
                 String arrayDate[]= date.split("-");
                 String newDateString = arrayDate[2]+"-"+monthArray[Integer.parseInt(arrayDate[1])]+"-"+arrayDate[0];                 
-                
+                    
                     PreparedStatement ps2=null; 
                     String sql = objQuery.InsertNativeStaffShortage();
                     ps2=con.prepareStatement(sql);

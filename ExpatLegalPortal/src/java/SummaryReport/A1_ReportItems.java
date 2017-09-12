@@ -24,6 +24,16 @@ public class A1_ReportItems {
         this.fileClosed = fileClosed;
         this.empID = empID;
     }
+   String attachmentRemarks;
+
+    public A1_ReportItems(String attachmentRemarks) {
+        this.attachmentRemarks = attachmentRemarks;
+    }
+
+    public String getAttachmentRemarks() {
+        return attachmentRemarks;
+    }
+   
 
     public String getCaseID() {
         return caseID;
