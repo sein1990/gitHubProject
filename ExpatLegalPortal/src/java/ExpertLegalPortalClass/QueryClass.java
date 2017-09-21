@@ -71,14 +71,14 @@ public class QueryClass {
     }   
     public String InsertEmpPassedAway(){
     return "INSERT INTO emp_passed_away (id, case_date, name, unit, remarks, action_taken,"
-            + "reason_for_death, emp_id)values(?,?,?,?,?,?,?,?)";              
+            + "reason_for_death, emp_id, amt_paid_to_family)values(?,?,?,?,?,?,?,?,?)";              
     }
     public String UpdateInsertEmpPassedAwayHighestValue(){
     return "UPDATE highestvalue SET emp_passed_away=?";
     }
     public String UpdateEmpPassedAway(String newId){
     return  "UPDATE emp_passed_away SET remarks=?, action_taken=?,"
-            + "reason_for_death=?, emp_id=? WHERE id='"+newId+"'";
+            + "reason_for_death=?, emp_id=?, amt_paid_to_family=? WHERE id='"+newId+"'";
     }
     public String InsertLeaveExtension(){
     return " INSERT INTO leave_extension (id, case_date, name, unit, from_date, to_date, "
@@ -88,7 +88,7 @@ public class QueryClass {
     return "UPDATE highestvalue SET leave_extension=?";
     }
     public String UpdateLeaveExtension(String newId){
-    return "UPDATE leave_extension SET extended_day=?, action_taken=? WHERE id='"+newId+"'";             
+    return "UPDATE leave_extension SET  action_taken=? WHERE id='"+newId+"'";             
     }
     public String InsertNativeStaffShortage(){
     return "INSERT INTO native_staff_shortage(id, case_date, name, unit, remarks, to_be_recovered,"
@@ -104,24 +104,24 @@ public class QueryClass {
     }
     public String InsertTerminatedEmployee(){
     return "INSERT INTO t_e_d_l_o_p (id, case_date, name, unit, "
-            + "remarks, action_taken, short_amount, details, emp_id)values(?,?,?,?,?,?,?,?,?)";      
+            + "remarks, action_taken, short_amount, details, emp_id, total_amount_company)values(?,?,?,?,?,?,?,?,?,?)";      
     }
     public String UpdateInsertTerminatedEmployeeHighestValue(){
     return "UPDATE highestvalue SET terminated_emp_due_loss=?";
     }
     public String UpdateTerminatedEmployee(String newId){
-    return "UPDATE t_e_d_l_o_p SET remarks=?, action_taken=?, short_amount=?, details=? WHERE id='"+newId+"'";
+    return "UPDATE t_e_d_l_o_p SET remarks=?, action_taken=?, short_amount=?, details=?, total_amount_company=? WHERE id='"+newId+"'";
     }
     public String InsertSalaryStopped(){
     return " INSERT INTO s_s_d_t_l_o_p (id, case_date, name, unit, remarks,"
-            + " action_taken, stopped_by, emp_id)values(?,?,?,?,?,?,?,?)";                     
+            + " action_taken, stopped_by, emp_id, salary_amount, salary_stopped_date, released_date, total_month, total_salary)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";                     
     }
     public String UpdateSalaryStoppedHighestValue(){
     return "UPDATE highestvalue SET salary_stopped_due_to_loss=?";
     }
     public String UpdateSalaryStopped(String newId){
     return "UPDATE s_s_d_t_l_o_p SET remarks=?, action_taken=?,"
-            + "stopped_by=? WHERE id='"+newId+"'";
+            + "stopped_by=?, salary_amount=?, total_salary=?  WHERE id='"+newId+"'";
     }
     public String InsertAttachment(){
     return  " INSERT INTO attachment (flag, path, caseID)values(?,?,?)";
@@ -266,7 +266,7 @@ public class QueryClass {
      }
      
      public String getEmpData(){
-         return "SELECT * FROM EXISTING_EMPLOYEES_DETAILS A";
+         return "SELECT * FROM ALL_EMPLOYEES_DETAILS A";
      }
      public String SelectAttachment(String caseid1){
       return "SELECT id FROM attachment WHERE id = (SELECT max(id) FROM attachment WHERE caseID='"+caseid1+"')";

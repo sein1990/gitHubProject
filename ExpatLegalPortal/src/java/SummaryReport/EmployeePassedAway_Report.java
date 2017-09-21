@@ -126,7 +126,7 @@ public class EmployeePassedAway_Report {
              ps=con1.prepareStatement(IDquery);
              rs=ps.executeQuery();
              if(rs.next())
-             attachItems=new EmployeePassedAway_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8));
+             attachItems=new EmployeePassedAway_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
              
          } catch (SQLException ex) {
              Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,6 +207,13 @@ public class EmployeePassedAway_Report {
 //            p6.setSpacingBefore(1f);
 //            p6.setSpacingAfter(10f);
 //            document.add(p6);
+             Paragraph p14 = new Paragraph(" EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
+            p14.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p14.setSpacingBefore(1f);
+            p14.setSpacingAfter(10f);
+            document.add(p14);
+            
             Paragraph p7 = new Paragraph("NAME:            "+attachItems.getName(), blueFont);
             p7.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -253,13 +260,14 @@ public class EmployeePassedAway_Report {
 //            p13.setSpacingBefore(1f);
 //            p13.setSpacingAfter(10f);
 //            document.add(p13);
-            
-            Paragraph p14 = new Paragraph(" EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
-            p14.setAlignment(Element.ALIGN_LEFT);         
+            //            
+            Paragraph p16 = new Paragraph("AMOUNT PAID TO FAMILY    "+attachItems.getAmountPaidToFamily(), blueFont);
+            p16.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
-            p14.setSpacingBefore(1f);
-            p14.setSpacingAfter(10f);
-            document.add(p14);
+            p16.setSpacingBefore(1f);
+            p16.setSpacingAfter(10f);
+            document.add(p16);
+           
             Paragraph p15 = new Paragraph(" ATTACHMENT REMARKS:    ",blueFont);
             p15.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -267,12 +275,12 @@ public class EmployeePassedAway_Report {
             p15.setSpacingAfter(10f);
             document.add(p15);
              for (AttachmentRemarks a1remarksArray1 : a1remarksArray) {
-                 Paragraph p16 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
-                 p16.setAlignment(Element.ALIGN_LEFT);
+                 Paragraph p17 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
+                 p17.setAlignment(Element.ALIGN_LEFT);
                  document.setMargins(1, 1, 1, 1);
-                 p16.setSpacingBefore(1f);
-                 p16.setSpacingAfter(10f);
-                 document.add(p16);
+                 p17.setSpacingBefore(1f);
+                 p17.setSpacingAfter(10f);
+                 document.add(p17);
              }
             document.close();
         }

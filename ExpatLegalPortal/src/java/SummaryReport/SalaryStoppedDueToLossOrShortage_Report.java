@@ -11,8 +11,10 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -126,7 +128,7 @@ public class SalaryStoppedDueToLossOrShortage_Report {
              ps=con1.prepareStatement(IDquery);
              rs=ps.executeQuery();
              if(rs.next())
-                 attachItems=new SalaryStoppedDueToLossOrShortage_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7));
+                attachItems=new SalaryStoppedDueToLossOrShortage_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6), rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11), rs.getString(12), rs.getString(13));
              
          } catch (SQLException ex) {
              Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,30 +166,48 @@ public class SalaryStoppedDueToLossOrShortage_Report {
             com.itextpdf.text.Document document = new com.itextpdf.text.Document(PageSize.A4, 40, 20, 10, 10);
             PdfWriter.getInstance(document, new FileOutputStream(DEST+pdfName));
             document.open();
+            
+           // Image img = Image.getInstance("C:\\Users\\USER\\Documents\\NetBeansProjects\\gitHubProject\\ExpatLegalPortal\\web\\newMETL.png");
+           // img.scaleAbsolute(50f, 100f);
+           // document.add(img);
+            
             Paragraph p = new Paragraph("MeTL COMPANY LIMITED DAR ES SALLAM, TANZANIA", blueFont);
             p.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
+          //  img.scaleAbsolute(50f, 70f);
             p.setSpacingBefore(1f);
-                p.setSpacingAfter(1f);
+            p.setSpacingAfter(1f);
             document.add(p);
+            
             Paragraph p1 = new Paragraph("EXPAT DISCIPLINARY PORTAL", blueFont);
             p1.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p1.setSpacingBefore(1f);
             p1.setSpacingAfter(1f);
             document.add(p1);
+            
             Paragraph p2 = new Paragraph("SALARY STOPPED DUE TO LOSS OR PERFORMANCE  ", blueFont);
             p2.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p2.setSpacingBefore(1f);
             p2.setSpacingAfter(1f);
             document.add(p2);
+            
             Paragraph p3 = new Paragraph("CASE SUMMARY ", blueFont);
             p3.setAlignment(Element.ALIGN_CENTER);         
             document.setMargins(1, 1, 1, 1);
             p3.setSpacingBefore(25f);
             p3.setSpacingAfter(1f);
             document.add(p3);
+            
+//            
+//            PdfPTable table = new PdfPTable(3);   
+//            table.addCell(img);
+//            table.addCell(p);
+//            table.addCell(img);
+//            
+//            document.add(table);
+            
            
             Paragraph p4 = new Paragraph("CASE ID:       "+attachItems.getCaseID(), blueFont);
             p4.setAlignment(Element.ALIGN_LEFT);         
@@ -196,18 +216,27 @@ public class SalaryStoppedDueToLossOrShortage_Report {
             p4.setSpacingAfter(10f);
             document.add(p4);
            
-//            Paragraph p5 = new Paragraph("DATE:            "+attachItems.getDate(), blueFont);
-//            p5.setAlignment(Element.ALIGN_LEFT);         
-//            document.setMargins(1, 1, 1, 1);
-//            p5.setSpacingBefore(1f);
-//            p5.setSpacingAfter(10f);
-//            document.add(p5);
+            Paragraph p5 = new Paragraph("DATE:            "+attachItems.getCaseDate(), blueFont);
+            p5.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p5.setSpacingBefore(1f);
+            p5.setSpacingAfter(10f);
+            document.add(p5);
+            
 //            Paragraph p6 = new Paragraph("REASON:       "+attachItems.getReason(), blueFont);
 //            p6.setAlignment(Element.ALIGN_LEFT);         
 //            document.setMargins(1, 1, 1, 1);
 //            p6.setSpacingBefore(1f);
 //            p6.setSpacingAfter(10f);
 //            document.add(p6);
+               
+            Paragraph p14 = new Paragraph("EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
+            p14.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p14.setSpacingBefore(1f);
+            p14.setSpacingAfter(10f);
+            document.add(p14);  
+            
             Paragraph p7 = new Paragraph("NAME:            "+attachItems.getName(), blueFont);
             p7.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -242,7 +271,7 @@ public class SalaryStoppedDueToLossOrShortage_Report {
             p11.setSpacingAfter(10f);
             document.add(p11);
             
-            Paragraph p12 = new Paragraph("SALARY STOPPED DUE TO LOSS/PERFORMANCE:         "+attachItems.getSalaryStopped(), blueFont);
+            Paragraph p12 = new Paragraph("SALARY STOPPED DUE TO LOSS/PERFORMANCE:        "+attachItems.getSalaryStopped(), blueFont);
             p12.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
             p12.setSpacingBefore(1f);
@@ -255,13 +284,47 @@ public class SalaryStoppedDueToLossOrShortage_Report {
 //            p13.setSpacingBefore(1f);
 //            p13.setSpacingAfter(10f);
 //            document.add(p13);
-//            
-            Paragraph p14 = new Paragraph(" EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
-            p14.setAlignment(Element.ALIGN_LEFT);         
+            
+            String string = attachItems.getTotalSalary();
+            String[] parts = string.split("-");
+            String part2CurrencyType  = parts[1];
+
+            Paragraph p16 = new Paragraph("SALARY:         "+attachItems.getSalaryAmount()+"-"+part2CurrencyType, blueFont);
+            p16.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
-            p14.setSpacingBefore(1f);
-            p14.setSpacingAfter(10f);
-            document.add(p14);  
+            p16.setSpacingBefore(1f);
+            p16.setSpacingAfter(10f);
+            document.add(p16);
+            
+            Paragraph p17 = new Paragraph("SALARY STOPPED DATE:         "+attachItems.getSalaryStoppedDate(), blueFont);
+            p17.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p17.setSpacingBefore(1f);
+            p17.setSpacingAfter(10f);
+            document.add(p17);
+//         
+            Paragraph p18 = new Paragraph("SALARY RELEASED DATE:         "+attachItems.getReleasedDate(), blueFont);
+            p18.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p18.setSpacingBefore(1f);
+            p18.setSpacingAfter(10f);
+            document.add(p18);
+//         
+            Paragraph p19 = new Paragraph("TOTAL MONTH:         "+attachItems.getTotalMonth(), blueFont);
+            p19.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p19.setSpacingBefore(1f);
+            p19.setSpacingAfter(10f);
+            document.add(p19);
+//         
+             
+            Paragraph p20 = new Paragraph("TOTAL SALARY:         "+attachItems.getTotalSalary(), blueFont);
+            p20.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p20.setSpacingBefore(1f);
+            p20.setSpacingAfter(10f);
+            document.add(p20);
+//         
             
             Paragraph p15 = new Paragraph(" ATTACHMENT REMARKS:    ",blueFont);
             p15.setAlignment(Element.ALIGN_LEFT);         
@@ -270,12 +333,12 @@ public class SalaryStoppedDueToLossOrShortage_Report {
             p15.setSpacingAfter(10f);
             document.add(p15);
              for (AttachmentRemarks a1remarksArray1 : a1remarksArray) {
-                 Paragraph p16 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
-                 p16.setAlignment(Element.ALIGN_LEFT);
+                 Paragraph p21 = new Paragraph(a1remarksArray1.getAttachmentRemarks(), blueFont);
+                 p21.setAlignment(Element.ALIGN_LEFT);
                  document.setMargins(1, 1, 1, 1);
-                 p16.setSpacingBefore(1f);
-                 p16.setSpacingAfter(10f);
-                 document.add(p16);
+                 p21.setSpacingBefore(1f);
+                 p21.setSpacingAfter(10f);
+                 document.add(p21);
              }
             document.close();
         }

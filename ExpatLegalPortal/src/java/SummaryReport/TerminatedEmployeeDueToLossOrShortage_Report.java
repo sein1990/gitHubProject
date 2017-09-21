@@ -114,7 +114,7 @@ public class TerminatedEmployeeDueToLossOrShortage_Report {
     public String getPdfName() {
         return pdfName;
     }
-       QueryClass objQuery=new QueryClass();
+    QueryClass objQuery=new QueryClass();
      public TerminatedEmployeeDueToLossOrShortage_ReportItems getTerminatedEmployeeDueToLossOrShortage_Data(String caseidupdate){
  
         TerminatedEmployeeDueToLossOrShortage_ReportItems attachItems = null; 
@@ -127,7 +127,7 @@ public class TerminatedEmployeeDueToLossOrShortage_Report {
              ps=con1.prepareStatement(IDquery);
              rs=ps.executeQuery();
              if(rs.next())
-                 attachItems=new TerminatedEmployeeDueToLossOrShortage_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8), rs.getString(9));
+                 attachItems=new TerminatedEmployeeDueToLossOrShortage_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7), rs.getString(8), rs.getString(9),rs.getString(10));
              
          } catch (SQLException ex) {
              Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,6 +209,15 @@ public class TerminatedEmployeeDueToLossOrShortage_Report {
 //            p6.setSpacingBefore(1f);
 //            p6.setSpacingAfter(10f);
 //            document.add(p6);
+            
+            
+            Paragraph p14 = new Paragraph(" EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
+            p14.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p14.setSpacingBefore(1f);
+            p14.setSpacingAfter(10f);
+            document.add(p14);  
+            
             Paragraph p7 = new Paragraph("NAME:            "+attachItems.getName(), blueFont);
             p7.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
@@ -250,19 +259,13 @@ public class TerminatedEmployeeDueToLossOrShortage_Report {
             p12.setSpacingAfter(10f);
             document.add(p12);
             
-//            Paragraph p13 = new Paragraph(" F & F FIXED & CLOSED/REMARKS:    "+attachItems.getFileClosed(), blueFont);
-//            p13.setAlignment(Element.ALIGN_LEFT);         
-//            document.setMargins(1, 1, 1, 1);
-//            p13.setSpacingBefore(1f);
-//            p13.setSpacingAfter(10f);
-//            document.add(p13);
-            
-            Paragraph p14 = new Paragraph(" EMPLOYEE ID:    "+attachItems.getEmpID(), blueFont);
-            p14.setAlignment(Element.ALIGN_LEFT);         
+            Paragraph p13 = new Paragraph("TOTAL AMOUNT WITH COMPANY:    "+attachItems.getTotalAmountWithCompany(), blueFont);
+            p13.setAlignment(Element.ALIGN_LEFT);         
             document.setMargins(1, 1, 1, 1);
-            p14.setSpacingBefore(1f);
-            p14.setSpacingAfter(10f);
-            document.add(p14);  
+            p13.setSpacingBefore(1f);
+            p13.setSpacingAfter(10f);
+            document.add(p13);
+            
             
             Paragraph p15 = new Paragraph(" ATTACHMENT REMARKS:    ",blueFont);
             p15.setAlignment(Element.ALIGN_LEFT);         

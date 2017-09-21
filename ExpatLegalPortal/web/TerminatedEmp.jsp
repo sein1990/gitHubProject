@@ -20,6 +20,7 @@
     String detailsS="";
     String shortAmountS="";
     String empIDS="";
+    String totalAmountWithCompany="";
     Connection con1=dbconnection.getConnection();
     String dbID="" ;
     PreparedStatement ps=null;
@@ -37,7 +38,8 @@
         actionTakenS=rs.getString(6);
         shortAmountS=rs.getString(7);
         detailsS=rs.getString(8);
-        empIDS=rs.getString(9);      
+        empIDS=rs.getString(9);  
+        totalAmountWithCompany=rs.getString(10);
     }
     IDquery=objQuery.terminatedEmpAttachment(caseid1);
     ps=con1.prepareStatement(IDquery);
@@ -172,19 +174,40 @@
                         </div>
                 </div>
                           
-                                <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Action Taken </label>
+                    <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Action Taken </label>
 
-                        <div class="col-sm-9">
-                                <input type="text" name="actionTaken" value="<%=actionTakenS%>" class="form-control"  required/>
-     
-                        </div>
-                        </div>
+                    <div class="col-sm-9">
+                            <input type="text" name="actionTaken" value="<%=actionTakenS%>" class="form-control"  required/>
+
+                    </div>
+                    </div>
                                   <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Short Amount</label>
 
                         <div class="col-sm-9">
                                 <input type="text" name="shortAmount" onkeypress="return isNumberKey(event)"  value="<%=shortAmountS%>" class="form-control"  required/>
+     
+                        </div>
+                        </div>
+                                <script>
+                                    function isNumberKey(evt)
+                            {
+                                      var charCode = (evt.which) ? evt.which : event.keyCode;
+                                      if (charCode != 46 && charCode > 31 
+                                        && (charCode < 48 || charCode > 57))
+                                         return false;
+
+                                      return true;
+                            }
+                            </script>
+                            
+                            
+                                  <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Total Amount With A Company</label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="totalAmountWithCompany" onkeypress="return isNumberKey(event)"  value="<%=shortAmountS%>" class="form-control"  required/>
      
                         </div>
                         </div>

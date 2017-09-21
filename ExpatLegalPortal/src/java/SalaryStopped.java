@@ -50,6 +50,17 @@ public class SalaryStopped extends HttpServlet {
     String fileName=null;
     String dbID=null;
     String fileRemarks=null;
+    String currencyType=null;
+    
+    
+    String salaryAmount=null;
+    String salaryStoppedDate=null;
+    String releasedDate=null;
+    
+    String totalMonth=null;
+    String totalSalary=null;
+    
+    
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -64,7 +75,7 @@ public class SalaryStopped extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
               
-                    dbID=Obj.salaryStopped(name, date, unity,remarks, actionTaken, stoppedBy,empID, caseidupdate);
+                    dbID=Obj.salaryStopped(name, date, unity,remarks, actionTaken, stoppedBy,empID, currencyType, salaryAmount,salaryStoppedDate, releasedDate, totalMonth, caseidupdate);
                     if(fileRemarks!=null){
                         String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                         fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
@@ -142,14 +153,24 @@ public class SalaryStopped extends HttpServlet {
                         if(fieldName.equals("fileRemarks")){
                           fileRemarks=item.getString();
                         }
+                         if(fieldName.equals("currencyType")){
+                           currencyType=item.getString();
+                        }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
-                        if(fieldName.equals(""))
-                            fileRemarks=item.getString();
+                        if(fieldName.equals("salaryAmount"))
+                            salaryAmount=item.getString();
+                        if(fieldName.equals("salaryStoppedDate"))
+                            salaryStoppedDate=item.getString();             
+                        if(fieldName.equals("releasedDate"))
+                            releasedDate=item.getString();
+                          if(fieldName.equals("totalMonth"))
+                            totalMonth=item.getString();             
+                        if(fieldName.equals("totalSalary"))
+                            totalSalary=item.getString();
                         if(fieldName.equals("deleteattachmentid"))
-                            fileRemarks=item.getString();
-                        if(fieldName.equals("deleteattachmentdbid"))
-                            fileRemarks=item.getString();
+                            deleteattachmentid=item.getString();
+                        
                          
                     }
                 }

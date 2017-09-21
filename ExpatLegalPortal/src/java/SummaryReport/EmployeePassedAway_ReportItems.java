@@ -11,9 +11,9 @@ package SummaryReport;
  */
 public class EmployeePassedAway_ReportItems {
     
-String caseID, date, name, unit,remarks,actionTaken, deathReason, empID;
+String caseID, date, name, unit,remarks,actionTaken, deathReason, empID, amountPaidToFamily;
 
-    public EmployeePassedAway_ReportItems(String caseID, String date, String name, String unit, String remarks, String actionTaken, String deathReason, String empID) {
+    public EmployeePassedAway_ReportItems(String caseID, String date, String name, String unit, String remarks, String actionTaken, String deathReason, String empID, String amountPaidToFamily) {
         this.caseID = caseID;
         this.date = date;
         this.name = name;
@@ -22,7 +22,14 @@ String caseID, date, name, unit,remarks,actionTaken, deathReason, empID;
         this.actionTaken = actionTaken;
         this.deathReason = deathReason;
         this.empID = empID;
+        this.amountPaidToFamily = amountPaidToFamily;
     }
+
+    public String getAmountPaidToFamily() {
+        return amountPaidToFamily;
+    }
+
+    
 
     public String getDate() {
         return date;

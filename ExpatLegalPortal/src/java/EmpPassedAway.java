@@ -53,6 +53,7 @@ public class EmpPassedAway extends HttpServlet {
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String amountPaidToFamily=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -65,7 +66,7 @@ public class EmpPassedAway extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-                dbID=Obj.empPassedAway(date, name, unity, remarks, actionTaken, deathReason, empID, caseidupdate);
+                dbID=Obj.empPassedAway(date, name, unity, remarks, actionTaken, deathReason, empID, amountPaidToFamily, caseidupdate);
                 if(fileRemarks!=null){
                   String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                   fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
@@ -141,6 +142,10 @@ public class EmpPassedAway extends HttpServlet {
                            if(fieldName.equals("fileRemarks")){
                              fileRemarks=item.getString();
                           }
+                           if(fieldName.equals("amountPaidToFamily"))
+                           {
+                           amountPaidToFamily=item.getString();
+                           }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();
                     }

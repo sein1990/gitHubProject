@@ -1,0 +1,48 @@
+  table {
+   border: 1px solid #999;
+   border-collapse: collapse;
+   font-family: Georgia, Times, serif;
+   }
+   th {
+   border: 1px solid #999;
+   font-size: 100%;
+   text-align: center;
+   height: 2em;
+   background: white;
+   text-transform: uppercase;
+   }
+   td {
+   border: 1px solid #999;
+   height: 5em;
+   width:5em;
+   padding: 5px;
+   vertical-align: top;
+   }
+   caption {
+   font-size: 200%;
+   font-style: italic;
+   }
+   button{
+	font-family:Arial, Helvetica, sans-serif;  
+	font-size: 120%;
+	height:4.5em;
+	width:4em;
+	font-weight: bold;
+	color: #44444444;
+   }
+   .day {
+   text-align: center;
+   }
+   .notes {
+   font-family:Arial, Helvetica, sans-serif;
+   font-size: 80%;
+   text-align: right;
+   height: 50px;
+   padding-left: 20px;
+   }
+   .birthday {
+   background-color: #ECE;
+   }
+   .weekend {
+   background-color: #F3F3F3;
+   }

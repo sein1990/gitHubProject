@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Metl-Attendance</title>
+
+<!-- CSS -->
+<link href="style/css/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="style/css/calendercss.css" rel="stylesheet" type="text/css" media="screen" />
+
+<!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie6.css" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="style/css/ie7.css" /><![endif]-->
+
+<!-- JavaScripts-->
+<script type="text/javascript" src="style/js/jquery.js"></script>
+<script type="text/javascript" src="style/js/jNice.js"></script>
+<script>
+
+
+function dis(x) {
+	if(x == 1){
+
+		var left  = ($(window).width()/2)-(900/2),
+		top   = ($(window).height()/2)-(600/2),
+		popup = window.open ("index.html", "popup", "width=900, height=600, top="+top+", left="+left);
+	}else{
+		alert('Hello world!');
+	}
+}
+ </script>
+</head>
+
+
+
+<body>
+	<div id="wrapper">
+    	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
+    	<h1><a href="#"><span>Transdmin Light</span></a></h1>
+        
+        <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
+        <ul id="mainNav">
+        	<li><a href="#" class="active">DASHBOARD</a></li> <!-- Use the "active" class for the active menu item  -->
+        	<li><a href="#">ADMINISTRATION</a></li>
+        	<li><a href="#">DESIGN</a></li>
+        	<li><a href="#">OPTION</a></li>
+        	<li class="logout"><a href="#">LOGOUT</a></li>
+        </ul>
+        <!-- // #end mainNav -->
+        
+        <div id="containerHolder">
+			<div id="container">
+        		<div id="sidebar">
+                	<ul class="sideNav">
+                    	<li><a href="#">Exchange</a></li>
+                    	<li><a href="#" class="active">Print resources</a></li>
+                    	<li><a href="#">Training &amp; Support</a></li>
+                    	<li><a href="#">Books</a></li>
+                    	<li><a href="#">Safari books online</a></li>
+                    	<li><a href="#">Events</a></li>
+                    </ul>
+                    <!-- // .sideNav -->
+                </div>    
+                <!-- // #sidebar -->
+                
+                <!-- h2 stays for breadcrumbs -->
+                <h2><a href="#">Dashboard</a> &raquo; <a href="#" class="active">Print resources</a></h2>
+                
+                <div id="main">
+                	<table>
+  <caption>June</caption>
+  <col class="weekend">
+ 
+  <col class="weekend">
+  <thead>
+    <tr>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><button type="button" onclick="alert('Hello world!')"><div class="day">1</div></td>
+      <td><button type="button" onclick="dis(1);"><div class="day">2</div></td>
+      <td><button type="button" onclick="dis(0);"><div class="day">3</div></td>
+      <td><button type="button"><div class="day">4</div></td>
+      <td><button type="button"><div class="day">5</div></td>
+      <td><button type="button"><div class="day">6</div></td>
+      <td><button type="button"><div class="day">7</div></td>
+    </tr>
+    <tr class="odd">
+      <td><button type="button"><div class="day">8</div></td>
+      <td><button type="button"><div class="day">9</div></td>
+      <td><button type="button"><div class="day">10</div></td>
+      <td><button type="button"><div class="day">11</div></td>
+      <td><button type="button"><div class="day">12</div></td>
+      <td><button type="button"><div class="day">13</div></td>
+      <td><button type="button"><div class="day">14</div></td>
+    </tr>
+    <tr>
+      <td><div class="day">15</div></td>
+      <td><div class="day">16</div></td>
+      <td><div class="day">17</div></td>
+      <td><div class="day">18</div></td>
+      <td><div class="day">19</div></td>
+      <td><div class="day">20</div></td>
+      <td><div class="day">21</div></td>
+    </tr>
+    <tr class="odd">
+      <td><div class="day">22</div></td>
+      <td><div class="day">23</div></td>
+      <td><div class="day">24</div></td>
+      <td><div class="day">25</div></td>
+      <td><div class="day">26</div></td>
+      <td><div class="day">27</div></td>
+      <td><div class="day">28</div></td>
+    </tr>
+    <tr>
+      <td><div class="day">29</div></td>
+      <td><div class="day">30</div></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <!-- // #main -->
+                
+                <div class="clear"></div>
+            </div>
+            <!-- // #container -->
+        </div>	
+        <!-- // #containerHolder -->
+
+    </div>
+    <!-- // #wrapper -->
+</body>
+</html>
+
+

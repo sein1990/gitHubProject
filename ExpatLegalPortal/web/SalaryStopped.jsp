@@ -23,6 +23,12 @@ String remarksS="";
 String actionTakenS="";
 String stoppedByS="";
 String empIDS="";
+String salaryAmountS="";
+String salaryStoppedDate="";
+String releasedDate="";
+String totalMonth="";
+String totalSalary="";
+
  Connection con1=dbconnection.getConnection();
  String dbID="";
     PreparedStatement ps=null;
@@ -40,6 +46,11 @@ String empIDS="";
         actionTakenS=rs.getString(6);
         stoppedByS=rs.getString(7);
         empIDS=rs.getString(8);
+         salaryAmountS=rs.getString(9);
+        salaryStoppedDate=rs.getString(10);    
+        releasedDate=rs.getString(11);
+        totalMonth=rs.getString(12);
+        totalSalary=rs.getString(13);
     }
     IDquery=objQuery.salaryStoppedAttachment(caseid1);
     ps=con1.prepareStatement(IDquery);
@@ -182,6 +193,130 @@ String empIDS="";
      
                         </div>
                         </div> 
+                                 <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Currency Type</label>
+
+                      
+
+                     <div class="form-group">
+                 
+                    <%
+                
+                          if(caseid1.contains("null")){
+                              
+                    %>
+                    
+                    
+                      <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
+                          <input type="radio" name="currencyType" value="-USD"/> USD    
+                        <input type="radio" name="currencyType" value="-Tshs" />Tshs 
+                        
+                    </label>
+                           
+                    </div>
+                         
+                             <%
+                } else{
+                    %> 
+                      <div class="form-group">
+                           <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
+                               <%
+                                    String string = totalSalary;
+                                    String[] parts = string.split("-");
+                                    String part2CurrencyType  = parts[1]; 
+                               %>
+                <input type="radio" name="currencyType" value="<%=part2CurrencyType%> checked">
+                                    <%=part2CurrencyType%></label>
+                                    <%}%>
+                </div>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary</label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="salaryAmount" value="<%=salaryAmountS%>" onkeypress="return isNumberKey(event)" class="form-control"  required/>
+     
+                        </div>
+                        </div> 
+                                <div class="form-group"> 
+                                  <%
+                    if(caseid1.contains("null")){
+                    %>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Salary Stopped Date</label>
+                        <div class="col-sm-9">
+                            <input  type="date" name="salaryStoppedDate" class="form-control" required="required" value="<%=salaryStoppedDate%>"/>
+                        </div>
+                        <%
+                        }else{
+                        %>
+                          <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Salary Stopped Date</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="salaryStoppedDate"  class="form-control" required="required" value="<%=salaryStoppedDate%>" readonly/>
+                        </div>
+                        <%
+                        }   
+                        %>
+                </div>
+                 <script type="text/javascript">
+                            function isNumberKey(evt)
+                            {
+                                      var charCode = (evt.which) ? evt.which : event.keyCode;
+                                      if (charCode != 46 && charCode > 31 
+                                        && (charCode < 48 || charCode > 57))
+                                         return false;
+
+                                      return true;
+                            }
+                            </script>
+                 
+                
+                <div class="form-group"> 
+                                  <%
+                    if(caseid1.contains("null")){
+                    %>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Released Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" name="releasedDate" class="form-control" required="required" value="<%=releasedDate%>"/>
+                        </div>
+                        <%
+                        }else{
+                        %>
+                          <label class="col-sm-3 control-label no-padding-right" for="form-field-1" > Released Date</label>
+                            <div class="col-sm-9">
+                            <input type="text" name="releasedDate"  class="form-control" required="required" value="<%=releasedDate%>" readonly/>
+                        </div>
+                        <%
+                        }   
+                        %>
+                </div>
+                
+                  <%
+                         if(!caseid1.contains("null")){
+                        %>
+                       
+         
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Total Month </label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="totalMonth" value="<%=totalMonth%>" class="form-control"  readonly/>
+                        </div>
+                        </div>
+                        <%}%>
+                        
+                        
+                         
+                         <%
+                         if(!caseid1.contains("null")){
+                        %>
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Total Salary</label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="totalSalary" value="<%=totalSalary%>" class="form-control"  readonly/>
+                        </div>
+                        </div>
+                        <%}%>
+                        
                       
                        
                               <div class="form-group">

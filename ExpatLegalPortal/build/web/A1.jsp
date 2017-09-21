@@ -189,18 +189,11 @@
                         
                           <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Currency Type</label>
-
-                      
-
-                     <div class="form-group">
-                 
+                        <div class="form-group">
                     <%
-                
                           if(caseid1.contains("null")){
                               
                     %>
-                    
-                    
                       <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
                           <input type="radio" name="currencyType" value="-USD"/> USD    
                         <input type="radio" name="currencyType" value="-Tshs" />Tshs 
@@ -208,18 +201,19 @@
                     </label>
                            
                     </div>
+                    
                          <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
 
                             <div class="col-sm-9">
-                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control" />
+                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)"/>
                             </div>
                             </div>
                             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary deposit </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control"  />
+                                <input type="text" name="salaryDeposit" value="<%=salaryDepositS%>" class="form-control" onkeypress="return isNumberKey(event)"  />
                         </div>
                       
                     </div>
@@ -244,14 +238,14 @@
                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Amount to be recovered(A part from salary holdings) </label>
 
                             <div class="col-sm-9">
-                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control"  />
+                                    <input type="text" name="recovered"  value="<%=recoveredS%>"class="form-control" onkeypress="return isNumberKey(event)" />
                             </div>
                             </div>
                             <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Salary deposit </label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="salaryDeposit"  value="<%=salaryDepositS%>" class="form-control"  />
+                                <input type="text" name="salaryDeposit"  value="<%=salaryDepositS%>" onkeypress="return isNumberKey(event)" class="form-control"  />
                         </div>
                       
                     </div>

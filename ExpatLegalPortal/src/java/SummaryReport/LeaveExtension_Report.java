@@ -126,7 +126,7 @@ public class LeaveExtension_Report {
              ps=con1.prepareStatement(IDquery);
              rs=ps.executeQuery();
              if(rs.next())
-                 attachItems=new LeaveExtension_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9));
+                 attachItems=new LeaveExtension_ReportItems(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
              
          } catch (SQLException ex) {
              Logger.getLogger(A1_Report.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,12 +196,12 @@ public class LeaveExtension_Report {
             p4.setSpacingAfter(10f);
             document.add(p4);
            
-//            Paragraph p5 = new Paragraph("DATE:            "+attachItems.getDate(), blueFont);
-//            p5.setAlignment(Element.ALIGN_LEFT);         
-//            document.setMargins(1, 1, 1, 1);
-//            p5.setSpacingBefore(1f);
-//            p5.setSpacingAfter(10f);
-//            document.add(p5);
+            Paragraph p5 = new Paragraph("DATE:            "+attachItems.getDate(), blueFont);
+            p5.setAlignment(Element.ALIGN_LEFT);         
+            document.setMargins(1, 1, 1, 1);
+            p5.setSpacingBefore(1f);
+            p5.setSpacingAfter(10f);
+            document.add(p5);
 //            Paragraph p6 = new Paragraph("REASON:       "+attachItems.getReason(), blueFont);
 //            p6.setAlignment(Element.ALIGN_LEFT);         
 //            document.setMargins(1, 1, 1, 1);

@@ -10,9 +10,9 @@ package SummaryReport;
  * @author USER
  */
 public class TerminatedEmployeeDueToLossOrShortage_ReportItems {
-    String caseID, date,name,unit, remarks,actionTaken, details,shortAmount,empID;
+    String caseID, date,name,unit, remarks,actionTaken, details,shortAmount,empID, totalAmountWithCompany;
 
-    public TerminatedEmployeeDueToLossOrShortage_ReportItems(String caseID, String date, String name, String unit, String remarks, String actionTaken, String details, String shortAmount, String empID) {
+    public TerminatedEmployeeDueToLossOrShortage_ReportItems(String caseID, String date, String name, String unit, String remarks, String actionTaken, String details, String shortAmount, String empID, String totalAmountWithCompany) {
         this.caseID = caseID;
         this.date = date;
         this.name = name;
@@ -22,8 +22,14 @@ public class TerminatedEmployeeDueToLossOrShortage_ReportItems {
         this.details = details;
         this.shortAmount = shortAmount;
         this.empID = empID;
+        this.totalAmountWithCompany = totalAmountWithCompany;
     }
 
+    public String getTotalAmountWithCompany() {
+        return totalAmountWithCompany;
+    }
+
+    
     public String getCaseID() {
         return caseID;
     }

@@ -30,6 +30,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -168,14 +169,19 @@ public class GraphReport {
             table.setWidthPercentage(70);
             table.setSpacingBefore(1f);
             table.setSpacingAfter(1f);
-            
-              table.addCell(new Phrase("Date", FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+            int totalCases=0;
+            table.addCell(new Phrase("Date", FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
             table.addCell(new Phrase("Total Case Per Day", FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
-          for(int i=0;i<datesVec.size();i++){
-          
-            table.addCell(new Phrase(datesVec.get(i).getYear(), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
-            table.addCell(new Phrase(Integer.toString(datesVec.get(i).getNumberOfCases()), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
-          }
+            for(int i=0;i<datesVec.size();i++){
+              int month = Integer.parseInt(datesVec.get(i).getYear());
+              table.addCell(new Phrase(getMonthForInt(month)+","+" "+datesVec.get(i).getMonth(), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+              //table.addCell(new Phrase(datesVec.get(i).getMonth()+","+datesVec.get(i).getMonth(), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+              table.addCell(new Phrase(Integer.toString(datesVec.get(i).getNumberOfCases()), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+              //table.addCell(new Phrase(Integer.toString(datesVec.get(i).getNumberOfCases())+getMonthForInt(datesVec.get(i).getYear()), FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+              totalCases+=datesVec.get(i).getNumberOfCases();
+            }
+             table.addCell(new Phrase("TOTAl", FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
+            table.addCell(new Phrase(""+totalCases, FontFactory.getFont(FontFactory.HELVETICA,7, Font.BOLD)));
             document.add(table);
             
             document.close();
@@ -187,6 +193,15 @@ public class GraphReport {
         } 
    
    }
+    String getMonthForInt(int num) {
+        String month = "December";
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num-1];
+        }
+        return month;
+    }
        QueryClass objQuery=new QueryClass();
     
     public  Vector<DateReportItems> getReport(String fromDate, String toDate, String caseName) throws IOException, DocumentException, SQLException
@@ -304,12 +319,8 @@ public class GraphReport {
     
         int[] NumberODays={31,28,31,30,31,30,31,31,30,31,30,31};
         if(month==02 && year%4 == 0)
-            return 29;
-        
+            return 29;        
         return NumberODays[month-1];
             
-            
-            
-     
      }
 }
