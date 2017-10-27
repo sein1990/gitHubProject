@@ -14,12 +14,14 @@ public class Case {
     String EmpName;
     String EmpUnit;
     String CaseDate;
+    String current_date;
 
-    public Case(String CaseId, String EmpName, String EmpUnit, String CaseDate) {
+    public Case(String CaseId, String EmpName, String EmpUnit, String CaseDate, String current_date) {
         this.CaseId = CaseId;
         this.EmpName = EmpName;
         this.EmpUnit = EmpUnit;
         this.CaseDate = CaseDate;
+        this.current_date = current_date;
     }
 
     public String getCaseId() {
@@ -37,8 +39,8 @@ public class Case {
     public String getCaseDate() {
         return CaseDate;
     }
-    
-  
-    
-    
+
+    public String getCurrent_date() {
+        return current_date;
+    }
 }

@@ -1,7 +1,6 @@
 
 <%@page import="ExpertLegalPortalClass.OracleDbConnection"%>
 <%@page import="ExpertLegalPortalClass.QueryClass"%>
-<%@page import="ExpertLegalPortalClass.PieChartDemo"%>
 <%@page import="java.io.File"%>
 <%@page import="ExpertLegalPortalClass.Attachment"%>
 <%@page import="java.util.Vector"%>
@@ -224,12 +223,15 @@
                       <div class="form-group">
                            <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> 
                                <%
+                             
                                     String string = totalAmountS;
                                     String[] parts = string.split("-");
                                     String part2CurrencyType  = parts[1]; 
+                                   
+                               
                                %>
-                               <input type="radio" name="currencyType" value="<%=part2CurrencyType%>">
-                                    <%=part2CurrencyType%></label>
+                               <input type="text" name="currencyType" value="<%="-"+part2CurrencyType%>" class="form-control"  readonly>
+                                    </label>
 
                           </div>
                 

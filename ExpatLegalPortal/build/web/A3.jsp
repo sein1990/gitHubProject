@@ -229,8 +229,8 @@ String empIDS="";
                                     String[] parts = string.split("-");
                                     String part2CurrencyType  = parts[1]; 
                                %>
-                               <input type="radio" name="currencyType" value="<%=part2CurrencyType%>">
-                                    <%=part2CurrencyType%></label>
+                                 <input type="text" name="currencyType" value="<%="-"+part2CurrencyType%>" class="form-control"  readonly></label>
+              
 
                           </div>
                 

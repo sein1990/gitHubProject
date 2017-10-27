@@ -18,8 +18,8 @@ public class QueryClass {
     public String InsertA1NonReturnedFromLeave(){   
     return "INSERT INTO a1_not_returned_from_leave (id, case_date, reason, name, "
             + "unit, remarks, a_t_b_r_a_f_s_h,"
-            + " salary_deposit, total_amount, filed_and_closed, emp_id)"
-            + "values(?,?,?,?,?,?,?,?,?,?,?)";      
+            + " salary_deposit, total_amount, filed_and_closed, emp_id, c_date)"
+            + "values(?,?,?,?,?,?,?,?,?,?,?,?)";      
     }
     public String UpdateA1HighestValue(){
     return  "UPDATE highestvalue SET a1=?";
@@ -27,13 +27,13 @@ public class QueryClass {
     public String UpdateA1NotReturnedFromLeave(String newId)
     {
     return "UPDATE a1_not_returned_from_leave SET reason=?,remarks=?,"
-                         + "a_t_b_r_a_f_s_h=?,salary_deposit=?,total_amount=?,filed_and_closed=?"
+                         + "a_t_b_r_a_f_s_h=?,salary_deposit=?,total_amount=?, filed_and_closed=?, c_date=?"
                          + "WHERE id='"+newId+"'";
     }
     public String InsertA2WithCompanyProperty(){
     return " INSERT INTO a2_with_company_property (id, case_date, reason, name, unit, remarks, "
             + "a_t_b_r_a_f_s_h, salary_deposit, total_amount, "
-            + "filed_and_closed, emp_id)values(?,?,?,?,?,?,?,?,?,?,?)";                     
+            + "filed_and_closed, emp_id, c_date)values(?,?,?,?,?,?,?,?,?,?,?,?)";                     
     }
     public String UpdateA2HighestValue(){
     return "UPDATE highestvalue SET a2=?";
@@ -41,7 +41,7 @@ public class QueryClass {
     public String UpdateA2WithCompanyProperty(String newId){
      return "UPDATE a2_with_company_property SET reason=?,remarks=?,"
              + "a_t_b_r_a_f_s_h=?,salary_deposit=?,total_amount=?,"
-             + "filed_and_closed=? WHERE id='"+newId+"'";   
+             + "filed_and_closed=?, c_date=? WHERE id='"+newId+"'";   
     }    
     public String InsertA3DamageOrLoss(){
     return  "INSERT INTO a3_damage_or_loss (id,case_date,reason, name, unit, remarks,"
@@ -60,7 +60,7 @@ public class QueryClass {
     public String InsertDisNotReturnFromLeave(){
     
     return " INSERT INTO dis (id, case_date, reason, name, unit, remarks, investigation,"
-            + " action_taken, action_to_be_taken, people_involved, emp_id, dis_type, salary_date)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";                     
+            + " action_taken, action_to_be_taken, people_involved, emp_id, dis_type, salary_date, c_date)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";                     
     }
     public String UpdateDisNotReturnFromLeaveHighestValue(){
     return "UPDATE highestvalue SET dis=?";
@@ -71,18 +71,18 @@ public class QueryClass {
     }   
     public String InsertEmpPassedAway(){
     return "INSERT INTO emp_passed_away (id, case_date, name, unit, remarks, action_taken,"
-            + "reason_for_death, emp_id, amt_paid_to_family)values(?,?,?,?,?,?,?,?,?)";              
+            + "reason_for_death, emp_id, amt_paid_to_family, c_date)values(?,?,?,?,?,?,?,?,?,?)";              
     }
     public String UpdateInsertEmpPassedAwayHighestValue(){
     return "UPDATE highestvalue SET emp_passed_away=?";
     }
     public String UpdateEmpPassedAway(String newId){
     return  "UPDATE emp_passed_away SET remarks=?, action_taken=?,"
-            + "reason_for_death=?, emp_id=?, amt_paid_to_family=? WHERE id='"+newId+"'";
+            + "reason_for_death=?, emp_id=?, amt_paid_to_family=? c_date=? WHERE id='"+newId+"'";
     }
     public String InsertLeaveExtension(){
     return " INSERT INTO leave_extension (id, case_date, name, unit, from_date, to_date, "
-            + "extended_day, actual, action_taken, emp_id)values(?,?,?,?,?,?,?,?,?,?)";                      
+            + "extended_day, actual, action_taken, emp_id, c_date)values(?,?,?,?,?,?,?,?,?,?,?)";                      
     }
     public String UpdateLeaveExtensionHighestValue(){
     return "UPDATE highestvalue SET leave_extension=?";
@@ -92,7 +92,7 @@ public class QueryClass {
     }
     public String InsertNativeStaffShortage(){
     return "INSERT INTO native_staff_shortage(id, case_date, name, unit, remarks, to_be_recovered,"
-            + " action, short_amount, current_status, emp_id)values(?,?,?,?,?,?,?,?,?,?)";                      
+            + " action, short_amount, current_status, emp_id, c_date)values(?,?,?,?,?,?,?,?,?,?,?)";                      
     }
     public String UpdateNativeStaffShortageHighestValue(){
     return "UPDATE highestvalue SET native_staff_shortage=?";
@@ -100,28 +100,28 @@ public class QueryClass {
     public String UpdateNativeStaffShortage(String newId){
     return "UPDATE native_staff_shortage SET  name=?, unit=?, remarks=?,"
                          + "to_be_recovered=?,action=?, short_amount=?,"
-                         + "current_status=?, emp_id=?  WHERE id='"+newId+"'";
+                         + "current_status=?, emp_id=?, c_date=?  WHERE id='"+newId+"'";
     }
     public String InsertTerminatedEmployee(){
     return "INSERT INTO t_e_d_l_o_p (id, case_date, name, unit, "
-            + "remarks, action_taken, short_amount, details, emp_id, total_amount_company)values(?,?,?,?,?,?,?,?,?,?)";      
+            + "remarks, action_taken, short_amount, details, emp_id, total_amount_company, c_date)values(?,?,?,?,?,?,?,?,?,?,?)";      
     }
     public String UpdateInsertTerminatedEmployeeHighestValue(){
     return "UPDATE highestvalue SET terminated_emp_due_loss=?";
     }
     public String UpdateTerminatedEmployee(String newId){
-    return "UPDATE t_e_d_l_o_p SET remarks=?, action_taken=?, short_amount=?, details=?, total_amount_company=? WHERE id='"+newId+"'";
+    return "UPDATE t_e_d_l_o_p SET remarks=?, action_taken=?, short_amount=?, details=?, total_amount_company=? c_date=? WHERE id='"+newId+"'";
     }
     public String InsertSalaryStopped(){
     return " INSERT INTO s_s_d_t_l_o_p (id, case_date, name, unit, remarks,"
-            + " action_taken, stopped_by, emp_id, salary_amount, salary_stopped_date, released_date, total_month, total_salary)values(?,?,?,?,?,?,?,?,?,?,?,?,?)";                     
+            + " action_taken, stopped_by, emp_id, salary_amount, salary_stopped_date, released_date, total_month, total_salary, c_date)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";                     
     }
     public String UpdateSalaryStoppedHighestValue(){
     return "UPDATE highestvalue SET salary_stopped_due_to_loss=?";
     }
     public String UpdateSalaryStopped(String newId){
     return "UPDATE s_s_d_t_l_o_p SET remarks=?, action_taken=?,"
-            + "stopped_by=?, salary_amount=?, total_salary=?  WHERE id='"+newId+"'";
+            + "stopped_by=?, salary_amount=?, total_salary=?, c_date=?  WHERE id='"+newId+"'";
     }
     public String InsertAttachment(){
     return  " INSERT INTO attachment (flag, path, caseID)values(?,?,?)";
@@ -133,15 +133,25 @@ public class QueryClass {
     return "select * from user_d_e_s where username=? and password=?";
     }
     public String SearchResult(){
-    return "SELECT id, case_date, name, unit FROM a1_not_returned_from_leave"
-                      +" UNION SELECT id, case_date, name, unit FROM a2_with_company_property"
-                      +" UNION SELECT id, case_date, name, unit FROM a3_damage_or_loss"
-                      +" UNION SELECT id, case_date, name, unit FROM dis"
-                      +" UNION SELECT id, case_date, name, unit FROM leave_extension"
-                      +" UNION SELECT id,case_date, name,unit FROM emp_passed_away"
-                      +" UNION SELECT  id, case_date, name, unit FROM s_s_d_t_l_o_p"
-                      +" UNION SELECT  id, case_date, name, unit FROM t_e_d_l_o_p"
-                      +" UNION SELECT  id, case_date, name, unit FROM native_staff_shortage ORDER BY case_date DESC";
+        return "SELECT * FROM ((SELECT id, case_date, name, unit, c_date  FROM a1_not_returned_from_leave)"
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM a2_with_company_property)"
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM a3_damage_or_loss) "
+                + "UNION ALL (SELECT id, case_date,name, unit, c_date  FROM dis)"
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM emp_passed_away)"
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM leave_extension)"
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM native_staff_shortage) "
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM s_s_d_t_l_o_p) "
+                + "UNION ALL (SELECT id, case_date, name, unit, c_date  FROM t_e_d_l_o_p)) results ORDER BY c_date  DESC";
+//    return "SELECT id, case_date, name, unit, c_date FROM a1_not_returned_from_leave"
+//                      +" UNION SELECT id, case_date, name, unit, c_date FROM a2_with_company_property"
+//                      +" UNION SELECT id, case_date, name, unit, c_date FROM a3_damage_or_loss"
+//                      +" UNION SELECT id, case_date, name, unit, c_date FROM dis"
+//                      +" UNION SELECT id, case_date, name, unit, c_date FROM leave_extension"
+//                      +" UNION SELECT id,case_date, name, unit, c_date FROM emp_passed_away"
+//                      +" UNION SELECT  id, case_date, name, unit, c_date FROM s_s_d_t_l_o_p"
+//                      +" UNION SELECT  id, case_date, name, unit, c_date FROM t_e_d_l_o_p"
+//                      +" UNION SELECT  id, case_date, name, unit, c_date FROM native_staff_shortage ORDER BY c_date DESC";
+      //    +" UNION SELECT  id, case_date, name, unit, c_date FROM native_staff_shortage ORDER BY c_date DESC";
     }
     public String A1SummaryData(String caseidupdate){
     return "SELECT * FROM a1_not_returned_from_leave WHERE id='"+caseidupdate+"'";

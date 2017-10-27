@@ -21,7 +21,7 @@ public class dbconnection
 //            con= DriverManager.getConnection("jdbc:mysql://localhost:3306/ExpatDisciplinaryPortal","root","1234");
 //            System.out.println("connected");
             Class.forName("oracle.jdbc.driver.OracleDriver");
-             con=DriverManager.getConnection("jdbc:oracle:thin:@192.168.14.72:1521:orcl","hrpayroll","hrevgavg2016");
+             con=DriverManager.getConnection("jdbc:oracle:thin:@192.168.175.72:1521:orcl","hrpayroll","hrevgavg2016");
             System.out.println("connected");
         }
         catch(Exception e){

@@ -20,7 +20,7 @@ public class OracleDbConnection {
         try{
             Class.forName("oracle.jdbc.driver.OracleDriver");
             OracleConnection=DriverManager.getConnection(
-            "jdbc:oracle:thin:@192.168.14.72:1521:orcl","hrpayroll","hrevgavg2016");
+            "jdbc:oracle:thin:@192.168.175.72:1521:orcl","hrpayroll","hrevgavg2016");
   System.out.println("connected");
             
         }catch(Exception e){
