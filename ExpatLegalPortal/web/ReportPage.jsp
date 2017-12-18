@@ -1,8 +1,4 @@
-
-<%@page import="org.jfree.chart.ChartUtilities"%>
 <%@page import="java.io.File"%>
-<%@page import="org.jfree.chart.entity.StandardEntityCollection"%>
-<%@page import="org.jfree.chart.ChartRenderingInfo"%>
 <%@page import="com.itextpdf.awt.DefaultFontMapper"%>
 <%@page import="java.awt.geom.Rectangle2D"%>
 <%@page import="java.awt.Graphics2D"%>
@@ -13,12 +9,7 @@
 <%@page import="com.itextpdf.text.Rectangle"%>
 <%@page import="com.itextpdf.text.Document"%>
 <%@page import="java.awt.Color"%>
-<%@page import="org.jfree.chart.plot.PiePlot"%>
-<%@page import="org.jfree.chart.JFreeChart"%>
-<%@page import="org.jfree.chart.ChartFactory"%>
-<%@page import="org.jfree.data.general.DefaultPieDataset"%>
 <%@page import="com.mysql.jdbc.Util"%>
-<%@page import="GraphAndPDFReport.EmbedPieChartPDF"%>
 <%@page import="ExpertLegalPortalClass.dbconnection"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="ExpertLegalPortalClass.Case"%>
@@ -111,7 +102,7 @@
 					<a href="Home.jsp" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							EXPERT LEGAL PORTAL
+							EXPAT LEGAL PORTAL
                                                       
 						</small>
 					</a>

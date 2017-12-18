@@ -18,6 +18,7 @@ String nameS="";
 String remarksS="";
 String actionTakenS="";
 String deathReasonS="";
+String amountPaidToFamily2="";
 String empIDS="";
  Connection con1=dbconnection.getConnection();
  String dbID="";
@@ -37,7 +38,8 @@ String empIDS="";
         remarksS=rs.getString(5);
         actionTakenS=rs.getString(6);
         deathReasonS=rs.getString(7);
-        empIDS=rs.getString(8);      
+        empIDS=rs.getString(8);   
+        amountPaidToFamily2=rs.getString(9);
     }
     IDquery=objQuery.empPassedAwayAttachment(caseid1);
     ps=con1.prepareStatement(IDquery);
@@ -179,6 +181,15 @@ String empIDS="";
 
                         <div class="col-sm-9">
                                 <input type="text" name="deathReason" value="<%=deathReasonS%>" class="form-control"  required/>
+     
+                        </div>
+                        </div>
+                                
+                                       <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1">Amount Paid To Family</label>
+
+                        <div class="col-sm-9">
+                                <input type="text" name="amountPaidToFamily" value="<%=amountPaidToFamily2%>" class="form-control"  required/>
      
                         </div>
                         </div>

@@ -201,13 +201,17 @@ String empIDS="";
                         }   
                         %>
                 </div>
+                        <%
+                        if(!caseid1.contains("null")){
+                        %>
                          <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Extended Day</label>
 
                         <div class="col-sm-9">
-                                <input type="text" name="extendedDay" value="<%=extendedDayS%>" class="form-control"  required/>
+                                <input type="text" name="extendedDay" value="<%=extendedDayS%>" class="form-control" readonly/>
                         </div>
                         </div>
+                       <%}%>
                         
                  <div class="form-group">
                     

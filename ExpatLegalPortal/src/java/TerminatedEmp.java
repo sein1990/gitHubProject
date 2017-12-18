@@ -45,6 +45,7 @@ public class TerminatedEmp extends HttpServlet {
     String fileOne=null;
     String fileName=null;
     String dbID=null;
+    String totalAmountWithCompany=null;
     boolean submit=false;
     ExpertLegalPortalOperation Obj=new ExpertLegalPortalOperation();
     FileInfoOperation fileObj;
@@ -67,7 +68,7 @@ public class TerminatedEmp extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
 
-                dbID = Obj.terminatedEmployee(date, name,unity, remarks, actionTaken, shortAmount, details,  empID, caseidupdate);
+                dbID = Obj.terminatedEmployee(date, name,unity, remarks, actionTaken, shortAmount, details,  empID, totalAmountWithCompany, caseidupdate);
                 if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 
                     fileObj.updateLastAttachmentRemarks(fileRemarks, attachmentID);
@@ -148,6 +149,9 @@ public class TerminatedEmp extends HttpServlet {
 //                            fileRemarks[i]=item.getString();
 //                            i++;
                             fileRemarks=item.getString();
+                        }
+                        if(fieldName.equals("totalAmountWithCompany")){                        
+                        totalAmountWithCompany=item.getString();
                         }
                         if(fieldName.equals("fileOne"))
                            fileOne = item.getString();

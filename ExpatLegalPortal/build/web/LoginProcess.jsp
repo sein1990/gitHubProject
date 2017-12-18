@@ -1,4 +1,8 @@
 
+<%@page import="ExpertLegalPortalClass.dbconnection"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page import="ExpertLegalPortalClass.login"%>
 <jsp:useBean id="UserItems" class="ExpertLegalPortalClass.UserItems" scope="session"/>
 <jsp:setProperty name="UserItems" property="*"/>
@@ -16,16 +20,16 @@
 
 <%
     //STEP 3: Open a connection
-
+        Connection conn=dbconnection.getConnection();
           //  return connbio;
-String result=login.loginCheck(UserItems);
+        String result=login.loginCheck(UserItems);
 //user is exist
         if(result.equals("true"))
         {
+                
+            //redirect to managerhome page
              response.sendRedirect("Home.jsp");
-       
         }
- 
         //if use is not exist
         if(result.equals("false"))
         {
@@ -34,6 +38,8 @@ String result=login.loginCheck(UserItems);
         //if error occur
            if(result.equals("error"))
         {
+           
+            
             response.sendRedirect("index.jsp?status=error");
         }
  

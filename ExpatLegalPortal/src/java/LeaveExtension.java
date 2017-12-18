@@ -64,7 +64,7 @@ public class LeaveExtension extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {            
-                dbID=Obj.LeaveExtension(date, name, unity, from, to,extendedDay, actual, actionTaken, empID, caseidupdate);
+                dbID=Obj.LeaveExtension(date, name, unity, from, to, actual, actionTaken, empID, caseidupdate);
               
                  if(fileRemarks!=null){
                     String attachmentID=fileObj.selectAttachmentLastRecord(dbID); 

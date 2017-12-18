@@ -340,7 +340,9 @@
                                                             <th style="width:40%;">Employee Name</th>
                                                             <th style="width:20%;">Unit</th>
                                                             <th style="width:10%;">Date</th>
+                                                            
                                                             <th style="width:25;">Case Summary</th>
+                                                            
                                                       </tr>
                                                       <%
 

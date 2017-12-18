@@ -11,10 +11,11 @@ package SummaryReport;
  */
 public class LeaveExtension_ReportItems {
     
-String caseID, name,unity, from, to, extendedDay, actual,actionTaken, empID;
+String caseID, date, name,unity, from, to, extendedDay, actual,actionTaken, empID;
 
-    public LeaveExtension_ReportItems(String caseID, String name, String unity, String from, String to, String extendedDay, String actual, String actionTaken, String empID) {
+    public LeaveExtension_ReportItems(String caseID, String date, String name, String unity, String from, String to, String extendedDay, String actual, String actionTaken, String empID) {
         this.caseID = caseID;
+        this.date = date;
         this.name = name;
         this.unity = unity;
         this.from = from;
@@ -24,6 +25,12 @@ String caseID, name,unity, from, to, extendedDay, actual,actionTaken, empID;
         this.actionTaken = actionTaken;
         this.empID = empID;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+  
 
     public String getCaseID() {
         return caseID;
